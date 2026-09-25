@@ -11759,7 +11759,24 @@ Rituals (sommation de daemons, mécanisme à vérifier avant de saisir), Goblin 
 
 **Testé par Nono : "validé"** — 77 sorts/3 talents des deux tranches de session.
 
-**Prochaine étape** : reste du chantier Unofficial Grimoire (~136 sorts, session dédiée) :
-Druidic Priest career + Lore of the Wild, Elementalist career + Lore of Elementalism +
-Elementals, Dark Magic + Lores de Daemonology/Necromancy, Skaven Magic — Lore of the Warp,
-Ritual Magic + Summoning Rituals, Goblin Magic. Voir `A FAIRE.txt` pour le détail par chapitre.
+**Troisième tranche (25/09/2026, compilée, à tester par Nono)** : Dark Magic — Lore of
+Daemonology (8 sorts nouveaux, `GRIM-DAEMON_01` à `_08`) et Lore of Necromancy (9 sorts
+nouveaux, `GRIM-NECRO_01` à `_09`), toutes deux rattachées aux Talents génériques
+`RULES-T0088_DEMON`/`RULES-T0088_NECRO` **déjà existants** dans `BOOK_RULESBOOK.Xml`
+(vérifié par grep avant saisie, aucun Talent créé) — les 4 sorts de chaque Lore déjà
+présents au Rulebook (Destroy Lesser Daemon/Detect Daemon/Manifest Lesser Daemon/Octagram,
+Screaming Skull/Vanhel's Call/Reanimate/Raise Dead) n'ont pas été dupliqués. Lore of the
+Warp (8 sorts, `GRIM-WARP_01` à `_08`, nouveau Talent générique `GRIM-T0203` "Arcane Magic
+(Warp)", même convention que `HORNE-T0197`) — seul le domaine de Lore (p.32) est saisi ;
+le reste du chapitre "Skaven Magic" (Talents/sorts Petty et Arcane (Warp), profils de
+sorciers Skaven) reste hors périmètre de cette tranche. Goblin Magic (2 sorts,
+`GRIM-GOBLIN_01`/`_02`, nouveau Talent générique `GRIM-T0204` "Arcane Magic (Goblin)" —
+aucun Talent existant trouvé pour la magie gobeline après grep). `TypSpell="Domain Magic"`
+partout. Soit 27 sorts + 2 talents supplémentaires, aucun fichier `.pas` touché. Compilé
+(`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes) le 25/09/2026.
+
+**Prochaine étape** : reste du chantier Unofficial Grimoire (session dédiée) : Druidic
+Priest career + Lore of the Wild, Elementalist career + Lore of Elementalism + Elementals,
+Ritual Magic + Summoning Rituals, et le reste du chapitre Skaven Magic (Talents/sorts
+Petty et Arcane (Warp), profils de sorciers) si Nono le souhaite. Voir `A FAIRE.txt` pour
+le détail par chapitre.

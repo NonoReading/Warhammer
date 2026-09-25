@@ -73,6 +73,37 @@
 <Test language="ENGLISH">""</Test>
 <Generique>"RULES-T0172_*"</Generique>
 </Talent>
+  <!-- "DARK MAGIC" (p.25-29) : Lore of Daemonology et Lore of Necromancy rattachees aux Talents
+       generiques RULES-T0088_DEMON/RULES-T0088_NECRO deja existants dans BOOK_RULESBOOK.Xml
+       (base Arcane Magic), aucun nouveau Talent cree - voir A FAIRE.txt. "SKAVEN MAGIC" (p.30-33) :
+       seule THE LORE OF THE WARP (domaine, p.32) est saisie ici, comme les autres Lores de ce livre ;
+       les Talents/sorts Petty/Arcane (Warp) et profils de sorciers Skaven restent hors perimetre
+       (chantier Skaven Magic complet, voir A FAIRE.txt). Nouveau Talent generique a la HORNE-T0197. -->
+<Talent id="GRIM-T0203">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Warp)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Skaven magic takes its power directly from the Warp, powered by the whims of the Horned Rat. As the existence of Skaven society is a well-concealed rumour, the Lore of the Warp is unknown to non-Skaven scholars and magicians. Warp sorcerers receive +10 to rolls while Casting or Channelling in any underground environment - such as a cavern, sewer, or basement. Targets who suffer Wounds from Warp Lore spells must pass an Easy (+40) Endurance Test or contract a Festering Wound."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
+  <!-- "GOBLIN MAGIC" (p.38) : deux sorts de Shamans gobelins publies a l'origine dans le WFRP4
+       Starter Set Adventure Book p.36 ; aucun Talent generique existant trouve pour la magie
+       gobeline (verifie par grep sur GREEN IZ BEST et les autres livres), nouveau Talent cree. -->
+<Talent id="GRIM-T0204">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Goblin)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"A couple of spells are included for Goblin Shamans, initially published in the WFRP4 Starter Set Adventure Book, p.36."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
 </DATA_TALENT>
 <DATA_SPELL>
   <!-- "NEW PETTY SPELLS" (p.4-5) : considerees comme faisant partie de la liste standard du
@@ -860,6 +891,291 @@
 <Talent>"RULES-T0172_TZEENTCH"</Talent>
 <Level>"13"</Level>
 <TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+  <!-- "DARK MAGIC", "THE LORE OF DAEMONOLOGY" (p.26-27) : seuls les sorts absents du Rulebook sont
+       repris ici (Destroy Lesser Daemon, Detect Daemon, Manifest Lesser Daemon et Octagram existent
+       deja dans BOOK_RULESBOOK.Xml, RULES-COLOR_77/_78/_79/_80, rattaches a RULES-T0088_DEMON - non
+       dupliques). Talent RULES-T0088_DEMON deja existant, aucun nouveau Talent. -->
+<Sort id="GRIM-DAEMON_01">
+<Description language="ENGLISH">"Banish Daemon"</Description>
+<Explanation language="ENGLISH">"Your magicks destabilize the Dhar binding all Daemons in the Area of Effect. Each target with the Daemonic Creature Trait must make a Dramatic Willpower Test, which you may penalize using Overcasting SL as normal. If the Test fails, the target suffers an immediate Critical Hit to the struck location, and each SL of the failed Test adds +10 to the roll on the Critical Table. The spasms are so violent that anyone within close combat range takes a Melee attack from the target's weapon as if used in the off-hand."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_02">
+<Description language="ENGLISH">"Hellride"</Description>
+<Explanation language="ENGLISH">"Once you have summoned and controlled a Daemonic Steed, you infuse the mount with Dhar. The Steed will then bear its rider and a single passenger beyond the mortal world and into the borders of the realms of Chaos, covering vast distances in mere minutes. Though the riders perceive the journey only dimly, the effects of witnessing such horrors are harrowing. The ride will last 1d10 minutes: at the end of each minute, the riders must test against Corruption (Moderate). Luckily, the speed and skill of the Steed protects the riders from closer contact with other denizens of the realm. Once the ride is finished, the Steed and its passengers will return to the material realm anywhere within your Willpower miles of the journey's beginning."</Explanation>
+<Target>"Special"</Target>
+<Duration>"1d10 minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_03">
+<Description language="ENGLISH">"Invoke Dark Energy"</Description>
+<Explanation language="ENGLISH">"You weave a writhing mist of Dhar about you, allowing the energy to enter your body and soul. Gain a Corruption point. In return, you may choose one of the following effects to receive for the spell's Duration: you may choose one spell from your Arcane or Lore Talents that you have not learned yet, and you may cast it in the usual manner; you may increase all of your characteristics by +10; or you gain 1d10+Willpower Bonus SL in stored energy to deploy while casting spells. After casting this spell, you must test to gain an affliction."</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_04">
+<Description language="ENGLISH">"Manifest Daemonic Pack"</Description>
+<Explanation language="ENGLISH">"You summon a number of Lesser Daemons or Daemonic Servants equal to your Willpower Bonus. They emerge through a tear in the material realm and appear within range. Perform an Opposed Channel (Dhar)/Willpower Test with the pack's leader. If successful, the Daemon will respond to one command issued by you, quite literally, then vanish (assuming the command is completed before the Duration ends). For each +2 SL, the Duration is further increased. If failed, the Daemons attack you."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"16"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_05">
+<Description language="ENGLISH">"Manifest Daemon Steed"</Description>
+<Explanation language="ENGLISH">"You gather and control a shimmering strand of Dhar, which deftly opens a person-sized hole in the material realm. Your magic manifests one Daemonic Steed (or Servant) that you have called forth from the Realm of Chaos. Perform an Opposed Channel (Dhar)/Willpower Test with the Steed. For each +2 SL, the Duration is further increased. If successful, the Daemon will respond to your commands for the Duration, including being your mount. If failed, the Steed attacks you."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_06">
+<Description language="ENGLISH">"Tormenting Vision"</Description>
+<Explanation language="ENGLISH">"You channel Dhar and direct it to strike one creature within range, inflicting a hellish vision upon the target. The creature must pass a Challenging (+0) Cool Test or take SL+1 Stunned conditions. If the target does not remove these conditions within its Willpower Bonus Rounds, it suffers a Corruption point."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_07">
+<Description language="ENGLISH">"Veil of Corruption"</Description>
+<Explanation language="ENGLISH">"You summon a billowing cloud of foul corruption. All living creatures within the Area of Effect must make an Endurance Test or lose 1 Wound. Thereafter, all wounded targets lose 1 Wound and gain 1 Corruption point at the end of each Round unless they spend their Action attempting to resist the corruption by passing an Endurance Test."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DAEMON_08">
+<Description language="ENGLISH">"Word of Pain"</Description>
+<Explanation language="ENGLISH">"You call out one of the forbidden names of the Chaos Gods. Simply speaking this word aloud causes excruciating pain to all living creatures within the Area of Effect. All affected suffer a magic missile hit with a Damage of +8 that ignores Armour Points. Further, your targets must pass an Endurance Test or take SL+1 Broken condition."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+  <!-- "DARK MAGIC", "THE LORE OF NECROMANCY" (p.28-29) : seuls les sorts absents du Rulebook sont
+       repris ici (Screaming Skull, Vanhel's Call, Reanimate et Raise Dead existent deja dans
+       BOOK_RULESBOOK.Xml, RULES-COLOR_81/_82/_83/_84, rattaches a RULES-T0088_NECRO - non
+       dupliques). Talent RULES-T0088_NECRO deja existant, aucun nouveau Talent. Raise Champion
+       (p.28) inclut un profil de creature de reference dans le texte source (aucune balise dediee
+       au profil d'une creature invoquee par un sort dans ce moteur) : reproduit en texte descriptif
+       dans l'Explanation, comme le reste du sort. -->
+<Sort id="GRIM-NECRO_01">
+<Description language="ENGLISH">"Awakening"</Description>
+<Explanation language="ENGLISH">"You gather delicate but powerful filaments of Dhar before you, and direct them into the corpses of NPCs with powerful Traits or Characters with more than two completed Career levels. Each such corpse is reanimated into a Wight, to a maximum of SL+1 Wights reanimated within range. Starting with the Prone condition, the Wights are entirely under your control and can perform simple orders as you command. If you die or gain an Unconscious condition, the spell ends and the reanimated corpses fall dead again."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Until the next sunrise"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_02">
+<Description language="ENGLISH">"Banish Undead"</Description>
+<Explanation language="ENGLISH">"You create a magical vortex of Dhar that sucks energy from any creatures that have the Undead Trait. Any such targets take a magic missile with a Damage of +5. Skeletons and Zombies are instantly destroyed instead."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_03">
+<Description language="ENGLISH">"Control Undead"</Description>
+<Explanation language="ENGLISH">"You target one creature with the Ethereal and Undead Traits and bend it to your will. Perform an Opposed Willpower Test, where you gain a +SL bonus equal to the SL of your Language (Magick) Test. If you win, the target comes under your control for SL days (minimum of 1)."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_04">
+<Description language="ENGLISH">"Forbidding"</Description>
+<Explanation language="ENGLISH">"You touch the door of a building and guard it from intrusion by the undead. While the spell lasts, any creature with the Undead Trait must win an Opposed Willpower Test to remain or trespass inside the building; otherwise, the creature suffers a Broken condition and must leave, suffering SL+1 Wounds per Round (ignoring Toughness Bonus and Armour Points). The range of this spell is limited to a single structure (such as a house or shop) no greater than Willpower yards in length, width, and height."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Until the next sunrise"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_05">
+<Description language="ENGLISH">"Hand of Dust"</Description>
+<Explanation language="ENGLISH">"Your touch flays the flesh of living opponents, counting as a magic missile with a Damage of +5 that ignores Armour Points. In addition, the target is afflicted with SL Bleeding conditions (minimum of 1). Creatures with the Undead Trait are immune to this spell."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_06">
+<Description language="ENGLISH">"Invigorating Vitae"</Description>
+<Explanation language="ENGLISH">"You must cast this spell before you drink the blood from a body, living or dead. You gain the Bite+0, Hungry, and Vampiric Creature Traits. Feeding and drinking the blood from a corpse killed within the last hour heals you for 1d10 Wounds."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_07">
+<Description language="ENGLISH">"Raise Champion"</Description>
+<Explanation language="ENGLISH">"You funnel Dhar towards the bones of a single dead creature who was once a figure of significant power when alive - as a guideline, a humanoid character or creature who had reached its third Career level or more (or equivalent in Traits). The skeletal champion will start with the Prone condition and can follow your simple instructions to the letter. Depending on the bones used, the GM might use the creature's former Skills and Talents added to the base Skeleton profile, or may opt to use the following sample profile instead: M4 WS70 BS55 S50 T45 I40 Agi45 Dex45 W22, Traits: Armour 6 (Full Plate &amp; Large Shield), Champion, Construct, Corruption (Minor), Dark Vision, Dem Bones, Fear 3, Hardy, Infected, Painless, Territorial, Undead, Unstable, Weapon+9 (Hand Weapon)."</Explanation>
+<Target>"1"</Target>
+<Duration>"Until the next sunrise"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_08">
+<Description language="ENGLISH">"Ride Through the Night"</Description>
+<Explanation language="ENGLISH">"You manipulate Dhar into a small cloud, invigorating all mounts within the Area of Effect. All mounts add +1 to their Movement score and gain the Ethereal and Stride Traits, as do their riders and any coaches they pull."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Until the next sunrise"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NECRO_09">
+<Description language="ENGLISH">"Wind of Withering"</Description>
+<Explanation language="ENGLISH">"With a wave of your hand, you unleash the devastating power of Dhar that withers the life from your opponents, shrivelling their skin, turning their blood to dust, and shattering their bones. All living creatures within the Area of Effect suffer a magic missile with a Damage equal to your Willpower Bonus; this Wind ignores Toughness Bonus and Armour Points."</Explanation>
+<Target>"Area of Effect (ATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_NECRO"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+  <!-- "SKAVEN MAGIC", "THE LORE OF THE WARP" (p.32), domaine seul - voir commentaire Talent
+       GRIM-T0203 plus haut. -->
+<Sort id="GRIM-WARP_01">
+<Description language="ENGLISH">"The Chittering"</Description>
+<Explanation language="ENGLISH">"You unleash a web of insanity from the Warp, twisting the minds of all within the Area of Effect. All non-Skaven humanoids within range must pass a Difficult (-10) Cool Test or degenerate into a mindless horde, instinctively aiding all Skaven and you in particular. They gather around you as protection, follow simple instructions, and attack anyone unaffected by the spell with their hands and teeth. Victims also lose their power of speech, communicating with gestures and the rat-like chittering noises that give this spell its name. When the spell's Duration ends, the victims return to their normal state over 1d10 minutes; they must test against Corruption (Major)."</Explanation>
+<Target>"Area of Effect (ATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_02">
+<Description language="ENGLISH">"Cloak of the Assassin"</Description>
+<Explanation language="ENGLISH">"You solidify the shadows around your body and melt into the surroundings. You gain 1 Armour Point to each location and a +30% bonus to all Stealth Tests made in any environment except full daylight. You cannot cast this spell if you are wearing any normal armour."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_03">
+<Description language="ENGLISH">"Curse of the Horned One"</Description>
+<Explanation language="ENGLISH">"You mutate a victim into the form of a Skaven. During this time, the victim is totally under your influence and will do whatever they are told (except for directly killing themselves). The victim maintains their characteristics but adds the basic Skaven Creature Traits. A victim must pass an Average (+20) Endurance Test to survive the transformation unharmed. If the Test is failed, the victim immediately suffers a Critical Wound with +20 added to the GM's Critical Table roll. And if the test is Fumbled, the GM adds +50 to the roll instead."</Explanation>
+<Target>"1"</Target>
+<Duration>"(ATTR_WP) hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_04">
+<Description language="ENGLISH">"Pestilent Breath"</Description>
+<Explanation language="ENGLISH">"You exhale a pestilent, poisonous cloud at your enemies. You gain the Breath+4 (Pestilence) Creature Trait, using the modifications here. All victims within the Area of Effect and creatures between you and the target must pass a Difficult (-10) Endurance Test or suffer Damage equal to the attack's Rating, ignoring Toughness Bonus and Armour Points. Further, a failed Test results in each victim suffering a 50% chance of contracting either (roll 1d10) 1-9 Ratte Fever or 10 The Black Plague. You are immune to your own pestilent breath."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"20+(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_05">
+<Description language="ENGLISH">"Skitterleap"</Description>
+<Explanation language="ENGLISH">"With a sound of inrushing air and a puff of brimstone-scented smoke, you teleport yourself or one ally within Range to any location that you have Line of Sight to. The teleported creature must be Average-sized or smaller."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus x2 yards"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_06">
+<Description language="ENGLISH">"Traceless Demise"</Description>
+<Explanation language="ENGLISH">"The body of any creature that dies while under the effects of this spell melts away into a foul-smelling black slime. Traceless Demise is commonly cast upon the assassins of Clan Eshin before they embark on a hunt, ensuring that no Skaven corpses are left behind. This spell affects any number of allies within Range, up to your Willpower Bonus multiplied by itself (ie, a WPB of 4 x 4 equals 16 potential targets)."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"14"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_07">
+<Description language="ENGLISH">"Veil of Flies"</Description>
+<Explanation language="ENGLISH">"With a buzzing curse and a flailing of your arms, you summon a cloud of gnats and biting flies. The insect swarm creates an Area of Effect that moves with you and attacks your enemies. While inside the swarm, your opponents suffer 1 Wound (no modifiers) each Round, and they receive a -20% penalty to all Tests. In addition, Veil of Flies also makes it hard for your enemies to pinpoint your location, imposing a -20% penalty to all Ranged Tests made against you."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WARP_08">
+<Description language="ENGLISH">"Warp Storm"</Description>
+<Explanation language="ENGLISH">"You summon a storm formed of pure warp energy. This storm is fuelled by the malignant power of the Horned Rat and may appear in any locale, even underground. All targets suffer a magic missile hit with a Damage of +5 (ignoring Armour Points). If the struck body location is protected by metal armour, the Damage is increased to +10. All targets take a Stunned Condition. If the Casting Roll is Fumbled, you suffer a magic missile hit instead. (This spell may also be used to blow away solid objects in the same manner as Warp Lightning.)"</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0203"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+  <!-- "GOBLIN MAGIC" (p.38), deux sorts pour Shamans gobelins - voir commentaire Talent GRIM-T0204
+       plus haut. -->
+<Sort id="GRIM-GOBLIN_01">
+<Description language="ENGLISH">"Itchy Nuisance"</Description>
+<Explanation language="ENGLISH">"You wave your fingers and small itchy fungal spores shoot out of their ends, embedding themselves in the sensitive areas of the target. These spores grow rapidly, causing unbearable itching. The target suffers a -10% to all Tests, and halves their Movement for the Duration."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0204"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-GOBLIN_02">
+<Description language="ENGLISH">"Sneaky Stabbin'"</Description>
+<Explanation language="ENGLISH">"You bewitch the blades of your allies, so that they seek out the weakest points in their enemies' armour. Your targets gain +1 Advantage, and their attacks gain the Penetrating Weapon Quality (WFRP4, p.298) which lasts for as long as they have Advantage."</Explanation>
+<Target>"(BATTR_Fel) allies"</Target>
+<Duration>"Special"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0204"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 </DATA_SPELL>
 </DATA_BOOK>
