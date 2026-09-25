@@ -11710,3 +11710,40 @@ légitime.
 Compilé (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes qu'avant). **TESTÉ ET
 VALIDÉ PAR NONO le 25/09/2026** : Talent et bonus d'Attribut corrects sur la fiche et le PDF après
 rattachement d'une fabrication via WinFabrication/WinPersonnage. Chantier clos.
+
+### 2.96 Unofficial Grimoire — début d'intégration (New Talent + New Spells), à valider par Nono (25/09/2026)
+
+**Livre de fan** (Chris MacLean, "Unofficial Grimoire" v1.2), `OFFICIAL="2"` comme Nations of
+Mankind/Lords of Naggaroth. Deux extractions texte comparées : `PDF_TEXTE\Aventures\Divers\
+Unofficial grimoire.txt` (2656 lignes, retenue — même contenu que l'autre, mais encodage propre)
+contre `PDF_TEXTE\Other help\Unofficial Grimoire 1.2 PDF.txt` (2993 lignes, ligatures mal
+extraites, ex. "unoﬃcial"). Aucun PDF source retrouvé ailleurs dans le dépôt pour lever une
+ambiguïté de mise en page ; le texte à deux colonnes suffit, sauf un léger désordre de lecture
+de colonnes autour du sort Observe (Target/Duration/effet retrouvés plus loin dans le flux,
+recoupés pour reconstituer le sort).
+
+Nouveau fichier `DATABASE\WFRP4\BOOK UNOFFICIAL GRIMOIRE.Xml` (`CODE_BOOK="GRIM"`,
+`COMPLETE="0"` — volontairement partiel). **Saisi** : le chapitre "New Talent" + "New Spells"
+du début du livre (p.4-9) uniquement — 1 Talent (Remove Curse, `GRIM-T0200`, le plus haut Talent
+id tous livres confondus étant `HORNE-T0199`), 10 Petty Spells (`GRIM-PETTY_01` à `_10`, Talent
+générique `RULES-T0089`, `TypSpell="Minor Magic"`, même convention que les Petty Spells Skaven
+du Horned Rat Companion), 27 Arcane Spells (`GRIM-ARCAN_01` à `_27`, Talent `RULES-T0088_*`,
+`TypSpell="Arcane Magic"`), et 16 sorts additionnels (2 par Lore) pour les 8 Lores **déjà
+existantes** du Rulebook — Beasts/Death/Fire/Heavens/Life/Light/Metal/Shadows — rattachés aux
+talents déjà présents dans `BOOK_RULESBOOK.Xml` (`RULES-T0088_BETE/MORT/FEU/CIEUX/VIE/LUMIERE/
+METAL/OMBRE`, vérifiés par grep avant saisie : aucun n'a été dupliqué). Soit 53 sorts + 1 talent,
+aucun fichier `.pas` touché.
+
+**Laissé de côté pour l'instant** (chapitres suivants du même livre, ~160 sorts restants, bien
+plus volumineux — sessions dédiées à prévoir) : Druidic Priest career + Lore of the Wild
+(nécessite un mécanisme de familiers spirituels non vérifié dans le programme), Elementalist
+career + Lore of Elementalism + Elementals (probables créatures adverses à écarter, comme
+Frostfiend/Djinn/Skaven Bestiary), Cult Magus of Tzeentch + Lores de Nurgle/Slaanesh/Tzeentch
+(Tzeentch existe déjà via `RULES-T0088_TZEENTCH`/`RULES-T0172_TZEENTCH` — à rattacher, pas
+dupliquer), Dark Magic + Lores de Daemonology/Necromancy (idem, `RULES-T0088_DEMON`/`NECRO`
+existent déjà), Skaven Magic — Lore of the Warp (nouveau talent générique nécessaire, à la
+`HORNE-T0197`), Ritual Magic + Summoning Rituals (sommation de daemons, mécanisme à vérifier
+avant de saisir), Goblin Magic. Voir `A FAIRE.txt` et `Log.txt` (25/09/2026) pour le détail.
+
+**À VALIDER PAR NONO** : compilation du nouveau fichier XML et relecture des 53 sorts/1 talent
+saisis — aucun test en jeu effectué depuis cette session.

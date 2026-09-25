@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"GRIM"</CODE_BOOK>
+<BOOK>"BOOK UNOFFICIAL GRIMOIRE"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"2"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<DISCLAIMER>"This Supplement is self-published and unofficial, and is not in any way to be associated with Games Workshop or Cubicle 7. All relevant licences, trademarks and copyrights are used without permission and in no way meant to challenge ownership to them by Games Workshop and Cubicle 7. Original Design and Writing: Chris MacLean. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2018. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+<!-- OFFICIAL=2 : livre de fan (Chris MacLean, "Unofficial Grimoire" v1.2), comme Nations of Mankind
+     et Lords of Naggaroth (CONTEXT.md). Source texte : PDF_TEXTE\Aventures\Divers\Unofficial grimoire.txt
+     (2656 lignes), prefere a PDF_TEXTE\Other help\Unofficial Grimoire 1.2 PDF.txt (2993 lignes) : meme
+     contenu, mais ce dernier souffre de ligatures mal extraites (ex. "unoﬃcial" au lieu de "unofficial")
+     alors que l'autre extraction est propre. Aucun PDF source retrouve ailleurs dans le depot pour lever
+     une ambiguite de mise en page ; le texte est suffisamment clair en deux colonnes pour se passer du PDF,
+     sauf un leger desordre de lecture de colonnes autour du sort Observe (reconstruit par recoupement
+     interne du texte).
+     COMPLETE=0 : seul le chapitre "New Talent" + "New Spells" (Petty/Arcane/8 Lores existantes) du debut
+     du livre est saisi ici (p.4-9 du PDF). Les chapitres suivants (Druidic Priest career + Lore of the
+     Wild, Elementalist career + Lore of Elementalism + Elementals, Cult Magus of Tzeentch + Lores de
+     Nurgle/Slaanesh/Tzeentch, Dark Magic + Lores de Daemonology/Necromancy, Skaven Magic + Lore of the
+     Warp, Ritual Magic + Summoning Rituals, Goblin Magic) restent a integrer dans une session dediee :
+     ce sont des carrieres completes avec mecaniques neuves (familiers spirituels, Elementals invoques,
+     malus/benefices de Dark Magic, rituels de sommation de daemons) qui demandent le meme travail de
+     verification qu'ici (Lores existantes vs nouvelles, cross-check des ID sur les 18 livres) mais en
+     bien plus volumineux ; voir A FAIRE.txt et Log.txt du 25/09/2026 pour le detail. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="GRIM-BOOK UNOFFICIAL GRIMOIRE">"Unofficial Grimoire"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="GRIM-BOOK UNOFFICIAL GRIMOIRE">"Unofficial Grimoire"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_TALENT>
+  <!-- "NEW TALENT" (p.4) : achetable par tout personnage ayant deja Arcane Magic, Chaos Magic,
+       Wild Magic, Witch! ou Invoke. Talent independant, sans Generique (pas de variante par Lore).
+       Plus haut Talent id tous livres confondus au 25/09/2026 : HORNE-T0199 -> GRIM-T0200. -->
+<Talent id="GRIM-T0200">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Remove Curse"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"A character who has purchased the Arcane Magic, Chaos Magic, Wild Magic, Witch!, or Invoke Talents may purchase the Remove Curse Talent at any time thereafter (while in the relevant career). You have learned the art of nullifying active curse effects. If you fail a Dispel Test when attempting to remove a curse, you may reverse the roll if doing so allows the Test to succeed. This applies also to Extended Dispel Tests. Only one curse may be removed at a time."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_SPELL>
+  <!-- "NEW PETTY SPELLS" (p.4-5) : considerees comme faisant partie de la liste standard du
+       Rulebook (p.240). Talent generique Petty Magic = RULES-T0089, TypSpell "Minor Magic",
+       meme convention que les 4 sorts Skaven Petty Magic de HORNE-PETTY_01..04. -->
+<Sort id="GRIM-PETTY_01">
+<Description language="ENGLISH">"Belligerence"</Description>
+<Explanation language="ENGLISH">"Your target gains the Belligerent Creature Trait."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_02">
+<Description language="ENGLISH">"Comfort"</Description>
+<Explanation language="ENGLISH">"You create a faint dome of energy around you that keeps out the extremes of the elements, averaging out heat and cold, and minimizing the effects of rain, snow, and wind. This has the result of creating a comfortable space to rest and make camp."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_03">
+<Description language="ENGLISH">"Converse By Candlelight"</Description>
+<Explanation language="ENGLISH">"You are able to converse with another Wizard through the light of a candle. Each Wizard must be within Willpower Bonus miles of each other, and each Wizard may only communicate for their Willpower minutes. The spell only works when the Wizards cast the spell at a pre-arranged time next to a lit candle, calling out the other's name at the end of the invocation. The light on the candle turns green on both candles as soon as the second wizard completes the spell. The spell can be ended sooner simply by blowing out either candle."</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes (each)"</Duration>
+<Range>"(BATTR_WP) miles (each)"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_04">
+<Description language="ENGLISH">"Find"</Description>
+<Explanation language="ENGLISH">"You are able to locate one lost object within range. The object will ring with the sound of a small bell until it is found. If the object does not belong to you, it must have been touched by a living person who seeks to find it and you must touch that person while casting the spell."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_05">
+<Description language="ENGLISH">"Induce Flavour"</Description>
+<Explanation language="ENGLISH">"You add flavour to all food eaten within Range, making ship's biscuits palatable and well-prepared food into a Duke's feast. This spell does not affect the quality of the food, but the GM may determine if there are any psychological or social benefits (or detriments). For instance, after a week of travel rations, a meal that tastes delicious could remove a Fatigued condition caused by travel. Or you might gain +1 SL to a successful Charm Test when serving this meal."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_06">
+<Description language="ENGLISH">"Magic Lock"</Description>
+<Explanation language="ENGLISH">"This spell can be cast on a single non-magical bolt or lock. The lock cannot be picked or forced open. This does not prevent someone from smashing down a magically locked door, for example, and a locked chest could still be broken."</Explanation>
+<Target>"1"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_07">
+<Description language="ENGLISH">"Mend"</Description>
+<Explanation language="ENGLISH">"You imbue subtle strands of magic into the collected pieces of a single broken item under 50 lbs, temporarily mending the object. This spell cannot mend an item that could not normally be fixed. Until repaired by a skilled craftsperson, the object no longer has the Durable Quality and it gains the Shoddy and Unreliable Flaws. Casting this spell again on the same object will destroy it."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_08">
+<Description language="ENGLISH">"Petty Curse"</Description>
+<Explanation language="ENGLISH">"You place a minor curse upon a target. An unwilling or unsuspecting victim is allowed an Opposed Willpower Test to resist, penalized by the casting roll's SL. A curse may only be removed with a successful dispel by the spellcaster or someone with the Remove Curse Talent. You may choose the precise effects of any curse, but the GM should make sure that they are about the same as those listed here: uncomfortable, perhaps embarrassing, but not especially dangerous. Examples: Warts, boils, piles, baldness, severe rash, halitosis, flatulence, hair turns a bright colour, irregular bowel movements, smelly feet, etc."</Explanation>
+<Target>"1"</Target>
+<Duration>"Until removed"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_09">
+<Description language="ENGLISH">"Read Out"</Description>
+<Explanation language="ENGLISH">"This spell will read out the text of a document, scroll, book, sign, or similar writing in a slow and clear voice. Once begun, the whole text will be read aloud and cannot be stopped without dispelling the spell. A listener is allowed an Easy (+40) Intelligence Test to memorise the information being read, with a cumulative penalty of -10 for every 10 minutes spent listening. The spell will not activate magical effects, summonings, prayers, or the like. If the writing is in a foreign language, it will be read aloud in the original language."</Explanation>
+<Target>"1"</Target>
+<Duration>"Up to (ATTR_WP) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-PETTY_10">
+<Description language="ENGLISH">"Reinforce"</Description>
+<Explanation language="ENGLISH">"This spell can be cast on any door, portal, chest or similar object or structure that you touch to make it physically tougher and harder to damage. The object's Toughness Bonus is increased by 1."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+  <!-- "NEW ARCANE SPELLS" (p.5-7) : considerees comme faisant partie de la liste standard du
+       Rulebook (p.242). Talent generique Arcane Magic = RULES-T0088_*, TypSpell "Arcane Magic",
+       meme convention que RULES-ARCAN_01..xx. -->
+<Sort id="GRIM-ARCAN_01">
+<Description language="ENGLISH">"Accelerate"</Description>
+<Explanation language="ENGLISH">"You speed up your target's senses, granting them the following bonuses: +10 Combat Initiative and +1 Movement. You may increase the effects by +10/+1 for each +2 SL. If you overcast by +6 SL, the target automatically goes first in the Initiative order and gains an extra Action during their Turn. While affected by this spell, a target may not make Channelling, Language (Magick), or Pray Tests."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_02">
+<Description language="ENGLISH">"Alarm"</Description>
+<Explanation language="ENGLISH">"You may cast this spell on any spot. Should any living creature pass within Willpower Bonus yards of it, you will be made aware that this has happened, even to the point of waking you up, no matter how far away the event takes place. You know only that something has disturbed the spell, but you will not be aware of any other details."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Until the next sunrise"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_03">
+<Description language="ENGLISH">"Aethyric Arrow"</Description>
+<Explanation language="ENGLISH">"You conjure one or more small arrows to hit one or more target(s), each strikes as a magic missile with a Damage of +0 and the Impale Quality. When casting, you choose as many arrows as desired up to your Willpower Bonus; additional arrows increase the spell's CN by 1 per arrow."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_04">
+<Description language="ENGLISH">"Berserk"</Description>
+<Explanation language="ENGLISH">"Your target gains the Frenzy Creature Trait."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_05">
+<Description language="ENGLISH">"Deadly Touch"</Description>
+<Explanation language="ENGLISH">"You jolt one living target with a harrowing energy, inflicting a magic missile with a Damage equal to your Dexterity Bonus. The energy carries one additional effect of your choice, replacing any Lore effects: Cold (targets gain a Stunned condition for every full 5 Wounds suffered, minimum 1; compatible with the Lores of Death, Heavens, Life, Metal, and Shadows), Corrosion (all Armour and Weapons carried by affected targets suffer 1 Damage; compatible with the Lores of Daemonology, Metal, Shadows), Fire (Wounds caused ignore Armour Points, targets gain an Ablaze condition; compatible with the Lores of Daemonology, Fire, Heavens, Light, Metal), Electrical (Wounds caused ignore Armour Points, targets gain a Stunned condition; compatible with the Lores of Daemonology, Heavens, Life, Metal), Poison (Wounds caused ignore Armour Points, targets gain a Poisoned condition; compatible with the Lores of Beasts, Death, Shadows), or Shadow (Wounds caused ignore Armour Points, targets gain an Entangled condition; compatible with the Lores of Daemonology, Death, Shadows)."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_06">
+<Description language="ENGLISH">"Deft Hands"</Description>
+<Explanation language="ENGLISH">"You enhance your target's ability to manipulate objects, imbuing them with a bonus of +20 to Dexterity. In addition, per 2 SL you succeed by, you may select one Dexterity-based Talent to bestow to your target, such as Artistic, Craftsman, Gunner, Master Tradesman, Rapid Reload, or Tinker; or you may choose additional levels in the chosen Talent."</Explanation>
+<Target>"1"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_07">
+<Description language="ENGLISH">"Dispirit"</Description>
+<Explanation language="ENGLISH">"You suggest feelings of doom and gloom in the mind of a living person of your size or smaller. The target loses 1 Advantage and suffers a -10 penalty to all Willpower and Fellowship-based Tests. For every +2 SL, you may increase the effect by -1/-10. The spell has no effect on creatures with any of these Traits: Bestial, Daemonic, Immunity to Psychology, Undead."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_08">
+<Description language="ENGLISH">"Enthuse"</Description>
+<Explanation language="ENGLISH">"You project hope and enthusiasm into the mind of a living person of your size or smaller. The target gains 1 Advantage and receives a +10 bonus to all Willpower and Fellowship-based Tests. For every +2 SL, you may increase the effect by +1/+10. The spell has no effect on creatures with any of these Traits: Bestial, Daemonic, Immunity to Psychology, Undead."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_09">
+<Description language="ENGLISH">"Forbidding"</Description>
+<Explanation language="ENGLISH">"You inscribe a magical barrier upon a portal or passageway, preventing access to what lies beyond. This barrier is invisible to others, except to you or any creatures with the Second Sight Talent, in which case the Forbidding appears as a delicate pattern of bluish strands undulating in mid-air. You can bypass your own Forbidding at will and may lead others through it if you are touching them. Any creature attempting to go through the Forbidding must pass a Difficult (-10) Willpower Test or be repelled by the mystical force, taking a Stunned condition. A creature unable to bypass the portal may try again at the following sunrise, but this time the test is considered Very Hard (-30). Should this test be failed, the creature will never be able to break the Forbidding."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_10">
+<Description language="ENGLISH">"Mental Duel"</Description>
+<Explanation language="ENGLISH">"You lock yourself into an immediate mental contest against one Wizard (or other spellcaster). If mistakenly initiated against a non-Wizard, your spell is wasted and you must immediately roll on the Minor Miscast Table. Once locked in mental combat, you may not stop until either duellist is attacked by another assailant, or one of you is reduced to zero Willpower. Each Round, perform an Opposed Willpower Test (adding your Overcasting SL to the first Round). The winner reduces the opponent's Willpower by the Opposed SL x 5 and increases their own by the same amount; a tie is a stalemate that Round. Once a combatant reaches Willpower 0, the duel ends: the loser gains a Corruption point and the Unconscious Condition, the victor gains +1 Willpower permanently (counting as an Advance). While duelling, both combatants can take no other Action or Movement and count as Helpless Targets; if either is attacked, the Duel breaks instantly and both take a Stunned Condition in addition to the attack's effects. Both combatants' Willpower characteristics return to normal once the duel ends, however it ends."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Special"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_11">
+<Description language="ENGLISH">"Observe"</Description>
+<Explanation language="ENGLISH">"Your target gains +20 to Perception (Sight) Tests; and while the spell lasts, the target may Assess (gaining +1 Advantage) without making a Skill Test (though it still takes an Action)."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_12">
+<Description language="ENGLISH">"Painless"</Description>
+<Explanation language="ENGLISH">"You absorb powerful energy which makes you immune to any pain sensation while the spell is active. Gain the Painless Creature Trait."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_13">
+<Description language="ENGLISH">"Panic"</Description>
+<Explanation language="ENGLISH">"You induce a sudden urge to flee in your target, inflicting +1 Broken condition upon a failed Cool Test. You may assign +1 condition per 2 SL of the Test. The spell has no effect on creatures with any of these Traits: Bestial, Daemonic, Immunity to Psychology, Undead."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_14">
+<Description language="ENGLISH">"Paralyse"</Description>
+<Explanation language="ENGLISH">"You attempt to hold one living creature in place who is your Size or smaller. The target is allowed a Challenging (+0) Willpower Test to resist. If paralyzed, the creature may not move or perform any action at all for its Duration, counting as Unconscious. Extra SL from the casting roll may either be used to penalize the Willpower Test at an equal rate (+1 SL on the casting roll for -1 SL to the Willpower Test), or to increase the Size of the creature affected by +1 for each 2 SL achieved."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_15">
+<Description language="ENGLISH">"Provocation"</Description>
+<Explanation language="ENGLISH">"You reach inside your victim's mind and twist something to stimulate an intense emotional response, inflicting your choice of either Animosity, Hatred, or Prejudice (with a specific Target of your choosing). Once the effect ends, any events put into motion are likely to continue, and the victim may realize that something suspicious happened to them. The spell has no effect on creatures with any of these Traits: Bestial, Daemonic, Immunity to Psychology, Undead."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_16">
+<Description language="ENGLISH">"Rally"</Description>
+<Explanation language="ENGLISH">"You cause a living person suffering from Broken conditions, Fear and/or Terror to immediately regroup. The affected target may move and act as normal when their Turn arrives, gaining +1 Advantage."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_17">
+<Description language="ENGLISH">"Repress"</Description>
+<Explanation language="ENGLISH">"You immediately block the memory of a particular event from the mind of another living character. You must know the details of the event and be able to speak to the character in a language they understand. If the blocked memory is of a terrifying nature, the character will have nightmares that vaguely suggest that memory. After each night's rest, the victim is allowed a Very Hard (-30) Intelligence Test to recover their memory; if regained the character must make a Difficult (-10) Cool Test or gain a Corruption point."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_18">
+<Description language="ENGLISH">"Sanctuary"</Description>
+<Explanation language="ENGLISH">"You create an aura of protective energy around you that grants all within the Area of Effect the Immunity to Psychology Creature Trait."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_19">
+<Description language="ENGLISH">"Silence"</Description>
+<Explanation language="ENGLISH">"You create an Area of Effect within range that blocks out all noise. No speech or sound may pass into or out of the area, no matter how loud or soft. Spellcasting is impossible inside the area."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_20">
+<Description language="ENGLISH">"Slippery Ground"</Description>
+<Explanation language="ENGLISH">"You target a patch of ground, dousing it in a magical substance that has the viscousity of oil (but isn't flammable like oil). The area becomes difficult ground to cross. Any creature of Average size or smaller moving on the ground must pass a Challenging (+0) Agility or Athletics Test or fall, gaining the Prone condition. Overcasting SL may be used to increase the Difficulty of this Test by -10 per 2 SL. A falling creature must then pass a Dexterity Test or drop any items held in its hands."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_21">
+<Description language="ENGLISH">"Sluggish"</Description>
+<Explanation language="ENGLISH">"Your target becomes slow as molasses. The affected creature gains the Slow Flaw for all attacks, and may only Move at Walking Rate. Charge, Run, Sprint, or Flee are not allowed (the creature may Engage with an opponent, but no Advantage bonus is gained)."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_22">
+<Description language="ENGLISH">"Smash"</Description>
+<Explanation language="ENGLISH">"You cause structural damage to a targeted door, small section of wall, or other inanimate surface or object; it has no effect on any creature. Smash pummels the affected structure with a magic missile of Damage +9."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_23">
+<Description language="ENGLISH">"Steal Aura"</Description>
+<Explanation language="ENGLISH">"You conjure shimmering magical hands, which launch themselves at your target, which must be a single creature protected by a magical spell or aura. Perform an Opposed Willpower Test against the protected creature, with a bonus in SL equal to your Overcasting SL. If you win, the shimmering hands strip away the protective magics from the target and give them to you, and the stolen spell's Duration now resets using your Characteristic Profile instead. You do not gain any Lore benefit from the stolen spell. Examples of protective spells include: Protection from Rain, Aethyric Armour, Arrow Shield, Dome, Magic Shield, Mundane Aura, Ward, Comfort, Painless, Sanctuary, Word of Invulnerability, and other similar warding spells."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_24">
+<Description language="ENGLISH">"Subvert Blessing"</Description>
+<Explanation language="ENGLISH">"Aggressive energy shoots out from you, encasing a single target affected by one or more Blessings. All Blessings on the target are eliminated."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_25">
+<Description language="ENGLISH">"Subvert Miracle"</Description>
+<Explanation language="ENGLISH">"Hostile energy spills out from you towards the target of an active Miracle. The Miracle ends immediately, and all its effects are nullified."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_26">
+<Description language="ENGLISH">"Tongues"</Description>
+<Explanation language="ENGLISH">"You are able to speak and make yourself understood in any common spoken language."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ARCAN_27">
+<Description language="ENGLISH">"Word of Invulnerability"</Description>
+<Explanation language="ENGLISH">"You utter a magic word and wrap protective energies around yourself, cloaking you from one non-magical Critical Hit and Damage up to SL+Willpower Bonus Wounds. Example: with +3 SL on the casting roll and a Willpower of 43, you would be protected from 12 Wounds. The effect ends once the Duration is reached, a Critical Hit is deflected, or all the spell's Wounds are absorbed."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+  <!-- "NEW LORE SPELLS" (p.7-9) : deux sorts additionnels pour chacune des 8 Lores existantes du
+       Rulebook (Beasts/Death/Fire/Heavens/Life/Light/Metal/Shadows) - talents deja presents dans
+       BOOK_RULESBOOK.Xml (RULES-T0088_BETE/MORT/FEU/CIEUX/VIE/LUMIERE/METAL/OMBRE), aucune nouvelle
+       Lore ni nouveau Talent necessaire pour ce bloc. -->
+<Sort id="GRIM-BETE_01">
+<Description language="ENGLISH">"The Standing Ox"</Description>
+<Explanation language="ENGLISH">"You shout out to all allies within range, bolstering their courage and resolve. Any ally suffering from Fear or Terror, or Broken conditions, no longer suffers these effects. In addition, each Character gains a Resolve point which is automatically lost at the end of the scene or encounter. This spell does not protect against future sources of Fear or Terror, etc."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-BETE_02">
+<Description language="ENGLISH">"Winter's Long Slumber"</Description>
+<Explanation language="ENGLISH">"Your touch causes a willing creature your Size or smaller to fall into a deep sleep akin to a bear's hibernation. The hibernation lasts for many months, for an entire season or more until the following solstice or equinox. The target need not eat or drink. Any diseases, poisons, or similar ailments the character is suffering are interrupted, their damaging properties slowed to a crawl. Current penalties remain active, however. Natural healing occurs as normal. The target cannot be awakened by normal means; only you may prematurely break the hibernation. You may also cast this spell upon yourself: if you do, you may imbue one witness with the power to break your spell with a Free Action."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-MORT_01">
+<Description language="ENGLISH">"Animus Imprisoned"</Description>
+<Explanation language="ENGLISH">"You imprison the soul of your target, sealing it in a durable vessel such as a bottle, vial, or pouch. While the soul is imprisoned, the victim's material body lives as a vegetable, carrying on the barest functions of life (breathing, swallowing, excreting) without initiative or awareness. The body must be fed by others or die of thirst or starvation; its body should be cleaned or it will likely gain a Festering Wound, Galloping Trots, Minor Infection, and possibly Blood Rot. Previously suffered damage, diseases, poisons, and other maladies affect the body normally. The husk heals over time as normal. You can restore the imprisoned soul to its body at any time by opening the sealed vessel in the presence of its body. Any knowledgeable Priest of Morr or an Amethyst Wizard who knows this spell can do likewise. When the soul is returned to the body, the target must test against Corruption (Major). Should the bottle be opened or destroyed away from the body, or by someone who does not know the proper rituals, the soul becomes lost in the world, damned to become a Ghost. Due to the disruption caused in conjuring this spell, all Wizards in a 5-mile radius feel a tremor in the Aethyr."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"15"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-MORT_02">
+<Description language="ENGLISH">"Tomb Robber's Curse"</Description>
+<Explanation language="ENGLISH">"You suffuse a single corpse, tomb, or gravesite with a long-lasting Shyish curse. Anyone who desecrates the body or site during the following year gains 1 Corruption point and suffers a Fatigued condition for a period of 1d10 days."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-FEU_01">
+<Description language="ENGLISH">"Blood Boil"</Description>
+<Explanation language="ENGLISH">"Your touch burns through armour and superheats your target's blood. The target suffers a magic missile with a Damage of +3 (Armour is ignored) as well as a Stunned condition. At the start of each Round thereafter, the target must make a Difficult (-10) Toughness Test or suffer another hit, each time increasing its Damage by +1. Once a Test is passed, the spell ends. Targets killed by this spell will explode into a fountain of superheated blood that causes a magic missile with a Damage of +1 to all creatures within 2 yards. Since the target is not literally set on fire by this spell, the Lore bonus is not applied."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_FEU"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-FEU_02">
+<Description language="ENGLISH">"Fiery Flavour"</Description>
+<Explanation language="ENGLISH">"Your fiery touch can quickly cook one serving of food to your liking or it causes up to one quart of liquid to come to a furious boil. Or you may use this spell to impart the food or drink with a fiery potency, such as a spicy or alcoholic flavour, which can induce gastrointestinal distress in those who are not used to such potency."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_FEU"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-CIEUX_01">
+<Description language="ENGLISH">"Birdspeak"</Description>
+<Explanation language="ENGLISH">"You are able to speak and understand the languages of birds. This spell does not force birds to talk or pay attention to you. Cunning birds may even lie to you or demand favours in return for their knowledge. A bird's opinion of you will be based on the way you appear and act, as interpreted through its own personality. You do gain insight into the customs and behaviour of birds, understanding why a flock of birds is migrating now or why a nest may have been abandoned. The GM should allow an Intuition or Intelligence Test with an Easy (+40) modifier when the situation allows."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-CIEUX_02">
+<Description language="ENGLISH">"Wind Blast"</Description>
+<Explanation language="ENGLISH">"You call down raging winds from the sky. Anyone in the Area of Effect takes a Stunned condition, which lasts until they exit the area or the spell ends. In addition, they must pass a Hard (-20) Agility or Dodge Test or take the Prone condition. Ranged attacks are impossible into or out of the area. As per the Combat Difficulty Chart, all attacks are made at -20 inside the area."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-VIE_01">
+<Description language="ENGLISH">"Geyser"</Description>
+<Explanation language="ENGLISH">"You cause a geyser of water to erupt from an area of natural ground within range. Those within the Area of Effect gain the Prone and Surprised conditions, and are knocked 4 yards in a random direction, suffering Falling Damage. After the initial burst, a large pool fills the entire Range (subject to reason), providing fresh water for the next water until it finally drains away."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-VIE_02">
+<Description language="ENGLISH">"Leaf Swirl"</Description>
+<Explanation language="ENGLISH">"If you are outdoors, you conjure a vortex to swirl about you, providing you with -20 cover against Ranged attacks and -10 cover against Melee attacks. You do not suffer these penalties yourself."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-LUMIERE_01">
+<Description language="ENGLISH">"The Power of Truth"</Description>
+<Explanation language="ENGLISH">"Your target becomes infused with the convincing certainty of truth and righteousness, but only if they speak honestly (such as they know it or believe). If so, the target gains a +40 bonus to Charm Tests as well as their maximum limit in the Master Orator and Public Speaking Talents. The influence of this spell is not visible to others, so there is no easy way to gauge the target's honesty. You may cast this spell on yourself."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_LUMIERE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-LUMIERE_02">
+<Description language="ENGLISH">"Radiant Weapon"</Description>
+<Explanation language="ENGLISH">"Your touch envelops a non-magical melee weapon in a coating of bright light. The weapon counts as magical, gains a bonus to Damage equal to your Willpower Bonus, and gains the Unbreakable Quality. Anyone attacked by this weapon counts as a target of a Lore spell. Due to its bright light, the wielder of this weapon automatically fails all Stealth Tests."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_LUMIERE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-METAL_01">
+<Description language="ENGLISH">"Stoke the Forge"</Description>
+<Explanation language="ENGLISH">"You cause an already-burning fire in any forge, fireplace, oven, or similar housing where heat and flame are stoked to burn as hotly as naturally possible, without consuming additional fuel."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_METAL"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-METAL_02">
+<Description language="ENGLISH">"Tale of Metal"</Description>
+<Explanation language="ENGLISH">"You touch any metal object and look into its past, unlocking its secrets and visualising the circumstances of its forging and creation as if you were there. You may make a Challenging (+0) Channelling Test to discern a magic item's special properties, learning one special property of the GM's choosing per SL (minimum of 1). In the case of cursed, tainted, or spoilt items, you uncover the dangerous properties last."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_METAL"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-OMBRE_01">
+<Description language="ENGLISH">"Cloak Activity"</Description>
+<Explanation language="ENGLISH">"Gathering the shadows of Ulgu about you, you disguise your actions, including the casting of this spell itself, and you appear to be doing something completely different (your choice). Your location remains the same to the observer, but you appear engaged in a different activity. For example, you can appear to all eyes to be reading a book when you are actually punching someone in the face. If your action affects someone else (an attack, spell, picking pocket, etc), the victim is granted an Opposed Intelligence/Channelling (Ulgu) Test to see through the illusion. Those with the Second Sight Talent must pass a Difficult (-10) Perception Test to notice the illusion."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_OMBRE"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-OMBRE_02">
+<Description language="ENGLISH">"Shadow Daggers"</Description>
+<Explanation language="ENGLISH">"You conjure up a number of shadowy daggers equal to your Willpower Bonus and hurl them at one or more targets. Each dagger is a magic missile with a Damage of +3."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0088_OMBRE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
+</DATA_BOOK>
