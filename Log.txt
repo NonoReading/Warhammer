@@ -6764,3 +6764,27 @@ colonnes et un sort (Banish Daemon, Lore of Daemonology) voit son explication co
 un saut de page - reconstruite par recoupement du sens plutot que mot a mot. XML pur,
 aucun code Pascal touche. Compile (lazbuild --build-all, 0 erreur, meme profil
 warnings/hints/notes) le 25/09/2026. A TESTER PAR NONO EN JEU avant commit.
+
+25/09/2026 - UNOFFICIAL GRIMOIRE : DRUIDIC PRIESTS & FAMILIARS (DRUIDIC FAVOURS + LORE OF THE WILD)
+Suite du chantier Unofficial Grimoire. Avant de saisir, verifie par grep "amiliar" sur
+tous les .pas du depot : aucun mecanisme de familier n'existe dans le programme. Meme
+decision que pour les creatures adverses non gerees (Frostfiend/Djinn/Skaven Bestiary...) :
+carriere Druidic Priest et systeme de familier-esprit laisses de cote, seuls les sorts
+sont saisis dans BOOK UNOFFICIAL GRIMOIRE.Xml. Druidic Favours (tier Petty, CN 0) : 19
+sorts sur 20 (GRIM-DRUID_01-19), rattaches au Talent generique Petty Magic RULES-T0089
+deja existant plutot que de creer un nouveau Talent avec sa propre table XP (IB au lieu
+de WPB comme Petty Magic normal) - le livre presente Druidic Favours comme un Talent a
+part mais fonctionnellement identique a Petty Magic, meme convention que "New Petty
+Spells" du meme livre (GRIM-PETTY_01-10). Sense of the Green non saisi : le texte tombe
+exactement sur le saut de page p.14-15 de l'extraction texte et la suite est introuvable
+ailleurs dans le fichier - irrecuperable, pas invente. The Lore of the Wild (tier Lore) :
+19 sorts sur 20 (GRIM-WILD_01-19), nouveau Talent generique GRIM-T0205 "Arcane Magic
+(Wild)" (Generique RULES-T0088_*, TypSpell "Domain Magic", meme convention que
+HORNE-T0197/GRIM-T0203/GRIM-T0204) - cette Lore n'existait nulle part dans les 18 livres,
+verifie par grep. Sacred Grove non saisi : c'est un Ritual, sans bloc CN/Range/Target/
+Duration dans la source, renvoi au chapitre Ritual Magic du meme livre - laisse pour le
+chantier Ritual Magic + Summoning Rituals. Soit 38 sorts + 1 talent supplementaires,
+aucun fichier .pas touche. Extraction du texte source confiee a un sous-agent dedie (mise
+en page a deux colonnes tres jumbled sur ce chapitre) puis verifiee avant saisie. XML
+valide par un parseur (aucun fichier .pas modifie, compilation Pascal non requise). A
+TESTER PAR NONO EN JEU avant commit.

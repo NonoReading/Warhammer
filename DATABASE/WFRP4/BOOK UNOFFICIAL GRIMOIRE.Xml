@@ -104,6 +104,33 @@
 <Test language="ENGLISH">""</Test>
 <Generique>"RULES-T0088_*"</Generique>
 </Talent>
+  <!-- "DRUIDIC PRIESTS & FAMILIARS" (p.10-14) : carriere Druidic Priest et systeme de familier-
+       esprit laisses de cote (aucun mecanisme de familier dans le programme, verifie par grep -
+       meme decision que les creatures adverses non gerees). Seuls les sorts sont saisis. Druidic
+       Favours (tier Petty, CN 0) rattachees au Talent generique Petty Magic RULES-T0089 deja
+       existant, meme convention que "New Petty Spells" du meme livre (GRIM-PETTY_01..10) plutot
+       que de creer un nouveau Talent avec sa propre table XP (IB au lieu de WPB) : le livre
+       presente "Druidic Favours" comme un Talent a part, mais fonctionnellement identique a
+       Petty Magic, donc pas de nouveau mecanisme invente. Sur les 20 sorts du chapitre, "Sense
+       of the Green" a son texte irrecuperable (chevauchement de saut de page p.14-15, aucune
+       suite trouvee ailleurs dans l'extraction) : non saisi plutot que de deviner le contenu -
+       voir A FAIRE.txt. The Lore of the Wild (p.14-19, tier Lore, CN eleve) rattachee a un
+       nouveau Talent generique a la HORNE-T0197/GRIM-T0203/T0204, Generique="RULES-T0088_*",
+       TypSpell "Domain Magic" (cette Lore n'existait nulle part dans les 18 livres, verifie par
+       grep). Sur 20 sorts du chapitre, "Sacred Grove" est un Ritual (renvoi au chapitre Ritual
+       Magic du meme livre, aucun bloc CN/Range/Target/Duration dans la source) : hors perimetre
+       de cette tranche, a traiter avec le chantier Ritual Magic + Summoning Rituals. -->
+<Talent id="GRIM-T0205">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Wild)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The power of the ancient Druidic Priests comes from refracting the Winds of Magic - particularly Ghur, Ghyran, and Ulgu - through the spirit realm. The traditions of The Old Faith teach that all fauna and flora are linked together in the cycles of life, death, seasons, decay, regrowth; thus, the Druidic belief that Humans should not separate their knowledge into smaller Lores as the Elves and Colleges have done. Druids gain +1 SL to any Channelling or Casting Tests while outside in a natural environment untainted by Corruption."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
 </DATA_TALENT>
 <DATA_SPELL>
   <!-- "NEW PETTY SPELLS" (p.4-5) : considerees comme faisant partie de la liste standard du
@@ -1175,6 +1202,391 @@
 <Range>"(ATTR_WP)m"</Range>
 <Talent>"GRIM-T0204"</Talent>
 <Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+  <!-- "DRUIDIC PRIESTS & FAMILIARS" (p.10-14) : Druidic Favours (tier Petty, CN 0), rattachees a
+       RULES-T0089 - voir commentaire DATA_TALENT. 19 sorts sur 20 (Sense of the Green non saisi,
+       texte irrecuperable). -->
+<Sort id="GRIM-DRUID_01">
+<Description language="ENGLISH">"Animal Friend"</Description>
+<Explanation language="ENGLISH">"You make friends with a creature that is smaller than you and possesses the Bestial Creature Trait. The animal trusts you completely and regards you as a friend."</Explanation>
+<Target>"1"</Target>
+<Duration>"1 hour"</Duration>
+<Range>"1 yard"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_02">
+<Description language="ENGLISH">"Amber Contour"</Description>
+<Explanation language="ENGLISH">"You point at one target and trace its shape, while a subtle outline of Ghur flickers around the target. All combat Tests against the outlined creature gain +1 Advantage. Note: This spell may have other uses other than direct combat, subject to the GM's common sense and yours. (For example, a GM may agree that an angry mob may react to an outlined character with hostility, or guards may detain the outlined character for questioning.)"</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_03">
+<Description language="ENGLISH">"Calming Hand"</Description>
+<Explanation language="ENGLISH">"Your touch soothes a creature that is smaller than you and possesses the Bestial Creature Trait. One Broken, Fatigued, or Stunned Condition is removed from the target. Each +2 SL will remove an additional Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_04">
+<Description language="ENGLISH">"Careful Step"</Description>
+<Explanation language="ENGLISH">"The magic flowing through your feet ensures any organic matter you tread upon remains undamaged: twigs do not break, grass springs back to its original position, and even delicate flowers are unharmed. Those seeking to use the Track Skill to pursue you through rural terrain suffer a -30 penalty to their Tests."</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_05">
+<Description language="ENGLISH">"Cleanse Poison"</Description>
+<Explanation language="ENGLISH">"Your touch removes a Poisoned condition from the target. You may choose to remove an additional condition per 2 SL."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_06">
+<Description language="ENGLISH">"Comfort"</Description>
+<Explanation language="ENGLISH">"You create a mystical dome around you that keeps out the extremes of the elements, averaging out heat and cold, and minimizing the effects of rain, snow, and wind. This has the result of creating a comfortable space to rest and make camp."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_07">
+<Description language="ENGLISH">"Commune"</Description>
+<Explanation language="ENGLISH">"Using your familiar, you converse with the spirits of the wood, river, desert, caverns, etc (ie, whichever natural locale you are in). You talk to your spirit animal, who in turn acts as medium to unseen spirits. You have no control or command over these spirits, but may ask a single question per minute of the spell's Duration. The spirit(s) that answer will do so honestly, without bias, about the surrounding area and local events. Only you and your familiar hear the spirits answer."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_08">
+<Description language="ENGLISH">"Delouse"</Description>
+<Explanation language="ENGLISH">"You remove a non-magical parasitic infestation from a character or mundane animal of your size or smaller."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_09">
+<Description language="ENGLISH">"Ease Pain"</Description>
+<Explanation language="ENGLISH">"Your touch heals 1 Wound or removes 1 Condition from a creature your size or smaller. This spell will only work on a target once per session."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_10">
+<Description language="ENGLISH">"Ease Symptom"</Description>
+<Explanation language="ENGLISH">"You ease the severity of a single disease Symptom by one degree: Severe to Challenging, Challenging to Average, or Average to Easy. (This spell does not actually cure the Disease or eliminate its symptoms.) Each +2 SL will ease the Symptoms by one more degree, to a minimum of Easy."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_11">
+<Description language="ENGLISH">"Forest Walk"</Description>
+<Explanation language="ENGLISH">"You gain the Arboreal Trait (p338) and are able to pass through any plant growth unhindered, no matter how dense or thorny. Trees will bend and bushes will magically open. Your worn and carried trappings are allowed to travel through, but nothing else gains the benefit of the spell."</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_12">
+<Description language="ENGLISH">"Fresh Water"</Description>
+<Explanation language="ENGLISH">"You purify all water within a receptacle (flask, barrel, jug) or the AoE of a very small pond or side of a stream. All non-magical impurities (poisons, contaminants, or disease) are removed, leaving drinkable water."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_13">
+<Description language="ENGLISH">"Gust"</Description>
+<Explanation language="ENGLISH">"You create a brief gust of wind, strong enough to blow out a candle, cause branches to creak or break, or blow leaves across the ground."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_14">
+<Description language="ENGLISH">"Sense Corruption"</Description>
+<Explanation language="ENGLISH">"Your familiar surveys the surrounding area and determines whether the flora and fauna are natural. 'Unnatural' predatory or non-native plants such as damaging moulds and fungi, Chaos plants and creatures, Corrupted beings, Daemonic entities, and hostile illusions will be seen for what they really are."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_15">
+<Description language="ENGLISH">"Sense Water"</Description>
+<Explanation language="ENGLISH">"You can sense the direction and distance of a body of water such as a lake, stream, or ocean - even if it is underground, an oasis in a desert, or well beyond sight. This spell can allow the caster to pierce through illusions which have some representation of water."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"1 mile"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_16">
+<Description language="ENGLISH">"Sense Wildlife"</Description>
+<Explanation language="ENGLISH">"If cast outside in a rural location, you can sense the direction of a known mundane animal or plant, if any exists within range. You must name the desired animal or plant while casting, and if the named thing does not exist within Range or Duration, you will be none the wiser. This spell adds a +20 bonus to any Tests related to gathering food and herbs."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"1 mile"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_17">
+<Description language="ENGLISH">"Soothe the Savage Plant"</Description>
+<Explanation language="ENGLISH">"You put a single, hostile plant or tree (such as a Bloodsedge or magically animated hedge) to sleep for the spell's Duration. This spell has no effect on plants with an Intelligence over 10, such as Treemen."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_18">
+<Description language="ENGLISH">"Spirit Lights"</Description>
+<Explanation language="ENGLISH">"You create a number of small floating motes of amber-green light up to your Intelligence. While they remain within line of sight, for your Action you may control the lights by passing an Easy (+40) Channelling Test; allowing you to send the lights moving in any direction. They will move at walking pace in a straight line, passing through any objects (or witnesses) in their path, unless you test again to change their direction."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-DRUID_19">
+<Description language="ENGLISH">"Spirit Perception"</Description>
+<Explanation language="ENGLISH">"You close your eyes and meditate, experiencing all the senses of your spirit animal as if they were your own. You cannot speak or otherwise communicate while the spell lasts, and you count as a Helpless Target."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+  <!-- "THE LORE OF THE WILD" (p.14-19), Talent GRIM-T0205, TypSpell "Domain Magic". 19 sorts sur
+       20 (Sacred Grove est un Ritual, hors perimetre - chantier Ritual Magic). -->
+<Sort id="GRIM-WILD_01">
+<Description language="ENGLISH">"Absorb Corruption"</Description>
+<Explanation language="ENGLISH">"You lay your hands on a character or mundane animal of your Size or smaller and remove 1 Corruption point. You absorb this Corruption point into your soul, but you may make a Challenging (+0) Endurance Test to resist adding it to your own Corruption score. Each +2 SL absorbs another Corruption point, prompting another Endurance Test. Curiously, this spell has no effect at all when cast on Druids. Casting this spell on a creature with the Corruption Creature Trait will have no effect other than you having to make an Endurance Test against the creature's Corruption Trait."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_02">
+<Description language="ENGLISH">"Animal Mastery"</Description>
+<Explanation language="ENGLISH">"You may initiate a non-verbal, telepathic connection with a mundane animal of Size (Large) or smaller within range. You may communicate freely with the animal, and you might be able to command it. Most animals contacted by this spell will usually be well-disposed towards you. The GM may impose a Charm Animal or Animal Training Test, which gains a SL bonus equal to your Willpower Bonus. While the spell lasts, you may not hold other verbal conversations, cast other spells, or dispel."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_03">
+<Description language="ENGLISH">"Aura of Purity"</Description>
+<Explanation language="ENGLISH">"You conjure a dome of translucent greenish-yellow energy that repels most creatures and withers invasive vegetation. Other Druids, followers of The Old Faith, and mundane animals may enter and leave the AoE freely. Creatures with the Corruption, Daemonic, Mutation, or Undead Traits gain a Broken Condition until they leave. All other creatures are allowed a Cool (WP) Test to resist gaining a Broken Condition, with the following modifiers: Elves, Rangers - Challenging (+0); Humans, Halflings, Gnomes - Difficult (-10); Dwarves - Hard (-20); All other creatures - Very Hard (-30)."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"14"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_04">
+<Description language="ENGLISH">"Autumn's Decay"</Description>
+<Explanation language="ENGLISH">"A ray of dark green light projects outwards from your fingertips to the spell's Range. At the crest of the Range, the AoE is equal to Willpower Bonus yards. Anything organic (wood, leather, plant or cloth fibre) in the path of the ray will immediately rot and turn to dust or sludge. Creatures, living or otherwise, will be unaffected by the spell, and they gain a Difficult (-10) Dodge Test to avoid their trappings being destroyed. The only exceptions are creatures with the Undead Trait such as Zombies or Zombie Dragons who have unliving flesh on their bones. Such creatures take a magic missile hit with a Damage of +3."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_05">
+<Description language="ENGLISH">"Call Animal"</Description>
+<Explanation language="ENGLISH">"A spirit horn appears in your hand, and you blow on it with great strength, calling out to the creatures in the nearby land. You must name the animal when you blow the horn. Within 1d10 - WPB Rounds a powerful, mundane creature will come to your aid. The creature will sense your need and hasten to your defence, standing by your side - fighting to the death for you if need be and watching over you while you sleep - until the next dawn. You may choose from one of the following: Bear (Large), Boar (Large), Eagle (Large), Wolf (Large) or a Rat Swarm. The creature must be native to your current surroundings. Note: If you wish to call a creature of the same species as your spirit animal, you are able to cast this spell at CN: 8. The called creature will be Large, or a pack/flock/swarm of smaller animals."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Special"</Duration>
+<Range>"(BATTR_WP) miles"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_06">
+<Description language="ENGLISH">"Call Lightning"</Description>
+<Explanation language="ENGLISH">"When the sky is overcast, your staff generates an electrical surge in the clouds nearby. A bolt of lightning strikes your target, causing a magic missile with a Damage of +4. The bolt ignores all Armour Points, and causes +2 Damage to a location protected by metal armour. Anyone engaged with the initial target takes a similar hit but with a Damage of +2. Also, anyone engaged with a secondary target takes the same hit with a Damage of +0. If the GM allows, this spell may inflict an Ablaze condition to nearby flammable objects (not creatures, however)."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_07">
+<Description language="ENGLISH">"Drawing Down the Moon"</Description>
+<Explanation language="ENGLISH">"If there is any sliver of Mannslieb present, you bring down a form of moon madness upon any creatures within the AoE. The creatures are bathed in the glowing moonlight, which halves their Willpower and very quickly drives them insane. All creatures must attempt to pass a Cool (Willpower) Test; failure inflicts your Willpower Bonus in Stunned Conditions on them. Affected creatures may not cast spells or invoke blessings and miracles. Once the spell ends, your victims must pass a Cool (Willpower) Test or gain 2 Corruption points. Creatures with the Mutation, Daemonic, or Undead Traits are affected differently, instead suffering a magic missile hit with a Damage of +10."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_08">
+<Description language="ENGLISH">"Earthpower"</Description>
+<Explanation language="ENGLISH">"You can only cast this spell while in a stone circle or sacred grove. You draw upon the power of the earth and harness it for further spellcasting. For the spell's Duration, all your Casting Numbers are halved and you gain all the Lore special rules for the Amber, Grey, and Jade Winds: Ghur, Ghyran, and Ulgu. However, you are a conduit for an immense amount of power. Any failed Language (Magick) Test becomes a Minor Miscast, and any Critical becomes a Major Miscast (unless you have the Instinctive Diction Talent). Once the spell comes to an end - inflicted with a minor nosebleed and a major headache - you suffer a Fatigued condition and 1d10 - WPB Wounds (minimum of 1)."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_09">
+<Description language="ENGLISH">"Heal Animal"</Description>
+<Explanation language="ENGLISH">"Your touch restores all normal Wounds and cures all Conditions and Diseases on a mundane animal that has not been killed. However, this spell will not heal the effects of Corruption, broken bones, torn muscles, or amputations."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_10">
+<Description language="ENGLISH">"Mend Bones"</Description>
+<Explanation language="ENGLISH">"Your touch heals the target of SL Wounds as well as any Minor Broken Bones and Torn Muscles, though the creature must rest for 8 hours immediately after the spell or gain a Fatigued Condition. Major Broken Bones and Torn Muscles are restored enough to be considered Minor, after which the normal healing time applies (p179). This spell may be cast a week or more later to fully heal the bones and muscles."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_11">
+<Description language="ENGLISH">"Morning Mist"</Description>
+<Explanation language="ENGLISH">"If you are in an exterior or humid interior environment, you may conjure a fog that obscures the sight of everyone within it. All victims gain SL+1 Blinded Conditions, and any Move or Action requires a successful Perception Test or the Prone Condition is gained. Those looking into the mist must pass a Perception Test to find their target, or their Action is made at Very Hard (-30). You are able to see and move normally within the mist."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes +"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_12">
+<Description language="ENGLISH">"Quickening"</Description>
+<Explanation language="ENGLISH">"Your touch brings a tree to animated, semi-conscious life for the spell's Duration, and puts the tree under your command. While the spell is in effect, you may move and act as normal, but you must be able to maintain concentration - see Interruptions (p237) - or the spell dissipates and the tree becomes inanimate again. The animated tree has the characteristics of a Treeman, except the creature has the Stupid Creature Trait and an Intelligence of 10."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"11"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_13">
+<Description language="ENGLISH">"Renew Growth"</Description>
+<Explanation language="ENGLISH">"You revitalize the plant life of a parched, withered, or desolate area of land or farmer's field, provided that such growth is not unnatural for the region (ie, jungle growth in the desert). The effects of drought, poisoning, blight, plant disease, parasites, Chaos mutations, etc, are all healed. You may choose the area affected within the spell's Range, and the first signs of regrowth are visible in 1d10 minutes, though the effects are permanent. This spell will summon back native plants and animals over the next few days and weeks."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Special"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_14">
+<Description language="ENGLISH">"Rite of Spring"</Description>
+<Explanation language="ENGLISH">"Your target gains the Magical and Regenerate Creature Traits (p341)."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_15">
+<Description language="ENGLISH">"Spirit Self"</Description>
+<Explanation language="ENGLISH">"Your form becomes intangible and nearly invisible. As you perceive your familiar, so others see you as a subtle, amber outline with bright-green eyes. You are immune to mundane attacks, and you gain +20 to Stealth Tests, but you may not interact with the physical world nor may you cast spells. Others suffer a -20 penalty when they try to see you."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_16">
+<Description language="ENGLISH">"Stoutstaff"</Description>
+<Explanation language="ENGLISH">"You weave energy into your staff, imbuing it with the Magical Trait."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_17">
+<Description language="ENGLISH">"Summer Rain"</Description>
+<Explanation language="ENGLISH">"You conjure a sudden downpour of rain anywhere within range - in any outdoor environment (except desert). The burst of rain snuffs out fire, gunfire, and explosives, making ranged combat impossible at longer than Short Range. This may also provide sustenance for local life and create enough pools of clean water to drink."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_18">
+<Description language="ENGLISH">"Tanglethorn"</Description>
+<Explanation language="ENGLISH">"You target a bare patch of earth and cause a dense hedge of thorns, vines, and brambles to sprout from the ground. While the spell lasts, the thorns are considered magical, lashing out and grasping anything that moves. At the start of each Round, all creatures within the area suffer a magic missile hit with a Damage of 0: Roll 1d100 to determine the Hit Location, and take the units die as your SL. In addition, Movement within the brambles is halved, and all creatures of Size (Small) or larger must pass a Hard (-20) Dodge (Agility) Test or suffer +1 Bleeding and +1 Entangled Conditions - with a Strength equal to your Willpower. Once created, the hedge of thorns remains, but loses its preternatural properties; Movement remains halved, and creatures may traverse safely with a Challenging (+0) Dodge (Agility) Test."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-WILD_19">
+<Description language="ENGLISH">"Winter's Bite"</Description>
+<Explanation language="ENGLISH">"This spell may only be cast outside. You cause a sudden and violent storm of large hail to break out. While the storm lasts, anyone caught in the AoE at the beginning of their Turn suffers a magic missile with a Damage of +0 and they must pass an Average (+20) Cool (WP) Test or gain +1 Broken Condition. Visibility within and into the hail is equivalent to your WPB Blinded Conditions. Fire, gunfire, and explosives will be snuffed out by the storm. In addition, the terrain becomes difficult ground until 1d10 minutes after the spell ends. All movement at Walking speed requires an Average (+20) Athletics Test or the victim gains the Prone Condition. This Test is Difficult (-10) while Running and Very Hard (-30) while Sprinting."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0205"</Talent>
+<Level>"8"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 </DATA_SPELL>

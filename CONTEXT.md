@@ -11775,8 +11775,28 @@ aucun Talent existant trouvé pour la magie gobeline après grep). `TypSpell="Do
 partout. Soit 27 sorts + 2 talents supplémentaires, aucun fichier `.pas` touché. Compilé
 (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes) le 25/09/2026.
 
-**Prochaine étape** : reste du chantier Unofficial Grimoire (session dédiée) : Druidic
-Priest career + Lore of the Wild, Elementalist career + Lore of Elementalism + Elementals,
-Ritual Magic + Summoning Rituals, et le reste du chapitre Skaven Magic (Talents/sorts
-Petty et Arcane (Warp), profils de sorciers) si Nono le souhaite. Voir `A FAIRE.txt` pour
-le détail par chapitre.
+**Quatrième tranche (25/09/2026, XML validé, à tester par Nono)** : Druidic Priests &
+Familiars (p.10-14). Aucun mécanisme de familier dans le programme (vérifié par grep
+`amiliar` sur tous les `.pas` : aucune occurrence, même décision que les créatures
+adverses non gérées) — carrière Druidic Priest et système de familier-esprit laissés de
+côté, seuls les sorts sont saisis. **Druidic Favours** (tier Petty, CN 0, 19 sorts sur 20)
+rattachés au Talent générique Petty Magic `RULES-T0089` déjà existant, même convention que
+"New Petty Spells" du même livre (`GRIM-PETTY_01..10`) plutôt que d'inventer un nouveau
+Talent avec sa propre table XP (IB au lieu de WPB) — le livre présente Druidic Favours
+comme un Talent à part, mais fonctionnellement identique à Petty Magic. *Sense of the
+Green* non saisi : son texte tombe exactement sur le saut de page p.14-15 de l'extraction
+et la suite est introuvable ailleurs dans le fichier — irrécupérable, pas deviné. **The
+Lore of the Wild** (tier Lore, 19 sorts sur 20) rattachée à un nouveau Talent générique
+`GRIM-T0205` ("Arcane Magic (Wild)", `Generique="RULES-T0088_*"`, `TypSpell="Domain
+Magic"`, même convention que `HORNE-T0197`/`GRIM-T0203`/`GRIM-T0204` — cette Lore
+n'existait nulle part dans les 18 livres, vérifié par grep). *Sacred Grove* (Ritual, aucun
+bloc CN/Range/Target/Duration dans la source, renvoi au chapitre Ritual Magic du même
+livre) non saisi — hors périmètre, à traiter avec le chantier Ritual Magic + Summoning
+Rituals. Soit 38 sorts + 1 talent supplémentaires, aucun fichier `.pas` touché (XML validé
+par parseur, compilation Pascal non nécessaire car aucun `.pas` modifié).
+
+**Prochaine étape** : reste du chantier Unofficial Grimoire (session dédiée) :
+Elementalist career + Lore of Elementalism + Elementals, Ritual Magic + Summoning Rituals
+(inclut Sacred Grove laissé de côté ci-dessus), et le reste du chapitre Skaven Magic
+(Talents/sorts Petty et Arcane (Warp), profils de sorciers) si Nono le souhaite. Voir
+`A FAIRE.txt` pour le détail par chapitre.
