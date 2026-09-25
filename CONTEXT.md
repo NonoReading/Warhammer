@@ -11711,7 +11711,7 @@ Compilé (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes qu
 VALIDÉ PAR NONO le 25/09/2026** : Talent et bonus d'Attribut corrects sur la fiche et le PDF après
 rattachement d'une fabrication via WinFabrication/WinPersonnage. Chantier clos.
 
-### 2.96 Unofficial Grimoire — New Talent/New Spells + Lores Nurgle/Slaanesh/Tzeentch, à valider par Nono (25/09/2026)
+### 2.96 Unofficial Grimoire — New Talent/New Spells + Lores Nurgle/Slaanesh/Tzeentch — testé par Nono : "validé" (25/09/2026)
 
 **Livre de fan** (Chris MacLean, "Unofficial Grimoire" v1.2), `OFFICIAL="2"` comme Nations of
 Mankind/Lords of Naggaroth. Deux extractions texte comparées : `PDF_TEXTE\Aventures\Divers\
@@ -11757,5 +11757,9 @@ of the Warp (nouveau talent générique nécessaire, à la `HORNE-T0197`), Ritua
 Rituals (sommation de daemons, mécanisme à vérifier avant de saisir), Goblin Magic. Voir
 `A FAIRE.txt` et `Log.txt` (25/09/2026) pour le détail.
 
-**À VALIDER PAR NONO** : compilation du nouveau fichier XML et relecture des 77 sorts/3 talents
-saisis — aucun test en jeu effectué depuis cette session.
+**Testé par Nono : "validé"** — 77 sorts/3 talents des deux tranches de session.
+
+**Prochaine étape** : reste du chantier Unofficial Grimoire (~136 sorts, session dédiée) :
+Druidic Priest career + Lore of the Wild, Elementalist career + Lore of Elementalism +
+Elementals, Dark Magic + Lores de Daemonology/Necromancy, Skaven Magic — Lore of the Warp,
+Ritual Magic + Summoning Rituals, Goblin Magic. Voir `A FAIRE.txt` pour le détail par chapitre.
