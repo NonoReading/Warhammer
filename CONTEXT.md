@@ -3597,6 +3597,29 @@ et consultées via des fonctions `ChercheXxx()`. On ne relit pas le XML à la vo
 Constantes clés (`chargeconstantes.pas` ~13-20) :
 `SeparateurMulti='/'`, `SeparateurLivre='-'`, `ValeurSousCompetence='_'`, `ValeurGenerique='_*'`.
 
+### 1.1 Mécanismes « objet spécial » déjà en place — vérifier avant d'en concevoir un nouveau
+
+Plusieurs livres ajoutent des variantes d'objets magiques/travaillés qui se ressemblent en
+surface mais utilisent des mécanismes différents. Avant de concevoir quoi que ce soit de
+nouveau pour un objet spécial, vérifier lequel de ceux-ci couvre déjà le besoin :
+
+- **Fabrication/travail générique** (ex. Best/Fine Craftsmanship du Rulebook) → catalogue
+  `DATA_CRAFTMANSHIP`, un par livre qui en a besoin (`BOOK_RULESBOOK.Xml` notamment).
+- **Runes** (posées sur un objet, ex. runes naines) → même catalogue `DATA_CRAFTMANSHIP`,
+  filtrées par `<Applies>` (Weapon/Armour/Misc ; vide = partout) ; voir §2.36 (chantier runes
+  terminé) pour le moteur d'effets (`ModifArmour`, `ModifyCarac`, `ModifyDamage`, `ModifySkill`,
+  effets conditionnels via `if=`).
+- **Qualité magique d'arme/armure/bouclier** (ex. objets magiques Archives of the Empire II) →
+  `DATA_WEAPON_BONUS`/`DATA_ARMOR_BONUS` (un bouclier est une `DATA_WEAPON`, donc ses qualités
+  vont dans `DATA_WEAPON_BONUS`) ; voir §2.94. **Piège moteur** : `xmlexportimport.pas` lit ces
+  chapitres avec `BookNode.FindNode(...)`, qui ne prend que le **premier** bloc du tag dans le
+  fichier — un livre ne peut avoir qu'un seul `<DATA_WEAPON_BONUS>` et un seul
+  `<DATA_ARMOR_BONUS>`, jamais plusieurs blocs séparés par thème dans le même fichier.
+- **Matériau** (Gromril/Ithilmar/Gifted...) → `<InherentCraftsmanship>` sur la Fabrication,
+  pas une qualité magique à part ; voir §2.29 (Gromril Suit du Dwarf Player's Guide).
+- **Objet sans catalogue arme/armure dédié** (anneaux, amulettes, bâtons...) → piste envisagée :
+  `DATA_TRAPPING` ; pas encore fait, voir §2.94 (Rings/Talismans/Oddities, Archives II p.65-66).
+
 ---
 
 ## 2. État par chantier
