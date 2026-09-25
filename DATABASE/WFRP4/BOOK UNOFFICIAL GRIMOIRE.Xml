@@ -15,15 +15,15 @@
      une ambiguite de mise en page ; le texte est suffisamment clair en deux colonnes pour se passer du PDF,
      sauf un leger desordre de lecture de colonnes autour du sort Observe (reconstruit par recoupement
      interne du texte).
-     COMPLETE=0 : seul le chapitre "New Talent" + "New Spells" (Petty/Arcane/8 Lores existantes) du debut
-     du livre est saisi ici (p.4-9 du PDF). Les chapitres suivants (Druidic Priest career + Lore of the
-     Wild, Elementalist career + Lore of Elementalism + Elementals, Cult Magus of Tzeentch + Lores de
-     Nurgle/Slaanesh/Tzeentch, Dark Magic + Lores de Daemonology/Necromancy, Skaven Magic + Lore of the
-     Warp, Ritual Magic + Summoning Rituals, Goblin Magic) restent a integrer dans une session dediee :
-     ce sont des carrieres completes avec mecaniques neuves (familiers spirituels, Elementals invoques,
-     malus/benefices de Dark Magic, rituels de sommation de daemons) qui demandent le meme travail de
-     verification qu'ici (Lores existantes vs nouvelles, cross-check des ID sur les 18 livres) mais en
-     bien plus volumineux ; voir A FAIRE.txt et Log.txt du 25/09/2026 pour le detail. -->
+     COMPLETE=0 : "New Talent" + "New Spells" (p.4-9) et "Cult Magus of Tzeentch" - Lores de
+     Nurgle/Slaanesh/Tzeentch (p.20-24, sorts uniquement, carriere elle-meme laissee de cote) sont
+     saisis ici. Les chapitres suivants (Druidic Priest career + Lore of the Wild, Elementalist career
+     + Lore of Elementalism + Elementals, Dark Magic + Lores de Daemonology/Necromancy, Skaven Magic +
+     Lore of the Warp, Ritual Magic + Summoning Rituals, Goblin Magic) restent a integrer dans une
+     session dediee : ce sont des carrieres completes avec mecaniques neuves (familiers spirituels,
+     Elementals invoques, malus/benefices de Dark Magic, rituels de sommation de daemons) qui demandent
+     le meme travail de verification qu'ici (Lores existantes vs nouvelles, cross-check des ID sur les
+     18 livres) mais en bien plus volumineux ; voir A FAIRE.txt et Log.txt pour le detail. -->
 <DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="GRIM-BOOK UNOFFICIAL GRIMOIRE">"Unofficial Grimoire"</Text>
@@ -45,6 +45,33 @@
 <Max>"1"</Max>
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
+</Talent>
+  <!-- "CULT MAGUS OF TZEENTCH" (p.20-24) : Lores de Nurgle et Slaanesh, deux nouveaux Talents
+       generiques a la HORNE-T0197, Generique RULES-T0172_* (famille Chaos Magic), TypSpell
+       "Chaos Magic" - meme convention que RULES-T0172_TZEENTCH (deja dans BOOK_RULESBOOK.Xml,
+       reutilise tel quel pour la Lore of Tzeentch de ce meme chapitre, aucun Talent Tzeentch
+       cree ici). -->
+<Talent id="GRIM-T0201">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Chaos Magic (Nurgle)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The Lore of Nurgle spreads foul disease and filth, mixing bloated excesses of the Jade Wind with whatever corruption comes to hand, then spewing it everywhere. Whenever a spell from this Lore inflicts a Disease, Condition, or Wound, you may choose to inflict +1 Poisoned condition on the target."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0172_*"</Generique>
+</Talent>
+<Talent id="GRIM-T0202">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Chaos Magic (Slaanesh)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The Lore of Slaanesh brings torture and excess, all splayed before the Prince of Pain and Pleasure for its eternal enjoyment, typically pressuring a perverse mix of the Amethyst, Gold, and Jade Winds into something twisted and exotic. You may choose to inflict +1 Stunned condition upon your target: victims are allowed a Challenging (+0) Willpower Test to resist the ecstatic or painful sensations coursing through them."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0172_*"</Generique>
 </Talent>
 </DATA_TALENT>
 <DATA_SPELL>
@@ -587,6 +614,252 @@
 <Talent>"RULES-T0088_OMBRE"</Talent>
 <Level>"6"</Level>
 <TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+  <!-- "CULT MAGUS OF TZEENTCH" (p.20-24) : Lore of Nurgle (8 sorts, Talent GRIM-T0201) et Lore
+       of Slaanesh (8 sorts, Talent GRIM-T0202), TypSpell "Chaos Magic" - meme convention que
+       les 13 sorts de Lore of Tzeentch de l'Enemy in Shadows Companion (ENEMY-CHAOS_11..23).
+       Lore of Tzeentch de ce chapitre (8 sorts) rattachee au Talent RULES-T0172_TZEENTCH deja
+       existant, aucun doublon. Career Cult Magus of Tzeentch elle-meme laissee de cote (pas de
+       sorts, juste une carriere). -->
+<Sort id="GRIM-NURGLE_01">
+<Description language="ENGLISH">"Malignant Regrowth"</Description>
+<Explanation language="ENGLISH">"Foul fluids temporarily replace your blood, and your body starts regenerating itself with wild and dangerous regrowth. You gain the Regenerate Creature Trait (p341), but each time you recover Wounds, you must suffer a random physical mutation. At the end of 1d10 minutes, your body will revert to its normal form; however, you will suffer +1 Fatigued condition per temporary mutation healed."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_02">
+<Description language="ENGLISH">"Miasma of Pestilence"</Description>
+<Explanation language="ENGLISH">"The Miasma causes all living creatures within the AoE to feel horrifically ill. All victims' characteristics are immediately halved (round down). Only you, Daemons and minions of Nurgle, and creatures that do not breathe remain unaffected. If you are wounded, the Miasma is dispelled, with the stench dissipating in 1-3 rounds."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_03">
+<Description language="ENGLISH">"Plague Wind"</Description>
+<Explanation language="ENGLISH">"You call forth a vile-smelling gust of cold that gathers and penetrates all clothing and armour, accompanied by eerie moaning, insane laughter, and other sounds of death and delirium. All living creatures within the AoE must immediately pass a Challenging (+0) Endurance Test or contract Nurgle's Rot. Also, the cloud possesses the Terror (3) Creature Trait. As your Action each Round, you may attempt an Average (+20) Channelling Test to move the cloud according to your Walking rate. Otherwise, it's up to the GM if the wind moves or dissipates."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"14"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_04">
+<Description language="ENGLISH">"Reveal the Inner Beauty"</Description>
+<Explanation language="ENGLISH">"You cause an object or individual you touch to decay rapidly. If inorganic, this spell causes the object to become brittle and unsuitable for use. If organic, the subject ripens rapidly until it begins to spoil, splitting open and spilling its stinking contents everywhere. A living creature must perform a Challenging (+0) Toughness Test to resist this Spell. On a failure, the target ages 2d10 years and permanently loses -1d10% from their Weapon Skill, Ballistic Skill, Strength, Toughness, Agility, and Dexterity Characteristics."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_05">
+<Description language="ENGLISH">"Spoil"</Description>
+<Explanation language="ENGLISH">"You conjure a foul wind which you guide through the targeted area. All potions, provisions, food items, water, and other consumables within the AoE are rendered useless or dangerously diseased and rotten. Followers of Nurgle may derive nourishment from these items, however."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_06">
+<Description language="ENGLISH">"Stench of Nurgle"</Description>
+<Explanation language="ENGLISH">"You exude a noxious smell of decay so foul that all living creatures within the AoE are nauseated. All affected must pass a Combined Cool/Endurance Test or be incapacitated with spasms of retching. Those affected take SL Stunned conditions (minimum of 1) which cannot be removed until the spell ends. Minions of Nurgle are unaffected by the spell."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Area of Effect (BATTR_WP)m"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_07">
+<Description language="ENGLISH">"Stream of Corruption"</Description>
+<Explanation language="ENGLISH">"Your maw distends horrifically before you vomit forth a foul stream of diseased filth and horror. Immediately make a Breath attack as if you had spent 2 Advantage to activate the Breath Creature Trait (see page 338). It counts as a magic missile with a Damage equal to your Toughness Bonus, ignoring Armour Points. The attack also has the Corrosive and Poison Traits listed under the Breath Creature Trait. Further, should any targets take more than their Toughness Bonus in Wounds, they must pass a Challenging (+0) Endurance Test or contract Blood Rot (see page 186). For every +2 SL achieved, you may also increase Damage by +2."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Special"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-NURGLE_08">
+<Description language="ENGLISH">"Writhing Cloak"</Description>
+<Explanation language="ENGLISH">"A mass of squirming, diseased maggots manifest all over your body, adding +2 to your Armour Points in all locations. When you suffer Melee or Ranged Damage, all living creatures within 2 yards of you must pass a Difficult (-10) Dodge Test or suffer a Poisoned condition. The maggots have the Infected and Disease (Nurgle's Rot) Creature Traits. (You are immune to the maggot's effects.)"</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0201"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_01">
+<Description language="ENGLISH">"Acquiescence"</Description>
+<Explanation language="ENGLISH">"Your magic pierces deep within your target, flooding the soul with an acute awareness of their broken dreams. The target's Initiative Characteristic drops to 10, if it was not already lower, as the mind turns inwards. On the target's Turn, all movement is randomised as determined by the GM as the character bemoans life, lewdly telling all what should have been as hands are flung in the air. Further, the target can only perform an Action if a Challenging (+0) Cool Test is first passed; if failed, the Target is far too busy bemoaning what could have been to do anything else."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_02">
+<Description language="ENGLISH">"Beam of Slaanesh"</Description>
+<Explanation language="ENGLISH">"A dazzling rainbow of light shoots from your fingertips, sending all living creatures within the AoE into a state of euphoria. Victims suffer SL Stunned conditions while the spell lasts (minimum of 1)."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_03">
+<Description language="ENGLISH">"Bedazzle"</Description>
+<Explanation language="ENGLISH">"You become surrounded by a bedazzling, beguiling aura that makes your enemies reluctant to cause you any harm. You gain the Attractive, Distracting and Fear (2) Creature Traits."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_04">
+<Description language="ENGLISH">"Fleshy Curse"</Description>
+<Explanation language="ENGLISH">"You conjure foul energies that spew towards a single living creature, causing them to mutate in disgusting ways. Your target is allowed a Difficult (-10) Endurance Test to resist the spell's effects. If failed, your victim sprouts horrific growths - misshapen mouths, hands, eyes, legs, and other appendages. This spell counts as exposure to Corruption (Major) for all victims. At the start of each Round after the spell has been cast, roll 1d10: on 1-3, growths of fat, sinew, and muscle spurt out from the victim 2 yards in a random direction; on 4-6, a tentacle-like extrusion shoots out 1d10+2 yards in a random direction, affecting all in its path; on 7-9, nothing happens and the victim stops growing if they pass a Very Hard (-30) Cool Test; on 10, the victim and all its foul excrescences move 2d10 yards in a random direction (see Scatter chart, p163). Any living creature who comes in contact with one of the growths or tentacles is allowed a Challenging (+0) Dodge Test to wriggle free, or suffers SL Entangled conditions (minimum 1) versus Strength 39, becoming subject to the rules for Drowning and Suffocation (p181). Each Round that the initial victim grows, they suffer 1d10 Wounds minus Toughness Bonus (minimum of 1); then the growths grant the victim a level in the Hardy Talent. Once they reach their maximum level in Hardy, every End of Round thereafter they must pass an Average (+20) Toughness Test or suffer a fatal heart attack. The effects of the curse are permanent until removed, and whilst affected by this spell the victim is considered a Helpless Target. The victim continues to grow until they pass the Cool Test, they are killed, or the curse is dispelled by someone with the Remove Curse Talent. Otherwise, the creature is doomed to live a short life in agony."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Special"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_05">
+<Description language="ENGLISH">"Pavane of Slaanesh"</Description>
+<Explanation language="ENGLISH">"All living creatures within the AoE must pass a Difficult (-10) Cool Test or do nothing but stand and dance lewdly to the sound of some unearthly music that only they can hear. Victims may not perform any Move or Action until the spell's effects are ended: they are considered Helpless targets. The spell ends once any affected creature is attacked."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_06">
+<Description language="ENGLISH">"Perfume of Slaanesh"</Description>
+<Explanation language="ENGLISH">"You and all your living allies and minions within Range are bathed in pleasant sensations, becoming inured to pain. All targets gain the Painless Creature Trait, and are rendered immune to any skill or spell that causes its effects through intimidation or physical pain. Additionally, all affected halve Damage from mundane attacks."</Explanation>
+<Target>"Area of Effect (ATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_07">
+<Description language="ENGLISH">"Seduction Song"</Description>
+<Explanation language="ENGLISH">"You point to one living creature, give a come-hither look, and sing a beguiling tune. If the target loses an Opposed Willpower Test with a penalty of -20, they are charmed by your obviously superior beauty and charisma. Your new plaything will do whatever you ask and will perform all duties with gusto, even when doing so inflicts harm upon themselves or allies. There is nothing your new friend will not do for you."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-SLAANESH_08">
+<Description language="ENGLISH">"Whispers of Doom"</Description>
+<Explanation language="ENGLISH">"Your fearsome chanting manifests as ghostly, ominous whispers in the mind of your target (which must be a living creature). These whispers tell the victim to flee at all costs, or their end is nigh. The victim takes +Willpower Bonus Broken conditions, and you may choose which direction the creature flees. All living creatures adjacent to the victim at any time during this Round must pass a Challenging (+0) Cool Test or suffer +Willpower Bonus Broken conditions as well - and so on. This chain reaction of doom will no longer spread once the Round ends, though all Broken conditions must be removed as normal."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0202"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_01">
+<Description language="ENGLISH">"Bestow the Mutator's Blessing"</Description>
+<Explanation language="ENGLISH">"Your touch inflicts a minor and inconvenient visible mutation of your choice for the spell's Duration. The 'minor' mutation can range from the creation of a third eye on the forehead to enlarged ears to extra fingers on a hand. Whatever the mutation is, it will bestow a small +10 bonus to a single appropriate Characteristic or Skill (see the Physical Corruption Table for examples). However, it will also mark the target as a creature of Chaos, halving the victim's Fellowship in some social circles and attracting attention from Witch Hunters and unruly mobs."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_02">
+<Description language="ENGLISH">"Bolt of Change"</Description>
+<Explanation language="ENGLISH">"You hurl a bolt of raw Dhar at your chosen target. Your victim must pass a Challenging (+0) Endurance Test to resist the power of change. If the Test is passed, the target suffers a magic missile with a Damage of +1d10 and +1 Ablaze, Poisoned, and Prone Conditions. If the Test is failed, the magic rips through the target, inflicting Willpower Bonus mutations to random locations; each mutation also causes a Critical Hit in the targeted location. If the creature dies, their body twists and warps helplessly until it collapses - leaving only a ruin of flesh, feathers, pink slime, and indescribably organic refuse. This spell counts as exposure to Corruption (Major)."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_03">
+<Description language="ENGLISH">"Boon of Flight"</Description>
+<Explanation language="ENGLISH">"With a cracking of bone and rending of flesh, a pair of wings sprouts from your back. You immediately suffer 1 Wound and 1 Corruption point, but you gain the Flight (Agility) Creature Trait (p339)."</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_04">
+<Description language="ENGLISH">"Gift of Tzeentch"</Description>
+<Explanation language="ENGLISH">"You appeal to Tzeentch for greater power: the GM can make a Fellowship Test to see if you get any spell of your choice or if the spell should be determined randomly. For the spell's duration, you may cast the spell as your Action with a CN of 0 and with no fear of a Miscast. (CN to cast Gift of Tzeentch itself: 3 if you know it as a Petty Spell, 6 as an Arcane Spell, or 9 as a Lore spell - the Level given here is the highest of the three.)"</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_05">
+<Description language="ENGLISH">"Nightmare Reality"</Description>
+<Explanation language="ENGLISH">"The power of the Warp floods out from your hands and alters the appearance of the surrounding area. Trees twist and contort, bark forming into leering or grimacing faces; grasping hands seem to form in stonework; inanimate objects seem full of malevolent intent. All enemies who can see the surroundings must pass a Challenging (+0) Cool Test or suffer the effects of Terror (SL). This failed Test also inflicts a number of Corruption points equal to your Willpower Bonus."</Explanation>
+<Target>"Area of Effect (a single location)"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_06">
+<Description language="ENGLISH">"Pink Fire of Tzeentch"</Description>
+<Explanation language="ENGLISH">"Guttering flames of pink magic spout from your fingertips. Your target is struck by a magic missile with a Damage of +7 that ignores all Armour Points. The target also takes +1 Ablaze and Poisoned conditions."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_07">
+<Description language="ENGLISH">"Treason of Tzeentch"</Description>
+<Explanation language="ENGLISH">"You channel fine strands of traitorous mergings of the Winds of Magic directly into your target's mind, twisting motivations, undermining desires, and fanning fires of discontent. The target can no longer use Talents, and doesn't add Skill Advances when making Skill Tests, meaning the target only Tests against unmodified Characteristics."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-TZEENTCH_08">
+<Description language="ENGLISH">"Tzeentch's Fire Storm"</Description>
+<Explanation language="ENGLISH">"You conjure a blasphemous storm of pink-purple flame to erupt within range. All targets in the AoE suffer four magic missiles with a Damage of +4 that ignore all Armour Points; also, they suffer +2 Ablaze and Poisoned conditions. Those slain by the fire are incinerated, transformed into pink ash. At the start of the next Round, the ash sworls and coalesces into one Pink Horror of Tzeentch for each victim slain. Any Horrors will disappear after 1d10 Rounds."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
 </Sort>
 </DATA_SPELL>
 </DATA_BOOK>

@@ -1,3 +1,23 @@
+25/09/2026 - UNOFFICIAL GRIMOIRE : LORES DE NURGLE/SLAANESH/TZEENTCH (24 SORTS), A VALIDER PAR NONO.
+Suite du chantier Unofficial Grimoire (entree precedente), chapitre "Cult Magus of Tzeentch"
+(p.20-24) : carriere elle-meme laissee de cote (pas de sorts), seuls les trois Lores sont saisis
+dans BOOK UNOFFICIAL GRIMOIRE.Xml. Verifie par grep avant saisie : Lore of Nurgle et Lore of
+Slaanesh n'existaient nulle part dans les 18 livres du depot, contrairement a ce que supposait
+A FAIRE.txt (qui ne mentionnait que Tzeentch comme deja existant). Deux nouveaux Talents
+generiques crees sur le modele HORNE-T0197 (Generique "RULES-T0172_*", meme famille que
+RULES-T0172_TZEENTCH) : GRIM-T0201 "Chaos Magic (Nurgle)" et GRIM-T0202 "Chaos Magic
+(Slaanesh)", chacun portant 8 sorts (GRIM-NURGLE_01 a _08, GRIM-SLAANESH_01 a _08). La Lore of
+Tzeentch de ce meme chapitre (8 sorts, GRIM-TZEENTCH_01 a _08) est en revanche rattachee au
+Talent RULES-T0172_TZEENTCH deja existant (Rulebook, deja utilise par les 13 sorts
+ENEMY-CHAOS_11..23 de l'Enemy in Shadows Companion) - aucun Talent Tzeentch cree ici.
+Un sort a CN variable selon le type de Lore connue (Gift of Tzeentch, CN 3 Petty / 6 Arcane / 9
+Lore) a ete saisi avec Level="9" (le plus haut des trois), la nuance etant reportee dans le champ
+Explanation faute de possibilite d'exprimer un CN a choix multiple dans le format DATA_SPELL.
+Total du lot : 24 sorts + 2 talents, aucun fichier .pas touche. Reste ~136 sorts dans le livre
+(Druidic Priest/Lore of the Wild, Elementalist/Elementalism/Elementals, Dark Magic/Daemonology/
+Necromancy, Skaven Magic/Lore of the Warp, Ritual Magic/Summoning Rituals, Goblin Magic) - voir
+A FAIRE.txt.
+
 25/09/2026 - UNOFFICIAL GRIMOIRE : DEBUT D'INTEGRATION (NEW TALENT + NEW SPELLS), A VALIDER PAR NONO.
 Nouveau fichier DATABASE\WFRP4\BOOK UNOFFICIAL GRIMOIRE.Xml (CODE_BOOK "GRIM", OFFICIAL=2 comme
 Nations of Mankind : livre de fan, Chris MacLean, "Unofficial Grimoire" v1.2, aucun editeur

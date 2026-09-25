@@ -11711,7 +11711,7 @@ Compilé (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes qu
 VALIDÉ PAR NONO le 25/09/2026** : Talent et bonus d'Attribut corrects sur la fiche et le PDF après
 rattachement d'une fabrication via WinFabrication/WinPersonnage. Chantier clos.
 
-### 2.96 Unofficial Grimoire — début d'intégration (New Talent + New Spells), à valider par Nono (25/09/2026)
+### 2.96 Unofficial Grimoire — New Talent/New Spells + Lores Nurgle/Slaanesh/Tzeentch, à valider par Nono (25/09/2026)
 
 **Livre de fan** (Chris MacLean, "Unofficial Grimoire" v1.2), `OFFICIAL="2"` comme Nations of
 Mankind/Lords of Naggaroth. Deux extractions texte comparées : `PDF_TEXTE\Aventures\Divers\
@@ -11734,16 +11734,28 @@ talents déjà présents dans `BOOK_RULESBOOK.Xml` (`RULES-T0088_BETE/MORT/FEU/C
 METAL/OMBRE`, vérifiés par grep avant saisie : aucun n'a été dupliqué). Soit 53 sorts + 1 talent,
 aucun fichier `.pas` touché.
 
-**Laissé de côté pour l'instant** (chapitres suivants du même livre, ~160 sorts restants, bien
+**Deuxième tranche, même session : "Cult Magus of Tzeentch" (p.20-24), Lores de Nurgle/
+Slaanesh/Tzeentch.** Carrière elle-même laissée de côté (pas de sorts). **24 sorts créés** :
+Lore of Nurgle (`GRIM-NURGLE_01` à `_08`, nouveau Talent générique `GRIM-T0201` "Chaos Magic
+(Nurgle)"), Lore of Slaanesh (`GRIM-SLAANESH_01` à `_08`, nouveau Talent `GRIM-T0202` "Chaos
+Magic (Slaanesh)") — ces deux Lores n'existaient nulle part dans les 18 livres (vérifié par
+grep), d'où deux Talents neufs sur le modèle `HORNE-T0197` (`Generique="RULES-T0172_*"`,
+TypSpell "Chaos Magic", même famille que `RULES-T0172_TZEENTCH`). Lore of Tzeentch de ce
+chapitre (`GRIM-TZEENTCH_01` à `_08`) en revanche **rattachée au Talent `RULES-T0172_TZEENTCH`
+déjà existant** (Rulebook, déjà utilisé par les 13 sorts `ENEMY-CHAOS_11..23`) — aucun doublon.
+Un sort à CN variable (*Gift of Tzeentch*, CN 3/6/9 selon Petty/Arcane/Lore) a été saisi avec
+`Level="9"` (le plus haut des trois) et la nuance reportée dans l'`Explanation`, faute de champ
+pour un CN à choix multiple. Soit 24 sorts + 2 talents, aucun fichier `.pas` touché.
+
+**Laissé de côté pour l'instant** (chapitres suivants du même livre, ~136 sorts restants, bien
 plus volumineux — sessions dédiées à prévoir) : Druidic Priest career + Lore of the Wild
 (nécessite un mécanisme de familiers spirituels non vérifié dans le programme), Elementalist
 career + Lore of Elementalism + Elementals (probables créatures adverses à écarter, comme
-Frostfiend/Djinn/Skaven Bestiary), Cult Magus of Tzeentch + Lores de Nurgle/Slaanesh/Tzeentch
-(Tzeentch existe déjà via `RULES-T0088_TZEENTCH`/`RULES-T0172_TZEENTCH` — à rattacher, pas
-dupliquer), Dark Magic + Lores de Daemonology/Necromancy (idem, `RULES-T0088_DEMON`/`NECRO`
-existent déjà), Skaven Magic — Lore of the Warp (nouveau talent générique nécessaire, à la
-`HORNE-T0197`), Ritual Magic + Summoning Rituals (sommation de daemons, mécanisme à vérifier
-avant de saisir), Goblin Magic. Voir `A FAIRE.txt` et `Log.txt` (25/09/2026) pour le détail.
+Frostfiend/Djinn/Skaven Bestiary), Dark Magic + Lores de Daemonology/Necromancy
+(`RULES-T0088_DEMON`/`NECRO` existent déjà — à rattacher, pas dupliquer), Skaven Magic — Lore
+of the Warp (nouveau talent générique nécessaire, à la `HORNE-T0197`), Ritual Magic + Summoning
+Rituals (sommation de daemons, mécanisme à vérifier avant de saisir), Goblin Magic. Voir
+`A FAIRE.txt` et `Log.txt` (25/09/2026) pour le détail.
 
-**À VALIDER PAR NONO** : compilation du nouveau fichier XML et relecture des 53 sorts/1 talent
+**À VALIDER PAR NONO** : compilation du nouveau fichier XML et relecture des 77 sorts/3 talents
 saisis — aucun test en jeu effectué depuis cette session.
