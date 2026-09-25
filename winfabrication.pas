@@ -5,7 +5,7 @@ unit WinFabrication;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   BCButton, ChargeTexte, ChargeConstantes, ChargeFabrication, GlobalFonts,
   Unitcalcul;
 
@@ -14,9 +14,11 @@ type
   { TWinFabrications }
 
   TWinFabrications = class(TForm)
+    CombTheme: TComboBox;
     ButtonOk: TBCButton;
     TabFabrication: TStringGrid;
     procedure ButtonOkClick({%H-}Sender: TObject);
+    procedure CombThemeChange({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
     procedure TabFabricationSelectEditor({%H-}Sender: TObject; aCol, aRow: Integer;
       var Editor: TWinControl);
@@ -24,6 +26,11 @@ type
       const OldValue: string; var NewValue: String);
 
   private
+    // Filtre la grille (deja entierement remplie) sur le theme choisi dans CombTheme, en jouant
+    // sur RowHeights (meme ruse que ColWidths[1]:=0 pour la colonne Code cachee) plutot qu'en
+    // reconstruisant les lignes : preserve les quantites deja saisies par Nono sur les entrees
+    // qui sortent temporairement du filtre. 25/09/2026.
+    procedure FiltreTheme;
 
   public
 
@@ -108,6 +115,16 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
 
      TabFabrication.RowCount := IndTab + 1;
 
+     // Liste deroulante des themes presents, dans l'ordre ou ils apparaissent (deja tries avec
+     // la grille), precedee de "Tous" (RULES-LAB_200, meme libelle que le filtre Theme de
+     // WinEquipement). 25/09/2026.
+     CombTheme.Items.Clear;
+     CombTheme.Items.Add(GetTexteLibelle('RULES-LAB_200'));
+     for I := 1 to IndTab do
+       if CombTheme.Items.IndexOf(TabFabrication.Cells[7, I]) < 0 then
+         CombTheme.Items.Add(TabFabrication.Cells[7, I]);
+     CombTheme.ItemIndex := 0;
+
      ButtonOk.Caption := getTexteLibelle('RULES-LAB_106');
 
      if SelectWinFabrication <> '' then
@@ -150,6 +167,26 @@ procedure TWinFabrications.ButtonOkClick(Sender: TObject);
     ChoixWinFabrication := Res;
     Close;
   end;
+
+procedure TWinFabrications.FiltreTheme;
+var
+  I:     Integer;
+  Theme: String;
+begin
+  Theme := '';
+  if CombTheme.ItemIndex > 0 then
+    Theme := CombTheme.Items[CombTheme.ItemIndex];
+  for I := 1 to TabFabrication.RowCount - 1 do
+    if (Theme = '') or (TabFabrication.Cells[7, I] = Theme) then
+      TabFabrication.RowHeights[I] := TabFabrication.DefaultRowHeight
+    else
+      TabFabrication.RowHeights[I] := 0;
+end;
+
+procedure TWinFabrications.CombThemeChange(Sender: TObject);
+begin
+  FiltreTheme;
+end;
 
 procedure TWinFabrications.TabFabricationSelectEditor(Sender: TObject; aCol,
   aRow: Integer; var Editor: TWinControl);

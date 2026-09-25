@@ -10,6 +10,16 @@ object WinFabrications: TWinFabrications
   DesignTimePPI = 120
   OnCreate = FormCreate
   LCLVersion = '3.0.0.1'
+  object CombTheme: TComboBox
+    Left = 720
+    Height = 28
+    Top = 24
+    Width = 160
+    ItemHeight = 20
+    OnChange = CombThemeChange
+    Style = csDropDownList
+    TabOrder = 1
+  end
   object TabFabrication: TStringGrid
     Left = 23
     Height = 344
