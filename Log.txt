@@ -1,3 +1,18 @@
+25/09/2026 - OBJETS MAGIQUES ARCHIVES II : QUALITES D'ARME/ARMURE/BOUCLIER SAISIES, COMPILE, A TESTER.
+Chapitre "Magical Items and Artifice" (p.51-66) : le tirage/fabrication aleatoire (p.51-56) est
+HORS PERIMETRE (decision Nono, outil de MJ/campagne) ; seuls les EFFETS rattachables a une arme/
+armure/bouclier du catalogue sont saisis. Deux mecanismes generiques manquaient, ajoutes en
+miroir exact de l'existant cote armure : qualite d'arme -> Talent octroye (chargearmebonustalent.pas)
+et qualite d'arme -> bonus d'Attribut (chargearmebonusmodificateur.pas), cables dans
+xmlexportimport/warhammersource/chargepersonnage/pdfpersonnage/winpersonnage.pas. Donnees dans
+BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml : Magical Weapon Qualities (27 entrees ARCH2-WEAPB_01-27),
+Magical Armour Qualities (8 entrees ARCH2-ARMOB_01-08), Magical Shield Qualities (4 entrees
+ARCH2-WEAPB_28-31, bouclier = arme dans le moteur). Gromril/Ithilmar/Legendary ecartes (materiau
+ou instruction de tirage, pas une qualite). Compile (lazbuild, 0 erreur), XML valide - A TESTER
+EN JEU PAR NONO. RESTE : Rings/Talismans/Oddities/Scrolls/Wands/Staffs (p.65-66), objets a part
+entiere hors du systeme arme/armure, a cadrer via DATA_TRAPPING. A FAIRE.txt et CONTEXT.md 2.94
+mis a jour.
+
 25/09/2026 - SIGNES ASTRAUX : TEXTE DE PERSONNALITE SAISI, ETAPES OPTIONNELLES P.50 TRANCHEES, COMPILE.
 Texte de personnalite des 20 signes (Archives of the Empire II p.39-46) saisi en <Personality>
 dans DATA_STARSIGN (BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml), purement informatif (pas de calcul),

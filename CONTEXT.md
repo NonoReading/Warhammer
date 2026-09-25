@@ -11569,3 +11569,71 @@ sur la ligne (`FabricationModificateurQualite`). Filtre étendu à `ConstXmlModi
 `ConstXmlModifieCompetence` : même marquage de pièce que l'Attribut/l'Armure, sans annotation
 "+X" supplémentaire (valeur déjà dans le total). Moteur générique `ChargeModificateur` non
 modifié, seul l'appelant PDF change.
+
+### 2.94 Objets magiques d'Archives of the Empire II — capacités d'arme/armure/bouclier saisies, tirage/fabrication hors périmètre (25/09/2026, compilé, à tester par Nono)
+
+**Cadrage avec Nono** : le chapitre "Magical Items and Artifice" (p.51-66) mélange deux choses
+très différentes. La génération aléatoire par le MJ (tirage d100, commission à un artificier,
+Crafting Endeavour, identification par un Wizard, p.51-56) est **hors périmètre**, décision
+Nono du 25/09/2026 — trop proche des outils de campagne (Endeavours, Status System) déjà écartés
+ailleurs. Seuls **les effets que ces objets peuvent porter** intéressent le projet : pouvoir les
+rattacher à une arme/armure/bouclier précise du catalogue, comme n'importe quelle qualité.
+
+**Deux mécanismes génériques manquaient**, en miroir exact de ce qui existe déjà côté armure
+(`ChargeArmureBonusTalent`/qualité → Talent, `ChargeArmureBonusModificateur`/qualité → bonus
+d'Attribut) — l'essentiel des effets (Qualité octroyée type Fast/Precise, bonus d'Attribut/
+Dégât/Armure chiffrés) était déjà couvrable par l'existant, seuls ces deux trous ont demandé du
+code :
+- **`chargearmebonustalent.pas`** (nouveau) : une qualité d'arme peut octroyer un Talent
+  (`<Talent>` sous `<ArmeBonus>`), même moule que `chargearmurebonustalent.pas`. Câblé dans
+  `xmlexportimport.pas` (case `ConstXmlTalent` ajouté à la boucle `ArmeBonus`), `warhammersource.pas`
+  (Create/Clear), `chargepersonnage.pas` (`PersonnageArmeBonusTalent`, recalculé à la volée depuis
+  `Personnage.Equipement`, même logique double-source catalogue+fabrication que son pendant
+  armure). Affiché partout où `PersonnageArmureBonusTalent` l'était déjà : `pdfpersonnage.pas`
+  (2 blocs, PDF Feldo2P) et `winpersonnage.pas` (tableau Talent à l'écran).
+- **`chargearmebonusmodificateur.pas`** (nouveau) : une qualité d'arme peut porter un
+  `StructureModificateur` générique (`ChargeModificateur`), même moule que
+  `chargearmurebonusmodificateur.pas`. `CodeSource` porte le `CodeArmeBonus` (la qualité), pas
+  le `CodeArme` — distinct de `ChargeArmeModificateur` existant qui reste dédié aux modificateurs
+  posés directement sur une arme précise. Câblé de la même façon (case `ConstXmlModifieAttribut`
+  ajouté à la boucle `ArmeBonus`), plus `PersonnageArmeQualites` (miroir de
+  `PersonnageArmureQualites`) et `PersonnageArmeBonusModificateur`/`PersonnageArmeBonusAttributModif`
+  dans `chargepersonnage.pas`. Câblé dans `PdfPersonnageAttribut` (`pdfpersonnage.pas`) à la suite
+  de la qualité d'armure, et dans la ligne "Item" du tableau Attribut de `winpersonnage.pas`.
+
+**Données saisies dans `BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml`** (nouveau `DATA_WEAPON_BONUS` et
+nouveau `DATA_ARMOR_BONUS` pour ce livre, qui n'en avait aucun) :
+- **Magical Weapon Qualities** (p.57-59, 27 entrées `ARCH2-WEAPB_01` à `_27`) : effets qui
+  octroient déjà une Qualité d'arme standard (Fast, Precise, Damaging, Hack, Pummel,
+  Penetrating, Impale, Unbreakable) ne sont **pas** redoublés en entrée — l'Explanation indique
+  le code standard à ajouter en plus sur l'arme concernée, pour éviter un doublon avec ce qui
+  existe déjà (`RULES-WEAPB*`). Deux capacités dépendant du type d'arme (melee/distance) sont
+  scindées en `_A`/`_B` (ex. "Of Rigor Wroth" → Strike Mighty Blow/to Injure/to Stun en melee,
+  Fast Shot/Sharpshooter/Sniper à distance ; "Of Deft and Cunning" → +20 WS ou +20 BS ; "Of
+  Leaping Silver Wroth" → Fast en melee, +10 Initiative à distance), à choisir par Nono selon
+  l'arme saisie, jamais résolu automatiquement. "Legendary Weapon" (résultat 00) écartée :
+  instruction de tirage (retirer deux fois de plus), pas une capacité en soi.
+- **Magical Armour Qualities** (p.62-63, 8 entrées `ARCH2-ARMOB_01` à `_08`) : Gromril/Ithilmar/
+  Gifted Armour écartées (matériau, déjà modélisable via `<InherentCraftsmanship>`/Fabrication,
+  §2.29, pas une qualité magique à part) ; "Legendary Armour" écartée pour la même raison que
+  "Legendary Weapon".
+- **Magical Shield Qualities** (p.64, 4 entrées `ARCH2-WEAPB_28` à `_31`) : un bouclier est une
+  `DATA_WEAPON` (`Type="RULES-WTYPE_SHIELD"`) dans le moteur, donc même bloc `DATA_WEAPON_BONUS`
+  que les armes. Ithilmar/Gromril Shield écartées (ajustement de matériau/valeur sur le champ
+  `Quality` de l'exemplaire précis, pas une qualité distincte à octroyer).
+
+**Compilé (lazbuild --build-all, 0 erreur, même profil de warnings/hints/notes qu'avant), XML
+validé bien formé.** Aucun test en jeu encore fait — **reste à Nono** : créer une arme/armure/
+bouclier de test portant une de ces qualités et vérifier le Talent/bonus d'Attribut sur la fiche
+et le PDF Feldo2P.
+
+**Reste** (voir `A FAIRE.txt`) : **Rings/Talismans/Oddities/Scrolls/Wands/Staffs** (p.65-66) —
+ce ne sont pas des variantes d'arme/armure mais des objets à part entière (anneaux, amulettes,
+bâtons...), sans catalogue dédié aujourd'hui. Piste la plus proche : `DATA_TRAPPING` (déjà
+utilisé pour les aménagements de bateau, l'équipement de classe...), à cadrer avec Nono avant de
+saisir.
+
+**Note de Nono (25/09/2026)** : à mesure que ce genre de catalogue grossit (fabrications/objets
+magiques de plusieurs livres), prévoir de scinder la saisie par thème (livre/type d'objet)
+plutôt que tout accumuler au même endroit, sous peine de devenir illisible — à appliquer dès le
+prochain ajout (Rings/Talismans/Oddities).

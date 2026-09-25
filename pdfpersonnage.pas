@@ -752,6 +752,11 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     // ci-dessus (les dix attributs classiques passés par ici).
     Res.Base := Res.Base + PersonnageArmureBonusAttributModif(Personnage, Attribut);
 
+    // Qualité d'arme bonifiant un Attribut (ex. capacité d'arme magique Archives II
+    // "+20 WS or BS") dont le personnage possède un exemplaire - même mécanisme que la
+    // qualité d'armure ci-dessus, côté arme. Chantier "objets magiques Archives II".
+    Res.Base := Res.Base + PersonnageArmeBonusAttributModif(Personnage, Attribut);
+
     // Qualites de fabrication (Rune of Fortitude) sur armure portee.
     Res.Base := Res.Base + PersonnageFabricationAttributModif(Personnage, Attribut);
 
@@ -1513,7 +1518,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     // Skull Trophies), meme bloc, meme mise en forme que les talents de mutation juste au-dessus.
     // Calcule a la volee (PersonnageArmureBonusTalent, chargepersonnage.pas) - CONTEXT.md,
     // chantier "traits de creature".
-    for PArmureBonusTalent in PersonnageArmureBonusTalent(Personnage) do
+    for PArmureBonusTalent in PersonnageArmureBonusTalent(Personnage) + PersonnageArmeBonusTalent(Personnage) do
       begin
         PTalent := ChercheTalent(PArmureBonusTalent.CodeTalent);
         inc(NbLigne);
@@ -3054,7 +3059,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     // Skull Trophies), meme bloc, meme mise en forme que les talents de mutation juste au-dessus.
     // Calcule a la volee (PersonnageArmureBonusTalent, chargepersonnage.pas) - CONTEXT.md,
     // chantier "traits de creature".
-    for PArmureBonusTalent in PersonnageArmureBonusTalent(Personnage) do
+    for PArmureBonusTalent in PersonnageArmureBonusTalent(Personnage) + PersonnageArmeBonusTalent(Personnage) do
       begin
         PTalent := ChercheTalent(PArmureBonusTalent.CodeTalent);
         inc(NbLigne);
@@ -4789,7 +4794,7 @@ Function PdfNbTalentsAcquis(Personnage: StructurePersonnage): Integer;
     finally
       ListeRegle.Free;
     end;
-    Result := Result + Length(PersonnageMutationTalent(Personnage)) + Length(PersonnageArmureBonusTalent(Personnage));
+    Result := Result + Length(PersonnageMutationTalent(Personnage)) + Length(PersonnageArmureBonusTalent(Personnage)) + Length(PersonnageArmeBonusTalent(Personnage));
     if Personnage.SigneAstral <> '' then
       Result := Result + 1;
   end;

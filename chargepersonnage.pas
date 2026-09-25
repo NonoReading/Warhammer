@@ -12,7 +12,7 @@ uses
   ChargeTalentCompetenceModif, ChargeArmureBonusModif,
   ChargeSort, ChargeCorruptionTable, ChargeTrapping,
   ChargeCorruptionCompetenceModif, ChargeCorruptionTalent, ChargeSigneAstral,
-  ChargeCorruptionEquipement, ChargeArmureBonusTalent,
+  ChargeCorruptionEquipement, ChargeArmureBonusTalent, ChargeArmeBonusTalent, ChargeArmeBonusModificateur,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
   ChargeFabrication,
@@ -281,6 +281,15 @@ Type
   // depuis Personnage.Equipement : le retrait de l'objet porte fait disparaitre le talent
   // accorde sans purge explicite a ecrire. CONTEXT.md, chantier "traits de creature".
   Function PersonnageArmureBonusTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
+  // Meme principe que PersonnageArmureBonusTalent ci-dessus, cote arme (<Talent> sous
+  // <ArmeBonus>, chargearmebonustalent.pas) - chantier "objets magiques Archives II".
+  Function PersonnageArmeBonusTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
+  // Meme principe que PersonnageArmureQualites/PersonnageArmureBonusModificateur/
+  // PersonnageArmureBonusAttributModif, cote arme (<ModifyCarac> sous <ArmeBonus>) -
+  // chantier "objets magiques Archives II".
+  Function PersonnageArmeQualites(Personnage: StructurePersonnage): TStringList;
+  Function PersonnageArmeBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
+  Function PersonnageArmeBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   // Même principe que PersonnageMutationAttributModif, mais sur les <ModifyCarac> déclarés
   // directement sur un TALENT (DATA_TALENT) plutôt que sur une mutation. Ajoutée le
@@ -2534,6 +2543,136 @@ Function PersonnageArmureBonusTalent(Personnage: StructurePersonnage): TArrayPer
       Alternatives.Free;
       Liste.Free;
     end;
+  end;
+
+Function PersonnageArmeBonusTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    indiceModif:          Integer;
+    PTalent:              StructurePersonnageTalent;
+    Liste:                TStringList;
+    Alternatives:         TStringList;
+    Element:              String;
+    Code:                 String;
+    Ind, IndAlt:          Integer;
+    ListeQualites:        String;
+  begin
+    Result       := [];
+    Liste        := TStringList.Create;
+    Alternatives := TStringList.Create;
+    try
+      for PersonnageEquipement in Personnage.Equipement do
+        if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
+          begin
+            // Meme double source que PersonnageArmureBonusTalent : qualites du catalogue
+            // (StructureArme.ListeBonus) et qualites de fabrication ajoutees par le joueur
+            // (PersonnageEquipement.QualiteEquipement).
+            ListeQualites := ChercheArme(PersonnageEquipement.CodeEquipement).ListeBonus;
+            if PersonnageEquipement.QualiteEquipement <> '' then
+              begin
+                if ListeQualites <> '' then
+                  ListeQualites := ListeQualites + ',';
+                ListeQualites := ListeQualites + PersonnageEquipement.QualiteEquipement;
+              end;
+
+            // Meme decoupage que GetAllArmeBonusLibelle (chargearmebonus.pas) : virgules entre
+            // qualites, suffixe numerique separe par un espace (ignore ici, seul le code
+            // importe pour l'octroi), alternatives separees par SeparateurMulti.
+            Liste.Clear;
+            ExtractStrings([','], [], PChar(ListeQualites), Liste);
+            for Ind := 0 to Liste.Count - 1 do
+              begin
+                Element := Trim(Liste[Ind]);
+                if Pos(' ', Element) > 0 then
+                  Element := Trim(ExtractStringBefore(Element, ' '));
+
+                Alternatives.Clear;
+                ExtractStrings([SeparateurMulti], [], PChar(Element), Alternatives);
+                for IndAlt := 0 to Alternatives.Count - 1 do
+                  begin
+                    Code := Trim(Alternatives[IndAlt]);
+                    for indiceModif := 0 to (ListArmeBonusTalent.Count - 1) do
+                      if CompareRechercheValeur(ListArmeBonusTalent[indiceModif].CodeArmeBonus, Code) then
+                        begin
+                          PTalent.CodeTalent := ListArmeBonusTalent[indiceModif].CodeTalent;
+                          PTalent.Valeur     := 1;
+                          PTalent.Asterisque := 0;
+                          PTalent.Source     := PersonnageEquipement.CodeEquipement;
+                          Result             += [PTalent];
+                        end;
+                  end;
+              end;
+          end;
+    finally
+      Alternatives.Free;
+      Liste.Free;
+    end;
+  end;
+
+Function PersonnageArmeQualites(Personnage: StructurePersonnage): TStringList;
+// Meme principe que PersonnageArmureQualites : un code de qualite (ListeBonus) par
+// occurrence, pour chaque arme equipee (TypeEquipWe, ChercheArme). Pas de deduplication.
+// L'APPELANT est proprietaire de la liste rendue et doit la liberer.
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PArme:                StructureArme;
+    ListeBonus:           String;
+    Liste:                TStringList;
+    Element:              String;
+    Ind:                  Integer;
+  begin
+    Result := TStringList.Create;
+    Liste  := TStringList.Create;
+    try
+      for PersonnageEquipement in Personnage.Equipement do
+        if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
+          begin
+            PArme      := ChercheArme(PersonnageEquipement.CodeEquipement);
+            ListeBonus := PArme.ListeBonus;
+            if (ListeBonus <> '') and (ListeBonus <> '-') then
+              begin
+                Liste.Clear;
+                ExtractStrings([','], [], PChar(ListeBonus), Liste);
+                for Ind := 0 to Liste.Count - 1 do
+                  begin
+                    Element := Trim(Liste[Ind]);
+                    if Pos(' ', Element) > 0 then
+                      Element := Trim(ExtractStringBefore(Element, ' '));
+                    if Element <> '' then
+                      Result.Add(Element);
+                  end;
+              end;
+          end;
+    finally
+      Liste.Free;
+    end;
+  end;
+
+Function PersonnageArmeBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
+  var
+    Qualites: TStringList;
+    Ind:      Integer;
+    IndModif: Integer;
+  begin
+    Result   := 0;
+    Qualites := PersonnageArmeQualites(Personnage);
+    try
+      for Ind := 0 to Qualites.Count - 1 do
+        for IndModif := 0 to (ListArmeBonusModificateur.Count - 1) do
+          if (ListArmeBonusModificateur[IndModif].TypeModif = TypeModif)
+             and CompareRechercheValeur(ListArmeBonusModificateur[IndModif].CodeSource, Qualites[Ind])
+             and CompareRechercheValeur(ListArmeBonusModificateur[IndModif].Cible, Cible)
+             and ((Trim(ListArmeBonusModificateur[IndModif].Filtre) = '')
+                  or CompareRechercheValeur(ListArmeBonusModificateur[IndModif].Filtre, Filtre)) then
+            Result := Result + ListArmeBonusModificateur[IndModif].Facteur;
+    finally
+      Qualites.Free;
+    end;
+  end;
+
+Function PersonnageArmeBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  begin
+    Result := PersonnageArmeBonusModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
   end;
 
 Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;

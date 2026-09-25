@@ -19,7 +19,7 @@ uses
   ChargeTalentEffet, ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionCompetenceModif,
   ChargeCorruptionTalent, ChargeCorruptionEquipement,
-  ChargeArmureBonusTalent,
+  ChargeArmureBonusTalent, ChargeArmeBonusTalent, ChargeArmeBonusModificateur,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
   ChargeDisease, ChargeClassEquipement,
@@ -1250,6 +1250,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PArme:                    StructureArme;
     PArmeModificateur:        StructureModificateur;
     PArmeBonus:               StructureArmeBonus;
+    PArmeBonusTalent:         StructureArmeBonusTalent;
+    PArmeBonusModificateur:   StructureModificateur;
     PArmure:                  StructureArmure;
     PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
@@ -2627,6 +2629,40 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                 PArmeBonus.Resume          := RemoveQuotes(UTF8Encode(Node.TextContent));
                                 Langue                     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Resume         := PArmeBonus.Resume;
+                              end;
+                            ConstXmlTalent:
+                              begin
+                                // Talent accorde par une qualite d'arme (ex. capacite d'arme
+                                // magique Archives II "Of Rigor Wroth" -> Strike Mighty Blow),
+                                // cas par cas dans le XML - meme mecanisme que ConstXmlTalent
+                                // sous <ArmureBonus> ci-dessous, cote arme (chantier "objets
+                                // magiques Archives II").
+                                PArmeBonusTalent.Livre         := Livre;
+                                PArmeBonusTalent.CodeArmeBonus := PArmeBonus.CodeArmeBonus;
+                                PArmeBonusTalent.CodeTalent    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmeBonusTalent.add(PArmeBonusTalent);
+                                    inc(NbArmeBonusTalent);
+                                   end;
+                              end;
+                            // <ModifyCarac name="CODE">VALEUR</ModifyCarac> sous <ArmeBonus> -
+                            // meme convention que sous <ArmureBonus> ci-dessous, cote arme
+                            // (chantier "objets magiques Archives II", ex. "+20 WS or BS").
+                            ConstXmlModifieAttribut:
+                              begin
+                                PArmeBonusModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                PArmeBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PArmeBonusModificateur.Filtre     := '';
+                                PArmeBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                PArmeBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PArmeBonusModificateur.CodeSource := PArmeBonus.CodeArmeBonus;
+                                PArmeBonusModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmeBonusModificateur.add(PArmeBonusModificateur);
+                                    inc(NbArmeBonusModificateur);
+                                   end;
                               end;
                           end;
 

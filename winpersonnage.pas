@@ -2994,6 +2994,7 @@ procedure TWinPersonnages.CalculTotaux();
         ValCareer := PersonnageCareerBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
         ValObjet  := PersonnageArmeAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
                      + PersonnageArmureBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
+                     + PersonnageArmeBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
                      + PersonnageFabricationAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
         if ValCareer <> 0 then
           TabAttribut.Cells[IndCol, LigAttCareer] := IntToStr(ValCareer);
@@ -3778,7 +3779,7 @@ begin
   // joueur possede deja le meme talent achete normalement (ex. Frightening) - jamais dans
   // ColTalNbAugm/ColTalXp, qui restent reserves aux augmentations payees en Xp : un octroi
   // automatique ne coute rien.
-  For PersonnageTalent in PersonnageMutationTalent(Personnage) + PersonnageArmureBonusTalent(Personnage) do
+  For PersonnageTalent in PersonnageMutationTalent(Personnage) + PersonnageArmureBonusTalent(Personnage) + PersonnageArmeBonusTalent(Personnage) do
     begin
       Lig  := FindRowByText(TabTalent, PersonnageTalent.CodeTalent, 1);
       if Lig = -1 then
