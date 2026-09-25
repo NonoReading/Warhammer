@@ -1105,6 +1105,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                   XmlContent.Add(XmlLigne(ConstXmlSigneDates, PSigneAstral.Dates));
                   XmlContent.Add(XmlLigne(ConstXmlSigneDieu, PSigneAstral.Dieu));
                   XmlContent.Add(XmlLigneLangue(ConstXmlSigneApparence, Langue, PSigneAstral.Apparence));
+                  XmlContent.Add(XmlLigneLangue(ConstXmlSignePersonnalite, Langue, PSigneAstral.Personnalite));
                   VarianteEnCours := '';
                   for PSigneEffet in ListSigneEffet do
                     if (PSigneEffet.CodeSigne = PSigneAstral.CodeSigne) and (PSigneEffet.Livre = PSigneAstral.Livre) then
@@ -3565,6 +3566,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PSigneAstral.Dieu         := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlSigneApparence:
                               PSigneAstral.Apparence    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSignePersonnalite:
+                              PSigneAstral.Personnalite := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlSigneModificateur, ConstXmlTalent:
                               if LangueDef = ConstAnglais then
                                 AjouteEffetSigneAstral(Livre, PSigneAstral.CodeSigne, '', Node);

@@ -271,6 +271,7 @@ Const
       ConstXmlSigneDates                = 'Dates';
       ConstXmlSigneDieu                 = 'God';
       ConstXmlSigneApparence            = 'Appearance';
+      ConstXmlSignePersonnalite         = 'Personality';
       ConstXmlSigneVariante             = 'Variant';
       ConstXmlSigneModificateur         = 'Modifier';
       // Fiche de personnage : code du signe (balise StarSign = ConstXmlSigneAstral) et plage de sa variante

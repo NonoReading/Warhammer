@@ -22,6 +22,7 @@ Type
     Dates:                      String;
     Dieu:                       String;
     Apparence:                  String;
+    Personnalite:                String;   // texte de personnalite, purement narratif (A FAIRE.txt)
     Plage:                      String;   // tranche du d100 : "01-05", "96-00" (00 = 100)
   end;
 
@@ -210,6 +211,8 @@ function ResumeSigneAstral(CodeSigne, Variante: String): String;
       Result := Result + LineEnding + Effets;
     if Talents <> '' then
       Result := Result + LineEnding + Talents;
+    if PSigne.Personnalite <> '' then
+      Result := Result + LineEnding + LineEnding + PSigne.Personnalite;
   end;
 
 end.

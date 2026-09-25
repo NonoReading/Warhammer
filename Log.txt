@@ -1,3 +1,12 @@
+25/09/2026 - SIGNES ASTRAUX : TEXTE DE PERSONNALITE SAISI, ETAPES OPTIONNELLES P.50 TRANCHEES, COMPILE.
+Texte de personnalite des 20 signes (Archives of the Empire II p.39-46) saisi en <Personality>
+dans DATA_STARSIGN (BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml), purement informatif (pas de calcul),
+affiche a la suite du reste du resume dans ResumeSigneAstral (chargesigneastral.pas). Nouvelle
+constante ConstXmlSignePersonnalite, lecture/export dans xmlexportimport.pas. Decision de Nono :
+les etapes optionnelles p.50 (signe ascendant, Celestial Mansions) restent NON implementees -
+purement roleplay (tirages supplementaires sur la meme table, aucun bonus/competence/talent),
+rien a modeliser, ne plus les ressortir en anomalie. A FAIRE.txt et CONTEXT.md 2.88 mis a jour.
+
 25/09/2026 - ASTERISQUE PDF DES RUNES DE DEGATS/COMPETENCE SUR ARME, COMPILE ET TESTE PAR NONO.
 PdfFabricationAsterisques (pdfpersonnage.pas) ne marquait le "(N)" a cote d'une arme que pour les
 qualites modifiant un Attribut (Initiative) ou l'Armure (PA) ; les qualites modifiant les Degats
