@@ -1280,4 +1280,331 @@
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 </DATA_TRAPPING>
+<!-- Miracles des 5 aspects/dieux du livre (p.18-25 Ranald, p.88 Taal), lies aux talents
+     RULES-T0080_NIGHTPROWLER/_GAMESTER/_DECEIVER/_PROTECTOR/_TAAL (BOOK_RULESBOOK.Xml).
+     Les listes "peuvent aussi utiliser ces miracles du Core Rulebook" (Cat's Eyes,
+     Ranald's Grace, Stay Lucky...) ne sont pas resaisies ici : deja presentes dans
+     BOOK_RULESBOOK.Xml, rattachement possible par le meme talent. -->
+<DATA_SPELL>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_01">
+<Description language="ENGLISH">"Distant Sounds"</Description>
+<Explanation language="ENGLISH">"You cup your hand to your ear and make the sign of Ranald's cross. You can clearly hear a conversation or other noise from anywhere within range - behind a wall, in a distant room, or elsewhere. You must have a specific target in mind and know where they are, such as a person you know is in a certain room or can see through a window. You can also whisper words to the target. Unlike the Cat's Eyes Miracle, this works with sealed chambers."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Minutes"</Duration>
+<Range>"Fellowship Yards"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_02">
+<Description language="ENGLISH">"Long Reach"</Description>
+<Explanation language="ENGLISH">"You weave a riddle saying that which is out of reach is closer than the senses suggest. Your reach is extended by the Range as invisible arms stretch towards whatever is out of your grasp. You can grab or manipulate whatever you reach, take hold of a ladder or ledge, lift an object of 2 Enc or less, and make Sleight of Hand Tests."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_03">
+<Description language="ENGLISH">"Lose the Loot"</Description>
+<Explanation language="ENGLISH">"With one hand you touch whatever you have gained illicitly while raising your eyebrows inquisitively towards Ranald. This miracle gives you a strong sense of who and where you can sell your contraband or stolen goods for a decent price. If within a large town or city, you receive an intuition as to where the nearest Fence may be found. How well this Fence regards you is left to the GM, but provided you have no Sin Points they should be at least willing to do business."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"Fellowship Bonus Miles"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_04">
+<Description language="ENGLISH">"Silence Reigns"</Description>
+<Explanation language="ENGLISH">"You whisper a rhyme to Ranald and ask him to fool the hearing of others. Anyone within the area of effect hears nothing but normal background noise undisturbed by footsteps, dogs barking, or any other abrupt sound."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Agility Bonus yards"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_05">
+<Description language="ENGLISH">"Poor Man's Face"</Description>
+<Explanation language="ENGLISH">"You whisper a riddle about riches being in the eye of the beholder. Ranald answers by concealing any valuables on your person. Anyone searching you finds only worthless items - where once there were coins or other precious objects, there are now a few breadcrumbs or a pebble. Ranald keeps your valuables for the duration of the miracle, but beware - for every hour that an object remains hidden in this way there is a 1% chance that he takes a liking to a valuable and keeps it for himself."</Explanation>
+<Target>"You"</Target>
+<Duration>"SL Hours (minimum 1)"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_06">
+<Description language="ENGLISH">"Talk Your Way Out"</Description>
+<Explanation language="ENGLISH">"You touch your earlobes and silently cross both fingers, hoping Ranald silvers your tongue. This miracle grants you the ability to talk yourself out of even the most compromising situation. You gain a one-off bonus of +8 SL to a Charm Test while you are trying to talk your way out of being caught red-handed."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_NIGHTPROWLER_07">
+<Description language="ENGLISH">"The Heat Is Off"</Description>
+<Explanation language="ENGLISH">"You pose a question to humanity at large - why don't they mind their own business? After committing a crime, for the next few hours, people are oddly disinterested in you. The authorities avert their eyes when you pass and others struggle to remember your coming. If using the rules for watch patrols subtract three from any score to work out watch presence. If you attempt another crime, the Miracle stops working. All Fellowship-based tests against Fel are at -3 SL as people can't focus on you or what you're saying."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_NIGHTPROWLER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_GAMESTER_01">
+<Description language="ENGLISH">"Bountiful Fortune"</Description>
+<Explanation language="ENGLISH">"You gesture towards several companions with a wave of crossed fingers. For the next Test they take, they can reverse the order of the percentile dice. For example, 82% could become 28%. If this boon isn't used within Fellowship Bonus Rounds, it is lost."</Explanation>
+<Target>"Fellowship Bonus Allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_GAMESTER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_GAMESTER_02">
+<Description language="ENGLISH">"Crisis of Confidence"</Description>
+<Explanation language="ENGLISH">"You whistle a jaunty little tune that throws off the confidence of an opponent. Choose one target in range who is about to take any voluntary Fellowship-based Test. They immediately feel a sense of anxiety about taking the risk and back down, choosing not to try what they had planned. If they must take the test regardless of their choice they suffer a penalty of -20."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_GAMESTER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_GAMESTER_03">
+<Description language="ENGLISH">"Force the Hand of Chance"</Description>
+<Explanation language="ENGLISH">"You ask Ranald to instruct the universe to reconsider the odds of a difficult challenge. This miracle improves your chance of passing a specific Test by +1 SL, but you can increase the advantage by an additional SL if you roll 1d10 and score 6 or less. You can keep making this roll and increase your score by +1 SL as long as subsequent rolls are successful. However, should you score a 7 or more, you lose all accrued bonus SL and must take the original Test at -1 SL."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_GAMESTER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_GAMESTER_04">
+<Description language="ENGLISH">"Perfect Empathy"</Description>
+<Explanation language="ENGLISH">"Like a cat sneaking silently into the shadows, you slip into someone else's mind. You perfectly understand someone to whom you are speaking - regardless of language, you know their meaning, their intentions and what's on their mind. How you use this information is up to you."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Minutes"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_GAMESTER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_GAMESTER_05">
+<Description language="ENGLISH">"The Gamemaster"</Description>
+<Explanation language="ENGLISH">"You invoke Ranald as master of all games and request that he shares his wisdom with you. When observing any game, sport, or similar leisure pursuit, you are instantly aware of the rules and best strategies to win. If the game involves mental skill (rather than pure chance, physical prowess), all Tests you take to compete in the game are taken at +4 SL. When the effects of the Miracle wear off, you forget everything but the rules."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_GAMESTER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_GAMESTER_06">
+<Description language="ENGLISH">"Up the Stakes"</Description>
+<Explanation language="ENGLISH">"You pray quietly to Ranald to exaggerate the effects of your luck. This miracle improves the consequences of success or failure. Take any Test as normal: if you succeed, the result is automatically an Astounding Success. If you lose, it's an Impressive Failure."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_GAMESTER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_DECEIVER_01">
+<Description language="ENGLISH">"A Suitable Sucker"</Description>
+<Explanation language="ENGLISH">"When finding a mark you pray to Ranald to direct you to the perfect patsy to exploit. Whilst the miracle is in effect the Character may reroll any results on the Contents of a Purse Table and the Victim Quirk Table. If they choose to reroll the second result stands."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DECEIVER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_DECEIVER_02">
+<Description language="ENGLISH">"Bamboozle"</Description>
+<Explanation language="ENGLISH">"You pose a quandary about the nature of free will in a universe ruled by gods. You fool one Human-sized creature into doing your bidding unless it can pass a Hard (-20) Cool Test. You can determine what it does the following round, providing it doesn't directly harm itself - indirectly is another matter. Creatures with the Undead or Daemonic Traits cannot be bamboozled."</Explanation>
+<Target>"1"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"24 yards"</Range>
+<Talent>"RULES-T0080_DECEIVER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_DECEIVER_03">
+<Description language="ENGLISH">"One Almighty Lie"</Description>
+<Explanation language="ENGLISH">"You take a deep breath, cross both fingers and tell the most outrageous lie you can imagine. This miracle allows you to convince people of a falsehood so colossal surely nobody would make it up. Roleplay the lie, then take the Pray Test to invoke the Miracle. If you pass, roll a d10 and add the SLs from the Pray Test. This total is the number of +SLs to add to your Charm Test. The GM may want to reward you with additional SLs if your lie is particularly entertaining (but not plausible!)"</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DECEIVER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_DECEIVER_04">
+<Description language="ENGLISH">"Ranald's Mischief"</Description>
+<Explanation language="ENGLISH">"You mock and mimic an adversary to even up an unequal contest. This miracle allows you to temporarily change two Characteristics to be the same as an opponent for the purpose of an Opposed Test with that opponent. Roll twice on the Ranald's Mischief Characteristic Table to see which are affected (re-roll duplicate results)."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"12 yards"</Range>
+<Talent>"RULES-T0080_DECEIVER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_DECEIVER_05">
+<Description language="ENGLISH">"Unremembered Face"</Description>
+<Explanation language="ENGLISH">"You whisper a quick prayer to Ranald and ask him to cloud the memories of those you meet. Any creature you meet must pass a Hard (-20) Cool Test to remember more than two facts about your appearance. You choose what they remember, so many priests of Ranald wear distinctive items of clothing which can quickly be removed or hidden."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DECEIVER"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_PROTECTOR_01">
+<Description language="ENGLISH">"Back At You"</Description>
+<Explanation language="ENGLISH">"You hold out the palm of your hand with fingers crossed. This miracle is directed at any combat within range other than one you are engaged in yourself. Determine the weaker participant by comparing S, T, and WS - whoever is higher in 2 or more Characteristics is strongest. Whilst this miracle is in effect, any Wounds inflicted by the strongest participant during a single attack may be added to the Wounds inflicted the next time the weaker participant causes Damage to the strongest participant."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"24 Yards"</Range>
+<Talent>"RULES-T0080_PROTECTOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_PROTECTOR_02">
+<Description language="ENGLISH">"Class War"</Description>
+<Explanation language="ENGLISH">"You call Ranald's attention to the inequity of society and he responds by cursing the privileged. This miracle requires a Gold Tier target. They are afflicted by a curse identical to the effects of Curse of Ill-Fortune (WFRP Core Rulebook). It lasts a day for every level of Gold Standing they have, plus one day per +SL from the Pray Test. If the target habitually follows Ranald's strictures the curse has no effect."</Explanation>
+<Target>"1"</Target>
+<Duration>"Gold Tier Days +SL (see text)"</Duration>
+<Range>"24 yards"</Range>
+<Talent>"RULES-T0080_PROTECTOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_PROTECTOR_03">
+<Description language="ENGLISH">"Free Your Mind"</Description>
+<Explanation language="ENGLISH">"You implore Ranald for the strength to resist the commands of authority. This miracle allows you or a chosen target to automatically resist the effects of any Charm or Leadership Test made by a Character with a higher status than the target, no matter how compelling."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"24 Yards"</Range>
+<Talent>"RULES-T0080_PROTECTOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_PROTECTOR_04">
+<Description language="ENGLISH">"Moment of Clarity"</Description>
+<Explanation language="ENGLISH">"You intone a riddle about the purpose of existence and Ranald answers with a spiritual wink. For a brief instant you see with total clarity the absolute absurdity of life and everything mortals do. Nothing really matters... and that's hilarious. For the duration of this miracle you have the Immunity to Psychology Trait."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_PROTECTOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_PROTECTOR_05">
+<Description language="ENGLISH">"Rally Round"</Description>
+<Explanation language="ENGLISH">"You sing a loud song of Ranald, and the crowd join in. This miracle affects all allies within the area of effect and becomes more effective with numbers. Allies gain +2 SLs to Endurance and Cool Tests, increasing by an additional +SL for every 10 people in the crowd. This Miracle does not affect characters of Silver or Gold Status."</Explanation>
+<Target>"Area of Effect (Fellowship yards)"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_PROTECTOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_PROTECTOR_06">
+<Description language="ENGLISH">"Under my Protection"</Description>
+<Explanation language="ENGLISH">"You call Ranald's attention to the cruelty of the powerful. This miracle requires a target who has threatened or persecuted a victim of your choice - a bullying noble, a racketeer, a prejudiced priest, or similar example of an unjust authority figure. From their next sleep onwards, Ranald inflicts terrifying dreams on them, in which the victims take revenge, they are chased by a giant black cat, magpies pull them apart, and similar nightmares. Whilst suffering such dreams, the target must take a Challenging (+0) Cool Test each morning. If they fail they suffer from a Fatigued Condition. If they treat their victims with kindness or otherwise make amends, the dreams end."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Months"</Duration>
+<Range>"Sight"</Range>
+<Talent>"RULES-T0080_PROTECTOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_01">
+<Description language="ENGLISH">"Auroch's Heart"</Description>
+<Explanation language="ENGLISH">"You pray to Taal to suffuse a character with the constitution of a wild oxen. The target gains +Fellowship Bonus SL to all Toughness Tests until the end of the miracle."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus +3 rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_02">
+<Description language="ENGLISH">"Earthshudder"</Description>
+<Explanation language="ENGLISH">"You cry Taal's name three times and cast your arms to the heavens in supplication. In return, the Lord of the Wild sends thunder and shakes the earth. All targets within Fellowship Bonus yards of a target point must pass a Difficult (-10) Athletics Test or gain the Prone condition. Artificial structures (i.e. built rather than natural) within the area of effect sustain d10 +SL damage."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_03">
+<Description language="ENGLISH">"Nature's Repast"</Description>
+<Explanation language="ENGLISH">"You reach out and intone an invocation to Taal, thanking him for his generosity of gifts from the land. This miracle requires food foraged or hunted from the wild. When touched, it becomes more sustaining and nutritious, filling bellies far better than it would have in its original state. Anyone eating the food can go four days without an Endurance Test for starvation. This miracle can affect up to six individual meals and it does not increase the amount of food - so it doesn't feed more mouths, rather the food itself becomes more sustaining."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Permanent"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_04">
+<Description language="ENGLISH">"Pax of Taal"</Description>
+<Explanation language="ENGLISH">"You whisper a guttural, animalistic prayer to Taal. As the words leave your mouth, all beasts in the area of effect fix their eyes on you. All natural animals (with Int 25 or lower) within the area of effect become calm. They will not attack any targets, including prey or one another. This miracle does not work on bipedal creatures or those twisted by Chaos. If anyone attacks the animals, the effect on them is broken."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_05">
+<Description language="ENGLISH">"Rending Paw"</Description>
+<Explanation language="ENGLISH">"You roar out a challenge with the ferocity of the Lord of the Wild at his most enraged. He grants you or an ally with a surprising strength of arms. The target gains +20 to their Strength characteristic until the end of the miracle."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus rounds"</Duration>
+<Range>"Fellowship Bonus yards"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_06">
+<Description language="ENGLISH">"River's Blessing"</Description>
+<Explanation language="ENGLISH">"You implore Taal as Lord of Rivers to grant you safe passage through his domain. For the duration of the miracle you gain +4 SL to all Swim Tests and your speed is your Movement rate when moving through water, rather than half. Note - this miracle has no effect in salt water."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_07">
+<Description language="ENGLISH">"Wild Wind"</Description>
+<Explanation language="ENGLISH">"You call to the Lord of the Wild and in response he whips up the wind into a raging, swirling maelstrom. While you are not affected, all targets within the area of effect are buffeted by irresistible winds. Any Test they take against WS or Agi is reduced by -2SL and each round they must pass a Difficult (-10) Toughness Test to avoid a Prone condition. No ranged attacks can be used within the area of effect, and only gunpowder or artillery weapons can attack targets within the area of effect."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="DEFT-MIRAC_TAAL_08">
+<Description language="ENGLISH">"Wilderness Way"</Description>
+<Explanation language="ENGLISH">"You close your eyes and make the stag sign of Taal with your left hand, waiting for the Lord of the Wild to guide your feet. This miracle can be performed before the party undertake a period of travel. Record the number of SL scored on the Pray Test. These can be used to reroll the results of any Planning Endeavour, Travel Endeavour, or Camp Endeavour made in the following period of journey time. If the journey is interrupted by an encounter the remaining rerolls are lost, though the miracle can be attempted again before the next stage of the journey commences."</Explanation>
+<Target>"You"</Target>
+<Duration>"See Text"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+</DATA_SPELL>
 </DATA_BOOK>

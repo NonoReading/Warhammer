@@ -11542,8 +11542,17 @@ correctement présent au niveau 3). Les mappings `Secret Signs (Thieves/Thief)` 
 présents et cohérents, rien touché.
 
 XML pur (`BOOK_RULESBOOK.Xml` + `BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml`), aucun code Pascal.
-Bien formé vérifié (parse XML sans erreur). Non compilé/non testé à l'écran dans ce tour — à
-la charge de Nono avant commit. RESTE hors périmètre : les 4 listes de Miracles des aspects
-de Ranald (Night Prowler/Gamester/Deceiver/Protector), et tout le contenu narratif du livre
-(cultes, règles de prison/hors-la-loi, contacts criminels, tables) — voir le commentaire en
-tête du fichier XML.
+Bien formé vérifié (parse XML sans erreur). RESTE hors périmètre : tout le contenu narratif du
+livre (cultes, règles de prison/hors-la-loi, contacts criminels, tables) — voir le commentaire
+en tête du fichier XML.
+
+**LES 4 LISTES DE MIRACLES DES ASPECTS DE RANALD + MIRACLES DE TAAL SAISIES ET VALIDEES A
+L'ECRAN PAR NONO LE 25/09/2026 — CHANTIER "DEFT STEPS, LIGHT FINGERS" ENTIEREMENT CLOS.**
+32 `<Sort>` ajoutés dans un nouveau bloc `DATA_SPELL` de `BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml`,
+codes `DEFT-MIRAC_<ASPECT>_NN`, chacun rattaché par `<Talent>` au talent Invoke correspondant
+déjà créé (`RULES-T0080_NIGHTPROWLER/_GAMESTER/_DECEIVER/_PROTECTOR/_TAAL`), même mécanisme
+que les Miracles de Handrich/Solkan/Rhya (Archives of the Empire III) : Night Prowler (7,
+p.18), Gamester (6, p.19), Deceiver (5, p.24), Protector (6, p.25), Taal (8, p.88). Les
+Miracles listés dans le livre comme "peuvent aussi utiliser ceux du Core Rulebook" (Cat's
+Eyes, Ranald's Grace, Stay Lucky...) ne sont pas resaisis : déjà présents dans
+`BOOK_RULESBOOK.Xml`, rattachés par le même talent. XML pur, aucun code Pascal.

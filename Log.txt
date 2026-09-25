@@ -6591,3 +6591,17 @@ SCHEME rendues en image (pdftoppm, LIVRES/Deft Steps Light Fingers.pdf) et compa
 icones de chaque Career Path pour retrouver le vrai palier par attribut. Liberator-
 Priest et Muleskinner avaient en plus un attribut ENTIER manquant (WS pour les deux).
 Compile et teste a l'ecran par Nono le 24/09/2026 : CHANTIER CLOS, pret a committer.
+
+25/09/2026 - DEFT STEPS, LIGHT FINGERS : MIRACLES DES ASPECTS DE RANALD ET DE TAAL
+Dernier point ouvert du livre : les 5 blocs de sorts (Miracles of the Night Prowler p.18,
+of the Gamester p.19, of the Deceiver p.24, of the Protector p.25, of Taal p.88) saisis
+dans un nouveau bloc DATA_SPELL de BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml, 32 <Sort> au total
+(codes DEFT-MIRAC_<ASPECT>_NN). Chaque sort rattache par <Talent> au talent Invoke de
+l'aspect deja cree le 24/09 (RULES-T0080_NIGHTPROWLER/_GAMESTER/_DECEIVER/_PROTECTOR/_TAAL,
+BOOK_RULESBOOK.Xml) - meme mecanisme que les Miracles de Handrich/Solkan/Rhya d'Archives
+of the Empire III. Non resaisis : les miracles que le livre indique pouvoir aussi piocher
+dans le WFRP Core Rulebook (Cat's Eyes, Ranald's Grace, Stay Lucky...), deja presents dans
+BOOK_RULESBOOK.Xml et rattachables par le meme talent. XML pur, aucun code Pascal touche.
+Compile et teste a l'ecran par Nono le 25/09/2026 : CHANTIER "DEFT STEPS, LIGHT FINGERS"
+ENTIEREMENT CLOS (carrieres + tableaux d'objets/animaux + miracles, seul reste hors
+perimetre le contenu narratif du livre).
