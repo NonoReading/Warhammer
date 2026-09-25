@@ -11795,8 +11795,23 @@ livre) non saisi — hors périmètre, à traiter avec le chantier Ritual Magic 
 Rituals. Soit 38 sorts + 1 talent supplémentaires, aucun fichier `.pas` touché (XML validé
 par parseur, compilation Pascal non nécessaire car aucun `.pas` modifié).
 
+**Cinquième tranche (25/09/2026, XML validé, à tester par Nono)** : chapitre "Elementalist"
+(p.18-21). Carrière Elementalist et **Elementals** (créatures invocables décrites p.18) laissées
+de côté — même décision que les créatures adverses non gérées (Frostfiend/Djinn/Skaven
+Bestiary). **The Lore of Elementalism** (21 sorts, `GRIM-ELEM_01` à `_21`) rattachée à un
+nouveau Talent générique `GRIM-T0206` ("Arcane Magic (Elementalism)", `Generique="RULES-
+T0088_*"`, `TypSpell="Domain Magic"`, même convention que `GRIM-T0203`/`T0204`/`T0205` — cette
+Lore n'existait nulle part dans les 18 livres, vérifié par grep). Particularité : chaque sort est
+associé à l'un des quatre éléments Air/Earth/Fire/Water, sans champ dédié dans `DATA_SPELL` —
+repris entre parenthèses dans la `Description` de chaque sort (ex. "Assault of Stone (Earth)"),
+sauf *Shape Elemental* qui canalise "un élément en proximité" sans élément fixe dans la source.
+Les règles de chapitre propres à chaque élément (Air ignore l'Armure, Earth ajoute un test
+d'Endurance contre Prone, Fire ajoute Ablaze, Water donne Regenerate) résumées dans
+l'`Explanation` du Talent `GRIM-T0206`, faute de mécanisme dédié dans le programme. Soit 21
+sorts + 1 talent supplémentaires, aucun fichier `.pas` touché (XML validé par parseur Python :
+163 sorts, 7 talents au total dans le fichier).
+
 **Prochaine étape** : reste du chantier Unofficial Grimoire (session dédiée) :
-Elementalist career + Lore of Elementalism + Elementals, Ritual Magic + Summoning Rituals
-(inclut Sacred Grove laissé de côté ci-dessus), et le reste du chapitre Skaven Magic
-(Talents/sorts Petty et Arcane (Warp), profils de sorciers) si Nono le souhaite. Voir
-`A FAIRE.txt` pour le détail par chapitre.
+Ritual Magic + Summoning Rituals (inclut Sacred Grove laissé de côté à la quatrième tranche),
+et le reste du chapitre Skaven Magic (Talents/sorts Petty et Arcane (Warp), profils de
+sorciers) si Nono le souhaite. Voir `A FAIRE.txt` pour le détail par chapitre.

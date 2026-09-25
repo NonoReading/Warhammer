@@ -131,6 +131,26 @@
 <Test language="ENGLISH">""</Test>
 <Generique>"RULES-T0088_*"</Generique>
 </Talent>
+  <!-- "ELEMENTALIST" career + "THE LORE OF ELEMENTALISM" (p.18-21) : carriere Elementalist
+       laissee de cote (pas de sorts), seuls les sorts de la Lore sont saisis. Nouveau Talent
+       generique a la HORNE-T0197/GRIM-T0203/T0204/T0205, Generique="RULES-T0088_*", TypSpell
+       "Domain Magic" (cette Lore n'existait nulle part dans les 18 livres, verifie par grep).
+       21 sorts, chacun rattache a l'un des quatre elements (Air/Earth/Fire/Water) indique entre
+       parentheses dans la Description, information reprise du livre faute de champ dedie. "Shape
+       Elemental" n'est rattache a aucun element specifique dans la source (canalise "un element
+       en proximite"), pas de parenthese. "Elementals" (les creatures invocables) laissees de
+       cote, meme decision que les creatures adverses non gerees par le programme. -->
+<Talent id="GRIM-T0206">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Elementalism)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Elementalists wield the unpredictable power of the four natural elements: Air, Earth, Fire, Water, rather than the specific Winds of Magic that Colour Wizards embody. Air spells causing Damage ignore the target's Armour Points, unless the caster has the Arcane Magic (Elementalism or Heavens) Talent. Earth spells that cause Damage require the target to pass an Average (+20) Endurance Test or gain the Prone condition. Fire spells causing Damage inflict +1 Ablaze condition on the target, unless the caster has the Arcane Magic (Elementalism or Fire) Talent. Water spells that cause Damage grant the caster the Regenerate Creature Trait until the beginning of their next Turn. Proximity to the element used in a spell is the only ingredient required to cast it; there is no Miscast benefit."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
 </DATA_TALENT>
 <DATA_SPELL>
   <!-- "NEW PETTY SPELLS" (p.4-5) : considerees comme faisant partie de la liste standard du
@@ -1587,6 +1607,217 @@
 <Range>"(ATTR_WP)m"</Range>
 <Talent>"GRIM-T0205"</Talent>
 <Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+  <!-- "THE LORE OF ELEMENTALISM" (p.19-21), Talent GRIM-T0206, TypSpell "Domain Magic". 21 sorts. -->
+<Sort id="GRIM-ELEM_01">
+<Description language="ENGLISH">"Assault of Stone (Earth)"</Description>
+<Explanation language="ENGLISH">"You conjure a handful of pebbles, which you throw high into the air: as the stones fly, they grow larger and rain down upon the targeted area. All victims suffer a magic missile with a Damage of +4."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_02">
+<Description language="ENGLISH">"Blinding Flash (Air)"</Description>
+<Explanation language="ENGLISH">"You conjure a ball of blinding light from the heavens above. Everyone looking at you receives SL+1 Blinded conditions. Anyone who passes a Difficult (-10) Intuition Test avoids looking at the light, but may not attack or engage you without being blinded."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_03">
+<Description language="ENGLISH">"Breathe Underwater (Water)"</Description>
+<Explanation language="ENGLISH">"You fill up your target's lungs with a magical fluid, allowing them to breathe freely in water or vacuum."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_04">
+<Description language="ENGLISH">"Bring Rain (Water)"</Description>
+<Explanation language="ENGLISH">"If there is moisture in the air, you are able to coalesce it all and release it as a torrential rainstorm, even indoors if the GM allows. Fires are put out instantly, and cannot kindle (including magic). Ranged attacks are impossible except at Short Range, though these are taken at Challenging (+0) Difficulty. There is a 25% chance that Blackpowder and Engineering weapons, and their ammo, become waterlogged and unable to fire until dried out."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_05">
+<Description language="ENGLISH">"Clap of Thunder (Air)"</Description>
+<Explanation language="ENGLISH">"Your magic unleashes an immense clap of thunder, audible over a great distance, though less so underground. Any creatures with the Bestial, Skittish, or Stupid Traits must make a Fear (SL) Test. Riders must make a Difficult (-10) Drive or Ride Test to calm their mounts."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"1 mile"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_06">
+<Description language="ENGLISH">"Cleansing Flurries (Air)"</Description>
+<Explanation language="ENGLISH">"You summon a strong breeze which dissipates all impurities in the air and brings a feeling of spring-like freshness. For the duration, airborne poisons, breath effects, and wind-based spells are ineffectual (subject to GM's discretion). Also, allies have any Fatigued conditions removed."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_07">
+<Description language="ENGLISH">"Cloud of Smoke (Fire)"</Description>
+<Explanation language="ENGLISH">"You breathe a concentrated smoke from your lungs, as if your insides were on fire. The cloud begins centred on you, but if you move it remains stationary while it dissipates. Creatures in the cloud cannot see out or through it, nor can anyone outside see into the cloud. Further, any creatures, except you, who attempt to move inside the cloud must make a Challenging (+0) Athletics Test or take the Prone condition."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_08">
+<Description language="ENGLISH">"Crumble Stone (Earth)"</Description>
+<Explanation language="ENGLISH">"Your touch causes an AoE of stone, rock, or brick to weaken, crack, and crumble, inflicting a magic missile with a Damage of +8."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_09">
+<Description language="ENGLISH">"Dust Storm (Air)"</Description>
+<Explanation language="ENGLISH">"You conjure whirling winds of dirt and dust anywhere within range, which you may move at will with an Average (+20) Channelling Test. When the storm is created and at the start of each Round, any creatures caught within the AoE suffer a magic missile with a Damage of +0."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_10">
+<Description language="ENGLISH">"Extinguish (Water)"</Description>
+<Explanation language="ENGLISH">"You conjure enough magical force to put out all fires within the AoE. All Ablaze conditions are removed immediately."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_11">
+<Description language="ENGLISH">"Flame Sheet (Fire)"</Description>
+<Explanation language="ENGLISH">"You lay down a wall of flame that is Willpower Bonus yards wide and high and 2 yards deep. For every +2 SL you may extend the length of the Flame Sheet by +Willpower Bonus yards. Anyone crossing the wall of fire gains an Ablaze condition."</Explanation>
+<Target>"Area of Effect (Special)"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_12">
+<Description language="ENGLISH">"Hand of Fire (Fire)"</Description>
+<Explanation language="ENGLISH">"Your Melee weapon burns with a flickering flame. The weapon counts as magical and gains the Unbreakable Quality. Any creature struck by the weapon takes +1 Ablaze condition."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_13">
+<Description language="ENGLISH">"Light as a Feather (Air)"</Description>
+<Explanation language="ENGLISH">"You bring forth a billowing cushion of air to ease your target's fall or movement from a higher position. Your target falls at Walking rate and will not take Falling Damage unless the spell ends."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_14">
+<Description language="ENGLISH">"Part the Seas (Water)"</Description>
+<Explanation language="ENGLISH">"You hold your hands out towards a nearby body of water (pool, river, lake, stream) and push open a gap the size of the AoE. You may cross, and may move at Walking rate across the now-soggy open ground. Creatures caught by returning water must make a Hard (-20) Swim Test or be caught in the downstream current and subject to the rules for Drowning."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_15">
+<Description language="ENGLISH">"Quicksand (Earth)"</Description>
+<Explanation language="ENGLISH">"You target a patch of dirt, mud, or sand, churning it into a magical quicksand. The thick, sucking mud traps any creatures crossing or standing in it, inflicting an Entangled condition (use your Channelling Skill for its Strength). At the start of each Round, all victims must make an Average (+20) Athletics Test or suffer an additional Entangled condition. If a creature suffers more Entangled conditions than its Strength Bonus, it has been sucked into the quicksand and is subject to the Suffocation rules. Non-breathing creatures do not suffocate but will likely be trapped forever."</Explanation>
+<Target>"Area of Effect (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_16">
+<Description language="ENGLISH">"Resist Fire (Fire)"</Description>
+<Explanation language="ENGLISH">"You cloak yourself in magick which repels fire of all kinds, including attacks from flaming weapons. You gain the Immunity (Fire) Trait."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds +"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_17">
+<Description language="ENGLISH">"Shape Elemental"</Description>
+<Explanation language="ENGLISH">"You channel the energy of a single element in proximity, and you coalesce this amorphous elemental energy into a large corporeal being. It takes shape within range of you. The default Elemental will have the Size (Large) Trait: each +3 SL may be used to increase its size by one level. You must perform an Opposed Channelling/Willpower Test with the Elemental. If successful, the Elemental will obey any simple commands you give it. Otherwise, it will behave completely randomly (or the GM's discretion). Should you be killed, the magicks binding the Elemental to this realm are severed and it dissipates back to nature."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"18"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_18">
+<Description language="ENGLISH">"Stoke Fire (Fire)"</Description>
+<Explanation language="ENGLISH">"You ignite one source of flammable material within range, causing it to burst in flames, suffering an Ablaze condition. It is the GM's discretion what counts as flammable and how quickly the fire might spread."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_19">
+<Description language="ENGLISH">"Swarm (Earth)"</Description>
+<Explanation language="ENGLISH">"Laying your hands on soil or rock, you send out energy attracting a swarm of mundane insects, spiders, scorpions, snakes, lizards, etc. The swarm will follow your simple instructions."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_20">
+<Description language="ENGLISH">"Walk on Water (Water)"</Description>
+<Explanation language="ENGLISH">"Water magically hardens beneath your feet as you move, allowing you to cross rivers, streams, lakes, marshes, pools, etc, without difficulty. This has no impact on any other creature or wildlife."</Explanation>
+<Target>"You"</Target>
+<Duration>"(ATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="GRIM-ELEM_21">
+<Description language="ENGLISH">"Wall Shaker (Earth)"</Description>
+<Explanation language="ENGLISH">"You cause the ground to shake and rumble, cracking the foundations and supports of all buildings within range. Perform an Opposed Test against each building, comparing one Channelling Test you make against each building's Toughness Test: Grass/Mud/Thatch Toughness 40, Wattle/Daub 55, Clay/Light Timber 65, Solid Timber 75, Brick Structure 90, Stone Structure 100. Each Test you win collapses that building by the end of the Round. Any creatures inside will suffer Damage from Falling and Collapsing. The energies of this spell reverberate for miles around, alerting anyone with the Second Sight Talent - those alerted will most likely be hostile to such open use of devastating force."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Round +"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"GRIM-T0206"</Talent>
+<Level>"16"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 </DATA_SPELL>

@@ -1,3 +1,21 @@
+25/09/2026 - UNOFFICIAL GRIMOIRE : THE LORE OF ELEMENTALISM (21 SORTS), XML VALIDE, A TESTER PAR NONO.
+Suite du chantier Unofficial Grimoire, chapitre "Elementalist" (p.18-21) : carriere Elementalist
+et les Elementals (creatures invocables) laisses de cote - meme decision que pour les creatures
+adverses non gerees par le programme (Frostfiend/Djinn/Skaven Bestiary). Seuls les 21 sorts de
+The Lore of Elementalism sont saisis dans BOOK UNOFFICIAL GRIMOIRE.Xml (GRIM-ELEM_01 a _21),
+rattaches a un nouveau Talent generique GRIM-T0206 "Arcane Magic (Elementalism)"
+(Generique="RULES-T0088_*", TypSpell "Domain Magic", meme convention que GRIM-T0203/204/205) :
+cette Lore n'existait nulle part dans les 18 livres du depot (verifie par grep avant saisie).
+Particularite de ce chapitre : chaque sort est associe a l'un des quatre elements Air/Earth/Fire/
+Water, information sans champ dedie dans le format DATA_SPELL - reprise entre parentheses dans la
+Description de chaque sort (ex. "Assault of Stone (Earth)"), a l'exception de "Shape Elemental"
+qui canalise "un element en proximite" sans element fixe dans la source. Les regles de chapitre
+propres a chaque element (Air ignore l'Armure, Earth ajoute un test d'Endurance contre Prone,
+Fire ajoute Ablaze, Water donne Regenerate) n'ayant pas non plus de mecanisme dedie dans le
+programme, elles sont resumees dans l'Explanation du Talent GRIM-T0206 a titre de reference pour
+le joueur. XML verifie par parseur Python (163 sorts, 7 talents au total dans le fichier) - aucun
+fichier .pas touche, compilation Pascal non necessaire.
+
 25/09/2026 - UNOFFICIAL GRIMOIRE : LORES DE NURGLE/SLAANESH/TZEENTCH (24 SORTS), A VALIDER PAR NONO.
 Suite du chantier Unofficial Grimoire (entree precedente), chapitre "Cult Magus of Tzeentch"
 (p.20-24) : carriere elle-meme laissee de cote (pas de sorts), seuls les trois Lores sont saisis
