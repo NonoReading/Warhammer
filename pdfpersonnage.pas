@@ -2338,7 +2338,13 @@ Procedure PdfFabricationAsterisques(Personnage: StructurePersonnage; var Asteris
                   end;
                 for IndModif := 0 to ListFabricationModificateur.Count - 1 do
                   if ((ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieAttribut)
-                      or (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieArmure))
+                      or (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieArmure)
+                      // Degats (Cleaving) et Competence (Striking) : meme astérisque de piece que
+                      // l'Attribut/l'Armure, mais sans texte "+X" - la valeur est deja incluse dans
+                      // le total affiche sur la ligne de l'arme (FabricationModificateurQualite,
+                      // PdfBlocArmesDonnees). A FAIRE.txt "FABRICATIONS", 25/09/2026.
+                      or (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieDegat)
+                      or (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieCompetence))
                      and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code) then
                     begin
                       if NumPiece = 0 then
@@ -2357,8 +2363,14 @@ Procedure PdfFabricationAsterisques(Personnage: StructurePersonnage; var Asteris
                             Annotation.Values[ListFabricationModificateur[IndModif].Cible] := Annotation.Values[ListFabricationModificateur[IndModif].Cible]
                               + ' ' + IntToStr(Valeur) + ' (' + IntToStr(NumPiece) + ')';
                         end
-                      else if Pos('(' + IntToStr(NumPiece) + ')', AsterisqueArmure) = 0 then
-                        AsterisqueArmure := AsterisqueArmure + '(' + IntToStr(NumPiece) + ')';
+                      else if ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieArmure then
+                        begin
+                          if Pos('(' + IntToStr(NumPiece) + ')', AsterisqueArmure) = 0 then
+                            AsterisqueArmure := AsterisqueArmure + '(' + IntToStr(NumPiece) + ')';
+                        end;
+                      // ConstXmlModifieDegat/ConstXmlModifieCompetence : la piece est deja marquee
+                      // (ParPiece ci-dessus) ; aucune annotation supplementaire a ecrire, la valeur
+                      // est deja dans le total Degats/Competence de la ligne.
                     end;
               end;
           end;

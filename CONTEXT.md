@@ -11556,3 +11556,14 @@ p.18), Gamester (6, p.19), Deceiver (5, p.24), Protector (6, p.25), Taal (8, p.8
 Miracles listés dans le livre comme "peuvent aussi utiliser ceux du Core Rulebook" (Cat's
 Eyes, Ranald's Grace, Stay Lucky...) ne sont pas resaisis : déjà présents dans
 `BOOK_RULESBOOK.Xml`, rattachés par le même talent. XML pur, aucun code Pascal.
+
+### 2.93 Astérisque PDF des runes de Dégâts/Compétence sur arme — terminé, compilé et testé par Nono (25/09/2026)
+
+Item "FABRICATIONS" de `A FAIRE.txt` : `PdfFabricationAsterisques` (`pdfpersonnage.pas`) ne
+marquait le repère `(N)` a côté d'une arme que pour les qualités modifiant un Attribut
+(Initiative) ou l'Armure (PA) — les qualités modifiant les Dégâts (Cleaving) ou la Compétence
+(Striking) n'étaient jamais signalées, alors que leur bonus est déjà inclus dans le total affiché
+sur la ligne (`FabricationModificateurQualite`). Filtre étendu à `ConstXmlModifieDegat`/
+`ConstXmlModifieCompetence` : même marquage de pièce que l'Attribut/l'Armure, sans annotation
+"+X" supplémentaire (valeur déjà dans le total). Moteur générique `ChargeModificateur` non
+modifié, seul l'appelant PDF change.

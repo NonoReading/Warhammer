@@ -1,3 +1,11 @@
+25/09/2026 - ASTERISQUE PDF DES RUNES DE DEGATS/COMPETENCE SUR ARME, COMPILE ET TESTE PAR NONO.
+PdfFabricationAsterisques (pdfpersonnage.pas) ne marquait le "(N)" a cote d'une arme que pour les
+qualites modifiant un Attribut (Initiative) ou l'Armure (PA) ; les qualites modifiant les Degats
+(Cleaving) ou la Competence (Striking) ne recevaient aucun marqueur, alors que leur bonus est deja
+inclus dans le total affiche sur la ligne. Filtre etendu a ConstXmlModifieDegat/
+ConstXmlModifieCompetence, meme marquage de piece, sans annotation "+X" supplementaire (la valeur
+est deja dans le total). Item "FABRICATIONS" retire de A FAIRE.txt.
+
 25/09/2026 - ARBITRAGES OUVERTS DE A FAIRE.txt, QUATRE TRANCHES PAR NONO.
 Famille RULES-T0088_* (Beasts/Beast, Shadows/Shadow, Witchery/Witchcraft) : verifie, les 21
 libelles <Description> de tous les livres emploient deja la forme singuliere de la base -
