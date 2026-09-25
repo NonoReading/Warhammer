@@ -11705,6 +11705,6 @@ de vraies données antérieures à cette session (`NATIO-ARMOB_16` Fear → Frig
 Mankind) — pas la même erreur, une qualité d'armure standard du catalogue reste un point d'entrée
 légitime.
 
-Compilé (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes qu'avant). **Reste à
-Nono** : poser une de ces fabrications sur une arme/armure de test via WinFabrication/
-WinPersonnage et vérifier le Talent/bonus d'Attribut sur la fiche et le PDF Feldo2P.
+Compilé (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes qu'avant). **TESTÉ ET
+VALIDÉ PAR NONO le 25/09/2026** : Talent et bonus d'Attribut corrects sur la fiche et le PDF après
+rattachement d'une fabrication via WinFabrication/WinPersonnage. Chantier clos.

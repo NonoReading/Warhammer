@@ -1,4 +1,4 @@
-25/09/2026 - OBJETS MAGIQUES ARCHIVES II REBASCULES SUR FABRICATION, COMPILE, A TESTER.
+25/09/2026 - OBJETS MAGIQUES ARCHIVES II REBASCULES SUR FABRICATION, TESTE ET VALIDE PAR NONO.
 Erreur signalee par Nono le jour meme sur la premiere saisie (chantier ci-dessous, "OBJETS
 MAGIQUES ARCHIVES II" du 25/09) : les qualites magiques d'arme/armure/bouclier avaient ete
 codees dans DATA_WEAPON_BONUS/DATA_ARMOR_BONUS, figees sur une entree precise du catalogue -
