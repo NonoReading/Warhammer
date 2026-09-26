@@ -1,3 +1,13 @@
+26/09/2026 - ARMURE A 0 PA ET TALENT DE CARRIERE : TESTES ET VALIDES PAR NONO
+Les deux chantiers signales par Nono sur Gunther Krieg sont clos. Armure a 0 PA :
+confirme comme non un bug, la case "porte" des 2 armures custom (PERSO-ARMO_01/_02)
+n'etait simplement pas cochee ; le grisage des lignes non portees (ecran et PDF) est
+valide. Talent de carriere (MetierTalent) : la Gaffe affiche desormais DR+12 correct
+apres correction du calcul dans PersonnageTalentModificateur (chargepersonnage.pas).
+Limite connue non corrigee : l'ecran Augmentation ne fusionne pas les rangs de
+carriere dans le total affiche pour un talent multi-niveaux (voir CONTEXT.md et
+A FAIRE.txt).
+
 26/09/2026 - REIKLAND MISCELLANEA : LORE OF HEDGECRAFT + LORE OF WITCHCRAFT SAISIES
 Chapitre "Blood and Bramble" (p.116-131) du livre. Nouveau fichier BOOK_REIKLAND_
 MISCELLANEA.Xml (CODE_BOOK REIKL), 24 sorts : 12 Lore of Hedgecraft (REIKL-HEDGE_01 a
