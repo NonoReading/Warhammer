@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"TRIBE"</CODE_BOOK>
+<BOOK>"BOOK TRIBES AND TRIBULATIONS"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording or otherwise without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2024. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="TRIBE-BOOK TRIBES AND TRIBULATIONS">"Tribes and Tribulations"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="TRIBE-BOOK TRIBES AND TRIBULATIONS">"Tribes and Tribulations"</Text>
+</Label>
+</DATA_LABEL>
+<!-- Premiere tranche (26/09/2026) : chapitre IX "Waaagh! Magic" (p.94-101) uniquement -
+     les deux Lores de sorts Orcs/Gobelins, aucune carriere ni objet catalogue dans cette
+     tranche. Deux nouveaux Talents generiques crees (aucune Lore "Waaagh!" existante
+     ailleurs dans le corpus, verifie par grep) : TRIBE-T0207 "Arcane Magic (Little
+     Waaagh!)" pour les Shamans Gobelins/Hobgobelins, TRIBE-T0208 "Arcane Magic (Big
+     Waaagh!)" pour les Shamans Orcs/Hobgobelins - meme convention que GRIM-T0203/T0204/
+     T0205/T0206 (Generique="RULES-T0088_*", TypSpell="Domain Magic"). 12 sorts de la
+     Lore of the Little Waaagh! (TRIBE-LITTLE_01 a _12) et 12 sorts de la Lore of the Big
+     Waaagh! (TRIBE-BIG_01 a _12), soit 24 sorts au total. Laisses de cote pour une tranche
+     future (voir A FAIRE.txt) : Waaagh! Miscast Table (variante de la table de miscast
+     standard, mecanisme non modelise dans le programme), objets magiques Orc/Gobelin
+     (Copper Staff, Dangly Wotnotz, Effigy of Mork/Gork, Glowy Green Amulet, Shaman
+     Staff), Shaman Shrooms et Purple Skullback Spider (creatures/regles annexes), le
+     reste du livre (bestiaire complet, warbands, carrieres de nemesis, objets magiques
+     hors chapitre IX) - chantier bien plus vaste, plusieurs sessions a prevoir. -->
+<DATA_TALENT>
+<Talent id="TRIBE-T0207">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Little Waaagh!)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You have learned to channel the spiteful, hexing magic of the Little Waaagh!, practiced by Goblin and some Hobgoblin Shamans. If you generate any SL on your Casting Tests for a spell of this Lore, you may spend it on Overcasting or use it to buy a single Fortune Point. Fortune Points earned this way can take your normal Fortune above its maximum, but must be spent by the end of the encounter, or are lost."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="TRIBE-T0208">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Big Waaagh!)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You have learned to channel the crude, belligerent magic of the Big Waaagh!, practiced by Orc and some Hobgoblin Shamans. Whenever you cast a spell of this Lore, any Orcs, Hobgoblins, or Goblins within Willpower yards lose any Broken Conditions."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_SPELL>
+<Sort id="TRIBE-LITTLE_01">
+<Description language="ENGLISH">"Behave!"</Description>
+<Explanation language="ENGLISH">"The Shaman snarls at a creature accompanying him, making them subservient. Any Squig, Giant Wolf, Spider (any size), or Snotling affected will follow the Shaman's commands with the discipline of a well-trained dog."</Explanation>
+<Target>"1 (Maximum)"</Target>
+<Duration>"Willpower Bonus minutes"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_02">
+<Description language="ENGLISH">"Cunnin' Words"</Description>
+<Explanation language="ENGLISH">"The Shaman calls on Mork to trick a listener into hearing cogent, civilised discourse rather than the mad babble he usually utters. Treat as if the Shaman can speak whatever language the listener understands."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus minutes"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_03">
+<Description language="ENGLISH">"Curse of Da Bad Moon"</Description>
+<Explanation language="ENGLISH">"The Shaman howls into the sky and summons a horrifying moon with a leering goblinoid face. Enemies in the Area of Effect are temporarily cursed. All gain +1 Fatigued Condition and suffer from a bout of pronounced ill luck. They may not use Fortune Points for the Duration."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_04">
+<Description language="ENGLISH">"Gift of the Spider-God"</Description>
+<Explanation language="ENGLISH">"The Shaman hisses an invocation to the Feaster from Beyond to aid his allies. All affected allies gain the Venom Trait with Challenging (+0) potency. If they already have the Venom Trait, it becomes Difficult (-10) potency."</Explanation>
+<Target>"Forest Goblins in AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_05">
+<Description language="ENGLISH">"Gork'll Fix It"</Description>
+<Explanation language="ENGLISH">"The Shaman points a bony finger at a nearby enemy and curses them in the name of Gork. For the duration of the spell, the target suffers from a Fatigued Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_06">
+<Description language="ENGLISH">"The Great Green Spite"</Description>
+<Explanation language="ENGLISH">"The Shaman brings to focus the accumulated spite of nearby Goblins, manifesting it as a thoroughly nasty curse. For the duration of the spell, whenever a Goblin successfully strikes an enemy within the Area of Effect with a melee or ranged attack, it counts as a Critical Hit. If the Shaman casting this spell is a Hobgoblin, then the effects apply to Hobgoblins rather than Goblins."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"20"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_07">
+<Description language="ENGLISH">"Itchy Nuisance"</Description>
+<Explanation language="ENGLISH">"The Shaman scratches his armpits and cackles, uttering nasty curses of poor hygiene and fungal mites. The target suffers -1 SL to all Tests for the duration of the spell as they try to scratch themselves. If they are wearing metal armour, the penalty is increased to -2 SL."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_08">
+<Description language="ENGLISH">"Mork Wants Ya!"</Description>
+<Explanation language="ENGLISH">"The Shaman makes a pinching gesture with its clawed hand. Mirroring this action, a great green hand descends from the heavens to pinch a target between its huge fingers. They must win an Opposed Strength Test against a Strength of 80 in order to wriggle free in time. If the test is failed, they take a hit to the body of 10 Damage and are then dropped from a height of 2d10 yards."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_09">
+<Description language="ENGLISH">"Night Shroud"</Description>
+<Explanation language="ENGLISH">"The Shaman tosses a black-capped nightshade mushroom into the air, which bursts to form a cloud of pitch darkness. Anyone within the cloud suffers from a Blinded Condition. Anyone attempting to move within the cloud must pass a Challenging (+0) Perception Test or gain the Prone Condition. Characters with Night Vision or Dark Vision are immune to the effects of the spell."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Strength Bonus yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_10">
+<Description language="ENGLISH">"Nikkit!"</Description>
+<Explanation language="ENGLISH">"The Shaman conjures up a pair of green hands. He may attempt to pick the pocket of any target in range as if he were possessed of a Sleight of Hand skill of 55. If the attempt is successful, the target may make a Challenging (+0) Perception Test to notice the hands (and loot) flying back to the Shaman."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_11">
+<Description language="ENGLISH">"Sneaky Stabbin'"</Description>
+<Explanation language="ENGLISH">"The Shaman enchants his allies with mischievous power to find their enemies' weak spots. Blows struck by affected targets possess the Impale and Penetrating Qualities."</Explanation>
+<Target>"AoE (Willpower Bonus yards) Orcs and Goblins"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-LITTLE_12">
+<Description language="ENGLISH">"Vindictive Glare"</Description>
+<Explanation language="ENGLISH">"The Shaman sends green bolts of purest spite to fizz and explode amidst the foe. This is a magic missile with Damage +4 that targets everyone in the Area of Effect. Any target who takes damage must pass a Challenging (+0) Cool Test or suffer from a Stunned Condition."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0207"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_01">
+<Description language="ENGLISH">"'Ard as Nails"</Description>
+<Explanation language="ENGLISH">"The Shaman imbues a target within range with Waaagh! energy, causing them to grow increasingly belligerent and resilient. The target becomes subject to Hatred of all enemies, may ignore the negative effects of any Conditions or Diseases they suffer from, and gains +2 SL to any Toughness based Tests they are called on to make."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_02">
+<Description language="ENGLISH">"Bash 'Em Lads!"</Description>
+<Explanation language="ENGLISH">"The Shaman's encouraging yawps fill his allies with fighting fervour. For every SL scored on the Casting roll, the Shaman may grant a point of Advantage to an allied Orc, Goblin, or Hobgoblin within range. Several points of Advantage may be granted to one target or spread among those available to the Shaman. If using Group Advantage add Advantage points to the Orc and Goblin pool equal to SL scored on the Casting roll."</Explanation>
+<Target>"See Text"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_03">
+<Description language="ENGLISH">"Brainbursta"</Description>
+<Explanation language="ENGLISH">"Projecting his belligerence forth in a mental wave, the Shaman glowers at his target and assaults it with brain-melting force. The target immediately suffers from the Prone and Stunned Conditions, and an additional +1 Stunned for every +1 SL the Shaman scored on the Casting Test. If the Target suffers more Stunned Conditions than their Toughness Bonus, they must pass an immediate Average (+20) Cool Test. If they fail the test, they take an immediate Critical Hit to their head."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_04">
+<Description language="ENGLISH">"'Eadbutt"</Description>
+<Explanation language="ENGLISH">"The Shaman thrusts his head forward, projecting a force of malign green energy to assail those sensitive to magic. 'Eadbutt is a magic missile that always strikes its target in the head with a Damage of +1. If the target has the Aethyric Attunement or Second Sight Talents, the spell strikes with a Damage of +6."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_05">
+<Description language="ENGLISH">"'Ere We Go!"</Description>
+<Explanation language="ENGLISH">"The Shaman chants a stream of gibberish at his allies, infusing them with aggressive vigour. Targets within the Area of Effect gain +2 Advantage for all Melee Tests. If the Shaman casting this spell is a Hobgoblin the target of the spell will be Hobgoblins rather than Orcs. If using Group Advantage add Advantage points to the Orc pool equal to the number of targets."</Explanation>
+<Target>"AoE (Willpower Bonus yards) Orcs"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_06">
+<Description language="ENGLISH">"The Evil Sun"</Description>
+<Explanation language="ENGLISH">"Fuelled with vast power, the Shaman wills into existence a burning core of energy with great tusks and a leering face. Targets within the Area of Effect suffer 8+SL Damage every Round and must pass a Challenging (+0) Endurance Test or receive an Ablaze Condition every Round."</Explanation>
+<Target>"AoE (Willpower yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_07">
+<Description language="ENGLISH">"Fists of Gork"</Description>
+<Explanation language="ENGLISH">"The Shaman's gnarled fists grow large and become as hard as iron. The Shaman must drop any items he holds in his hands and may only attack with his fists, but counts as having Melee (Brawling) 55 and Weapon (Fists) +9 for the duration of the spell."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_08">
+<Description language="ENGLISH">"Foot of Gork"</Description>
+<Explanation language="ENGLISH">"The Shaman raises his head and howls to the sky while waving his hands in bizarre patterns. Gork responds with an almighty foot which descends to crush anything underneath. All targets in the Area of Effect gain the Prone Condition and receive a Damage 8 hit to a random Hit Location ignoring Armour Points, or Damage 4 if they pass a Difficult (-10) Dodge Test."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus Yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_09">
+<Description language="ENGLISH">"Gaze of Mork"</Description>
+<Explanation language="ENGLISH">"A destructive beam of coruscating energy bursts from the Shaman's eyes, hitting all in its path. Any living creature on a straight line in the direction of the blast is hit by a Damage +4 magic missile. Structures with 65 Toughness or less also take damage."</Explanation>
+<Target>"See Text"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_10">
+<Description language="ENGLISH">"The Hand of Gork"</Description>
+<Explanation language="ENGLISH">"The Shaman conjures an enormous ethereal green hand which scoops up 1d10 targets and plonks them down somewhere within range. Targets must be within Willpower Bonus yards of one another. On landing, they gain +1 Advantage in combat if they enter Melee immediately. If using Group Advantage add Advantage points to the Orc and Goblin pool equal to the number of targets."</Explanation>
+<Target>"See Text"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_11">
+<Description language="ENGLISH">"Mork Save Us!"</Description>
+<Explanation language="ENGLISH">"The Shaman beseeches Mork to provide protection to his allies. For every SL scored on the casting roll, the Shaman may imbue an allied Orc, Goblin, or Hobgoblin within range with the Ward 10 Creature Trait. If the target already has a Ward Trait, the rating is improved by 1. A Ward Trait may not be improved to 7+ or better in this manner."</Explanation>
+<Target>"See Text"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="TRIBE-BIG_12">
+<Description language="ENGLISH">"WAAAGH!"</Description>
+<Explanation language="ENGLISH">"An unstoppable surge of magical energy emanates from the Shaman, met by the roars of every Orc, Hobgoblin, and Goblin in the vicinity. All Orcs, Hobgoblins, and Goblins in the Area of Effect gain 1 Advantage for specific use on Melee and Ranged Tests. Remove any Broken Conditions and gain +2 SL to Cool and Endurance Tests for the duration of the spell. If using Group Advantage add Advantage points to the Orc and Goblin pool equal to the number of targets."</Explanation>
+<Target>"AoE (Willpower yards) all Orcs, Goblins, and Related Creatures within range - not just allies"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"TRIBE-T0208"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
+</DATA_BOOK>

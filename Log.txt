@@ -6998,3 +6998,27 @@ chaque appel de RafraichirBoutonMAJLivres.
 Code Pascal + .lfm + 2 livres (INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, RULES-LAB_295).
 Compile (lazbuild --build-all, 0 erreur, meme profil warnings/hints/notes). Teste et
 valide par Nono le 26/09/2026 : CHANTIER CLOS.
+
+26/09/2026 - TRIBES AND TRIBULATIONS : PREMIERE TRANCHE, WAAAGH! MAGIC (24 SORTS)
+Nono demande de commencer le chantier Tribes and Tribulations, releve le 29/08 comme
+livre non vide (ecarte a tort par le tri initial car sans carriere). C'est le plus riche
+des quatre livres "sorts uniquement" alors retenus (avec Temple of Spite, Reikland
+Miscellanea et Sullasara's Spells, tous saisis avant lui) : bestiaire complet (Trolls,
+Ogres, Gobelins, Orcs, Orcs Noirs, Hobgoblins, Snotlings), plusieurs tribus/warbands
+jouables, objets magiques, carrieres de nemesis en plus des sorts - trop volumineux pour
+une seule session, saisie par tranches comme Unofficial Grimoire.
+Premiere tranche : chapitre IX "Waaagh! Magic" (p.94-101), le seul contenu de sorts du
+livre. Nouveau fichier BOOK TRIBES AND TRIBULATIONS.Xml (CODE_BOOK TRIBE, COMPLETE=0).
+Aucune Lore "Waaagh!" n'existait dans le corpus (verifie par grep) : deux nouveaux
+Talents generiques crees, TRIBE-T0207 "Arcane Magic (Little Waaagh!)" (Shamans
+Gobelins/Hobgobelins) et TRIBE-T0208 "Arcane Magic (Big Waaagh!)" (Shamans Orcs/
+Hobgobelins), memes ids suivants disponibles apres GRIM-T0206 (verifie par grep sur tout
+le corpus). 12 sorts de la Lore of the Little Waaagh! (TRIBE-LITTLE_01 a _12, ruses et
+malediction goblines) et 12 sorts de la Lore of the Big Waaagh! (TRIBE-BIG_01 a _12,
+magie orque brute et destructrice, dont le sort WAAAGH! lui-meme). Laisses de cote dans
+ce chapitre (regles annexes, pas des sorts) : Waaagh! Miscast Table (variante de la table
+de miscast standard, mecanisme non modelise dans le programme), objets magiques Orc/
+Gobelin (Copper Staff, Dangly Wotnotz, Effigy of Mork/Gork, Glowy Green Amulet, Shaman
+Staff), Shaman Shrooms et Purple Skullback Spider (regles/creature annexes). Livre ajoute
+a INI.TXT (BOOKWFRP4). XML pur, aucun fichier .pas touche - valide par un parseur Python
+(24 sorts, 2 talents). A TESTER PAR NONO EN JEU avant commit.

@@ -826,7 +826,20 @@ REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa c
     et Log.txt 26/09/2026 pour le detail. COMPLETE=0, reste dans ce meme livre pour une session
     future : mecanisme "Sorceress Pacts" (Lore Attribute non modelisable simplement), ethnie
     Dark Elves (chapitre I), un trait de navire special, et les "Gifts of Khaine" (8 dons
-    rituels, bloc juste apres le chapitre de magie). Reste au global : Tribes and Tribulations
+    rituels, bloc juste apres le chapitre de magie). [FAIT LE 26/09/2026, XML VALIDE PAR
+    PARSEUR, A TESTER PAR NONO] Tribes and Tribulations, premiere tranche : chapitre IX
+    "Waaagh! Magic" (p.94-101) saisi - BOOK TRIBES AND TRIBULATIONS.Xml, CODE_BOOK TRIBE,
+    COMPLETE=0. 24 sorts (Lore of the Little Waaagh! x12 code TRIBE-LITTLE_01-12, Lore of
+    the Big Waaagh! x12 code TRIBE-BIG_01-12) + 2 nouveaux Talents generiques (TRIBE-T0207
+    "Arcane Magic (Little Waaagh!)", TRIBE-T0208 "Arcane Magic (Big Waaagh!)" - aucune Lore
+    Waaagh! existante ailleurs, verifie par grep). Livre ajoute a INI.TXT (BOOKWFRP4). Reste
+    dans ce chapitre pour une session future : Waaagh! Miscast Table (variante de miscast
+    non modelisee), objets magiques Orc/Gobelin (Copper Staff, Dangly Wotnotz, Effigy of
+    Mork/Gork, Glowy Green Amulet, Shaman Staff), Shaman Shrooms et Purple Skullback Spider.
+    Reste au global sur ce livre (bien plus vaste, plusieurs sessions) : bestiaire complet
+    (Trolls, Ogres, Gobelins, Orcs, Orcs Noirs, Hobgoblins, Snotlings), warbands/tribus
+    jouables (Cluster-Eye, Black Mountain Boyz, Stone Snakes, Wolfboyz of Oglah...), objets
+    magiques hors chapitre IX, carrieres de nemesis, table de noms Orc/Gobelin (p.18).
     (voir GABARIT_LIVRE_XML.md pour le format).
   * Statut officiel ou fan : les fanbooks V4 passent par le programme Community Content,
     qui impose une mention ; les livres Cubicle 7 portent leur copyright complet. L absence

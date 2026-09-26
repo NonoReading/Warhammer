@@ -1,5 +1,7 @@
 # Warhammer — Contexte projet
 
+**TRIBES AND TRIBULATIONS : PREMIERE TRANCHE, WAAAGH! MAGIC (26/09/2026, XML valide par parseur, A TESTER PAR NONO)** — voir §2.97 en fin de fichier pour le detail. 24 sorts (Lore of the Little/Big Waaagh!) + 2 nouveaux Talents generiques (`TRIBE-T0207`/`TRIBE-T0208`), `BOOK TRIBES AND TRIBULATIONS.Xml`, `COMPLETE="0"`. Chantier le plus vaste des livres "sorts seuls" restants (bestiaire complet, plusieurs warbands jouables, objets magiques, carrieres de nemesis encore a saisir) — saisie par tranches comme Unofficial Grimoire.
+
 **TEMPLE OF SPITE : PREMIER LIVRE WFRP5 (HORS RULEBOOK) SAISI DANS LE PROJET (26/09/2026, compile 0 erreur, A TESTER PAR NONO)** : chantier "livre suivant" apres Reikland Miscellanea (voir `A FAIRE.txt` "LIVRES NON ENCORE INTEGRES"), choix de Nono entre Temple of Spite et Tribes and Tribulations. **Decouverte en cours de route** : la page de copyright du texte source (`PDF_TEXTE/Temple of Spite.txt`, lignes 48-53) indique "Warhammer Fantasy Roleplay 5th Edition" et Copyright 2026, PAS WFRP4/2023 comme tous les autres livres saisis jusqu'ici - un premier jet avait ete saisi par erreur sous `DATABASE/WFRP4/` (conventions `RULES-T0088_XXX`/`TypSpell="Domain Magic"`), supprime et refait sous `DATABASE/WFRP5/BOOK_TEMPLE_OF_SPITE.Xml` apres verification directe du texte et confirmation de Nono de continuer sous WFRP5. **Seul autre fichier WFRP5 existant jusqu'ici : `BOOK_RULESBOOK.Xml`** - conventions differentes du WFRP4, reperees par lecture directe avant de coder (regle du projet) : Talents de Lore en `RULES-T0007_XXX` (famille generique `RULES-T0007_*`, pas de suffixe sur un talent racine T0088 comme en WFRP4), `TypSpell="Arcane Magic"` (pas "Domain Magic"), meme structure de balises `DATA_TALENT`/`DATA_SPELL` que WFRP4 sinon. **Contenu saisi** : "The Lore of Dark Magic" (chapitre VI, p.64-67), 24 sorts reels (pas 26 comme estime au depart - verifie par comptage des occurrences "CN:" dans le texte source), nouveau Talent generique `TEMPLE-T0001_DARK` "Arcane Magic (Dark Magic)" (aucune Lore Dark Magic n'existait deja dans le Rulebook WFRP5). **Hors perimetre de cette saisie, note dans un commentaire XML en tete de fichier pour la prochaine session** : mecanisme "Sorceress Pacts" (Lore Attribute, effet bonus selon pacte d'ame, non modelisable simplement - meme decision que Sense of the Green du Grimoire), ethnie Dark Elves (chapitre I), un trait de navire special (tableaux de vaisseaux), et les "Gifts of Khaine" (8 dons rituels, bloc juste apres le chapitre de magie). `COMPLETE="0"` tant que ces elements ne sont pas traites. `INI.TXT` : entree ajoutee a `BOOKWFRP5` (qui ne contenait jusqu'ici que le Rulebook). Compile (`lazbuild --build-all`, 0 erreur, meme profil warnings/hints/notes ; l'exe etait verrouille au premier essai, ferme puis recompile avec succes). **A TESTER PAR NONO** : cocher le livre sous VERSION=WFRP5, verifier l'affichage des 24 sorts sur un personnage WFRP5.
 
 **ARMURE A 0 PA SUR TOUS LES EMPLACEMENTS (26/09/2026, CONFIRME PAR NONO : CASE "PORTE" NON COCHEE, PAS UN BUG. CHANTIER CLOS.)** : signale par Nono sur Gunther Krieg (Cotte de maille `PERSO-ARMO_02` + Coiffe de maille `PERSO-ARMO_01`, catalogue custom `BOOK_PERSO.Xml`). Cause confirmee par Nono : la case "porte" de ces 2 armures n'etait simplement pas cochee sur la fiche - comportement attendu, catalogue et moteur de calcul innocentes (`ArmorPoint` correctement rempli, calcul par emplacement dans `pdfpersonnage.pas` n'additionne que si `PersonnageEquipement.Porte` est vrai). **Suite demandee par Nono, testee et validee** : les lignes d'arme/armure non "portees" sont desormais grisees, a la fois sur `TabEquipementAffichage` (`winpersonnage.pas`, `TabDrawCell` ~L4728) et sur les 4 blocs PDF concernes (`pdfpersonnage.pas`, bloc arme/armure de `PdfPersonnageCreation` et `PdfBlocArmesDonnees`/`PdfBlocArmuresDonnees` de la fiche etendue).
@@ -11825,3 +11827,40 @@ sorts + 1 talent supplémentaires, aucun fichier `.pas` touché (XML validé par
 Ritual Magic + Summoning Rituals (inclut Sacred Grove laissé de côté à la quatrième tranche),
 et le reste du chapitre Skaven Magic (Talents/sorts Petty et Arcane (Warp), profils de
 sorciers) si Nono le souhaite. Voir `A FAIRE.txt` pour le détail par chapitre.
+
+### 2.97 Tribes and Tribulations — première tranche, Waaagh! Magic (26 sorts) — XML validé, à tester par Nono (26/09/2026)
+
+Chantier demandé par Nono après Temple of Spite/Reikland Miscellanea/Sullasara's Spells :
+le plus riche des livres "sorts seuls" repérés le 29/08 (écarté à tort par le tri initial,
+qui ne comptait que les carrières) — `PDF_TEXTE/Tribes and Tribulations.txt` (5099 lignes)
+contient en réalité un bestiaire complet (Trolls, Ogres, Gobelins, Orcs, Orcs Noirs,
+Hobgoblins, Snotlings), plusieurs tribus/warbands jouables, des objets magiques et des
+carrières de nemesis en plus des sorts — trop volumineux pour une session, saisie par
+tranches comme Unofficial Grimoire.
+
+**Première tranche** : chapitre IX "Waaagh! Magic" (p.94-101), seul contenu de sorts du
+livre. Nouveau fichier `DATABASE/WFRP4/BOOK TRIBES AND TRIBULATIONS.Xml` (`CODE_BOOK
+TRIBE`, `COMPLETE="0"`). Aucune Lore "Waaagh!" n'existait dans les 18+ livres du corpus
+(vérifié par grep) : deux nouveaux Talents génériques créés, `TRIBE-T0207` "Arcane Magic
+(Little Waaagh!)" (Shamans Gobelins/Hobgobelins) et `TRIBE-T0208` "Arcane Magic (Big
+Waaagh!)" (Shamans Orcs/Hobgobelins) — ids suivants disponibles après `GRIM-T0206`
+(vérifié par grep sur tout le corpus, plus haut id de Talent générique tous livres
+confondus). 12 sorts de la Lore of the Little Waaagh! (`TRIBE-LITTLE_01` à `_12`, ruses et
+malédictions goblines) et 12 sorts de la Lore of the Big Waaagh! (`TRIBE-BIG_01` à `_12`,
+magie orque brute et destructrice, dont le sort *WAAAGH!* lui-même). Soit 24 sorts + 2
+talents, aucun fichier `.pas` touché (XML validé par parseur Python : 24 sorts, 2 talents).
+
+**Laissé de côté dans ce chapitre** (règles annexes, pas des sorts) : *Waaagh! Miscast
+Table* (variante de la table de miscast standard qui s'aggrave avec le nombre d'Orcs/
+Gobelins proches — mécanisme non modélisé dans le programme, même limite que les tables
+de miscast normales) ; objets magiques Orc/Gobelin (*Copper Staff, Dangly Wotnotz, Effigy
+of Mork/Gork, Glowy Green Amulet, Shaman Staff*) ; *Shaman Shrooms* et *Purple Skullback
+Spider* (règles/créature annexes liées aux Forest/Night Goblins).
+
+Livre ajouté à `INI.TXT` (`BOOKWFRP4`).
+
+**Prochaine étape** : reste du chapitre IX (objets magiques Orc/Gobelin ci-dessus, si Nono
+le souhaite), puis le reste du livre par tranches — bestiaire complet, warbands jouables
+(Cluster-Eye Tribe, Black Mountain Boyz, Stone Snakes, Wolfboyz of Oglah...), objets
+magiques hors chapitre IX, carrières de nemesis, table de noms Orc/Gobelin (p.18, à
+rattacher au chantier Générateur de noms, §2.87). Voir `A FAIRE.txt` pour le détail.
