@@ -6385,7 +6385,17 @@ Procedure TWinPersonnages.MajTables();
                                                      PMetierTalent.CodeTalent);
                     if PersonnageTalent.CodeTalent = '' then
                       continue;
-                    PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
+                    // PMetierTalent.NiveauMetier est le NIVEAU DE CARRIERE ou ce talent
+                    // apparait dans la table (StructureMetierTalent, chargemetiertalent.pas -
+                    // pas de champ "nombre de rangs"), pas un nombre de rangs a accorder. Le
+                    // stocker tel quel dans Valeur donnait un talent multi-niveaux (ex. Strike
+                    // Mighty Blow/Coup Puissant pris au niveau 2 d'une carriere) directement 2
+                    // rangs au lieu d'1 - avec en plus les rangs achetes ensuite via
+                    // l'Augmentation (Personnage.AugmentationTalent), PersonnageTalentModificateur
+                    // additionnait les deux sans recoupement (chargepersonnage.pas), doublant le
+                    // bonus de degats. Signale par Nono sur Gunther Krieg (Gaffe a +14 au lieu de
+                    // +12). Un pick de carriere accorde toujours exactement 1 rang.
+                    PersonnageTalent.Valeur     := 1;
                     Personnage.MetierTalent     += [PersonnageTalent];
                   end;
 
