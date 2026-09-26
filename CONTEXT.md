@@ -11828,7 +11828,7 @@ Ritual Magic + Summoning Rituals (inclut Sacred Grove laissé de côté à la qu
 et le reste du chapitre Skaven Magic (Talents/sorts Petty et Arcane (Warp), profils de
 sorciers) si Nono le souhaite. Voir `A FAIRE.txt` pour le détail par chapitre.
 
-### 2.97 Tribes and Tribulations — première tranche, Waaagh! Magic (26 sorts) — XML validé, à tester par Nono (26/09/2026)
+### 2.97 Tribes and Tribulations — première tranche, Waaagh! Magic (26 sorts), chapitre IX clos (26/09/2026)
 
 Chantier demandé par Nono après Temple of Spite/Reikland Miscellanea/Sullasara's Spells :
 le plus riche des livres "sorts seuls" repérés le 29/08 (écarté à tort par le tri initial,
@@ -11850,17 +11850,39 @@ malédictions goblines) et 12 sorts de la Lore of the Big Waaagh! (`TRIBE-BIG_01
 magie orque brute et destructrice, dont le sort *WAAAGH!* lui-même). Soit 24 sorts + 2
 talents, aucun fichier `.pas` touché (XML validé par parseur Python : 24 sorts, 2 talents).
 
-**Laissé de côté dans ce chapitre** (règles annexes, pas des sorts) : *Waaagh! Miscast
-Table* (variante de la table de miscast standard qui s'aggrave avec le nombre d'Orcs/
-Gobelins proches — mécanisme non modélisé dans le programme, même limite que les tables
-de miscast normales) ; objets magiques Orc/Gobelin (*Copper Staff, Dangly Wotnotz, Effigy
-of Mork/Gork, Glowy Green Amulet, Shaman Staff*) ; *Shaman Shrooms* et *Purple Skullback
-Spider* (règles/créature annexes liées aux Forest/Night Goblins).
+**Chapitre IX passé en revue en intégralité le 26/09/2026, décisions de Nono, clos** :
+- *Waaagh! Miscast Table* : variante de la table de miscast standard — hors périmètre,
+  même limite que les autres tables de miscast. Ne plus la ressortir.
+- *Copper Staff, Dangly Wotnotz, Effigy of Mork, Effigy of Gork* : effets de reroll d'un
+  test — aucun mécanisme de reroll dans le moteur (contrairement à Talent/bonus d'Attribut/
+  Compétence). Laissés hors périmètre, décision de Nono.
+- *Glowy Green Amulet* : octroie un Talent (mécanisable en soi), mais c'est un objet
+  « libre » sans catalogue arme/armure/bouclier dédié (anneau/amulette/bâton) — même trou
+  de conception que Rings/Talismans/Oddities d'Archives II (§1.1, §2.94), pas encore
+  cadré avec Nono. Laissé de côté jusqu'à ce chantier.
+- *Shaman Staff* : renvoie à une table 1d10 absente de l'extraction texte (probablement
+  perdue dans la mise en page à deux colonnes) — vérification PDF différée, décision de
+  Nono.
+- *Shaman Shrooms* et *Purple Skullback Spider* : règles/créature annexes liées aux
+  Forest/Night Goblins, hors périmètre sorts.
 
 Livre ajouté à `INI.TXT` (`BOOKWFRP4`).
 
-**Prochaine étape** : reste du chapitre IX (objets magiques Orc/Gobelin ci-dessus, si Nono
-le souhaite), puis le reste du livre par tranches — bestiaire complet, warbands jouables
-(Cluster-Eye Tribe, Black Mountain Boyz, Stone Snakes, Wolfboyz of Oglah...), objets
-magiques hors chapitre IX, carrières de nemesis, table de noms Orc/Gobelin (p.18, à
-rattacher au chantier Générateur de noms, §2.87). Voir `A FAIRE.txt` pour le détail.
+**Deuxième tranche : table de noms Orc/Gobelin (p.18), rattachée au chantier Générateur de
+noms (§2.87) — XML validé, à compiler/tester par Nono (26/09/2026)**. La table ne vit pas
+dans `BOOK TRIBES AND TRIBULATIONS.Xml` : les Species Orc/Gobelin/Hobgoblin existent déjà
+dans `BOOK_GREEN_IZ_BEST.Xml` (`GREEN-RACE_CORC/BORC/CGOB/NGOB/HGOB`), donc un
+`SUBCHAPTER_NAMES` y a été ajouté à chacune plutôt que d'en recréer ailleurs. Prénoms
+(Orc/Goblin/Hobgoblin Names) en `part="Forename"`, poids égaux (`"1"`, `"2"`... — la liste
+du livre n'est pas pondérée, contrairement au générateur nain en d1000). Les quatre listes
+de titres du livre (Boasting of Prowess, Intended to Offend/Amuse, Favoured Weapon, Shaman
+Titles) regroupées en une seule liste `part="Epithet"` plate — simplification déjà pratiquée
+ailleurs (le moteur ne distingue pas de sous-catégorie de titre selon la carrière du
+personnage). Snotling Names et les titres n'ont pas pu être rattachés aux Forest Goblins/
+Snotlings : ces deux-là n'ont **aucune** Specie/ethnie dans tout le corpus, contrairement
+aux cinq autres — voir `A FAIRE.txt`. Le propre générateur de Green Iz Best (p.273-285,
+1d10 préfixe/suffixe + Titres) reste distinct et non saisi.
+
+**Prochaine étape** : le reste du livre par tranches — bestiaire complet, warbands
+jouables (Cluster-Eye Tribe, Black Mountain Boyz, Stone Snakes, Wolfboyz of Oglah...),
+objets magiques hors chapitre IX, carrières de nemesis. Voir `A FAIRE.txt` pour le détail.

@@ -23,13 +23,15 @@
      Waaagh!)" pour les Shamans Orcs/Hobgobelins - meme convention que GRIM-T0203/T0204/
      T0205/T0206 (Generique="RULES-T0088_*", TypSpell="Domain Magic"). 12 sorts de la
      Lore of the Little Waaagh! (TRIBE-LITTLE_01 a _12) et 12 sorts de la Lore of the Big
-     Waaagh! (TRIBE-BIG_01 a _12), soit 24 sorts au total. Laisses de cote pour une tranche
-     future (voir A FAIRE.txt) : Waaagh! Miscast Table (variante de la table de miscast
-     standard, mecanisme non modelise dans le programme), objets magiques Orc/Gobelin
-     (Copper Staff, Dangly Wotnotz, Effigy of Mork/Gork, Glowy Green Amulet, Shaman
-     Staff), Shaman Shrooms et Purple Skullback Spider (creatures/regles annexes), le
-     reste du livre (bestiaire complet, warbands, carrieres de nemesis, objets magiques
-     hors chapitre IX) - chantier bien plus vaste, plusieurs sessions a prevoir. -->
+     Waaagh! (TRIBE-BIG_01 a _12), soit 24 sorts au total. Chapitre IX clos le 26/09/2026
+     (decision de Nono) : Waaagh! Miscast Table hors perimetre (variante de miscast, non
+     modelisable) ; Copper Staff/Dangly Wotnotz/Effigy of Mork/Effigy of Gork hors perimetre
+     (effets de reroll, aucun mecanisme dans le moteur) ; Glowy Green Amulet et Shaman Staff
+     laisses de cote (objet libre sans catalogue dedie / table manquante a l'extraction, voir
+     CONTEXT.md 2.97) ; Shaman Shrooms et Purple Skullback Spider hors perimetre (creatures/
+     regles). Le reste du livre (bestiaire complet, warbands, carrieres de nemesis, objets
+     magiques hors chapitre IX) reste a saisir par tranches futures - chantier bien plus
+     vaste. -->
 <DATA_TALENT>
 <Talent id="TRIBE-T0207">
 <Attribut>""</Attribut>

@@ -7022,3 +7022,31 @@ Gobelin (Copper Staff, Dangly Wotnotz, Effigy of Mork/Gork, Glowy Green Amulet, 
 Staff), Shaman Shrooms et Purple Skullback Spider (regles/creature annexes). Livre ajoute
 a INI.TXT (BOOKWFRP4). XML pur, aucun fichier .pas touche - valide par un parseur Python
 (24 sorts, 2 talents). A TESTER PAR NONO EN JEU avant commit.
+
+26/09/2026 - TRIBES AND TRIBULATIONS : CHAPITRE IX CLOS, TABLE DE NOMS ORC/GOBELIN SAISIE
+Suite du chantier. Chapitre IX passe en revue en integralite avec Nono : Waaagh! Miscast
+Table hors perimetre (variante de miscast, non modelisable, meme limite que les autres
+tables de miscast) ; Copper Staff/Dangly Wotnotz/Effigy of Mork/Effigy of Gork laisses hors
+perimetre (effets de reroll d'un test, aucun mecanisme de reroll dans le moteur) ; Glowy
+Green Amulet et Shaman Staff laisses de cote (le premier octroie un Talent mais c'est un
+objet libre - anneau/amulette/baton - sans catalogue dedie, meme trou de conception que
+Rings/Talismans/Oddities d'Archives II §2.94 ; le second renvoie a une table 1d10 absente de
+l'extraction texte, verification PDF differee) ; Shaman Shrooms et Purple Skullback Spider
+hors perimetre (creatures/regles). Chapitre IX definitivement clos.
+Deuxieme tranche du livre : table de noms Orc/Gobelin (p.18), rattachee au chantier
+Generateur de noms (CONTEXT.md 2.87). Les Species Orc/Gobelin/Hobgoblin existant deja dans
+BOOK_GREEN_IZ_BEST.Xml (GREEN-RACE_CORC/BORC/CGOB/NGOB/HGOB), un SUBCHAPTER_NAMES a ete
+ajoute a chacune plutot que d'en recreer ailleurs. Prenoms (Orc/Goblin/Hobgoblin Names) en
+part="Forename", poids egaux (la liste du livre n'est pas ponderee, contrairement au
+generateur nain en d1000). Les quatre listes de titres du livre (Boasting of Prowess,
+Intended to Offend/Amuse, Favoured Weapon, Shaman Titles) regroupees en une seule liste
+part="Epithet" plate, simplification deja pratiquee ailleurs (le moteur ne distingue pas de
+sous-categorie de titre selon la carriere). Snotling Names et les titres n'ont pas pu etre
+rattaches aux Forest Goblins/Snotlings : ces deux-la n'ont aucune Specie/ethnie dans tout le
+corpus, contrairement aux cinq autres - voir A FAIRE.txt. Le propre generateur de Green Iz
+Best (p.273-285, 1d10 prefixe/suffixe + Titres) reste distinct et non saisi. XML pur, aucun
+fichier .pas touche - valide par un parseur Python (XML bien forme). A TESTER/COMPILER PAR
+NONO avant commit.
+Ce que la session retient : verifier avant tout si le livre en cours possede deja les
+Species necessaires ailleurs dans le corpus (ici Green Iz Best) plutot que d'en recreer -
+une table de noms rattachee au mauvais endroit ne servirait a rien au generateur.
