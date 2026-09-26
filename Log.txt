@@ -1,3 +1,10 @@
+26/09/2026 - ARMURE A 0 PA SUR TOUS LES EMPLACEMENTS (SIGNALE EN FIN DE SESSION, A REPRENDRE)
+Nono signale sur Gunther Krieg, juste avant de partir : il porte une armure (Cotte de
+maille PERSO-ARMO_02 + Coiffe de maille PERSO-ARMO_01, catalogue custom BOOK_PERSO.Xml)
+et chaque emplacement de protection affiche 0 PA. Pas investigue ce soir - voir A FAIRE.txt
+pour le point de reprise et les premieres pistes (verifier le catalogue PERSO vs le
+moteur de calcul des PA).
+
 26/09/2026 - TALENT DE CARRIERE COMPTAIT SON NIVEAU DE CARRIERE COMME NOMBRE DE RANGS
 Signale par Nono sur Gunther Krieg : la Gaffe affichait DR+14 au lieu de DR+12 attendu
 apres avoir augmente Coup Puissant de 1 a 2. Premiere piste (stocker 1 au lieu du niveau
