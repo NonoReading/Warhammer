@@ -41,6 +41,16 @@ Function FabricationEncombrement(ListeCode :String; Var Quality: String): Intege
 // Somme, sur les qualites d'UN objet ("CODE niveau,..."), des modificateurs (TypeModif, Cible) de
 // fabrication multiplies par le niveau. Rune of Cleaving (ModifyDamage CC). 20/09/2026.
 Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): Integer;
+// Chiffre de Reload effectif d'une arme (Qualite BonusReload = RULES-WEAPB23 "Reload N" sur
+// PArme.ListeBonus) une fois applique le ModifyReloadRate des qualites de fabrication portees
+// par l'objet du personnage (Rune of Reloading, ListeCode = PersonnageEquipement.QualiteEquipement).
+// Retourne -1 si l'arme n'a pas la Qualite Reload (rien a afficher, reglage RAW normal).
+// Plancher a 1 si l'arme porte la Qualite Salvo (BonusSalvo = UPINA-WEAPB36) : un rechargement de
+// Salvo ne redescend jamais a 0, il augmente seulement le nombre de tirs restants (regle du livre,
+// voir A FAIRE.txt "RUNES DE MACHINES"). Base recoit le chiffre de la Qualite avant reduction
+// (pour permettre a l'appelant de retrouver le texte "Reload N" a remplacer), non definie si
+// Result = -1. 26/09/2026.
+Function ArmeReloadEffectif(PArme: StructureArme; ListeCodeFabrication: String; out Base: Integer): Integer;
 // Effets CONDITIONNELS (attribut if= du XML, stocke dans Filtre) des qualites d'UN objet, pour la
 // cible CC ou CT : "Rune of Might : +3 DR contre une cible de taille superieure / Grudge Rune :
 // +10% +1 DR contre ...". Chaine vide si aucun. Cible vide = la premiere cible trouvee par rune. Jamais ajoutes aux totaux. 20/09/2026.
@@ -406,6 +416,40 @@ Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): In
                and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible) then
               Result := Result + ListFabricationModificateur[IndModif].Facteur * Niveau;
         end;
+    finally
+      Liste.Free;
+    end;
+  end;
+
+Function ArmeReloadEffectif(PArme: StructureArme; ListeCodeFabrication: String; out Base: Integer): Integer;
+  var
+    Liste:    TStringList;
+    Element:  String;
+    Ind:      Integer;
+  begin
+    Result := -1;
+    Base   := -1;
+    Liste  := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(PArme.ListeBonus), Liste);
+      for Ind := 0 to Liste.Count - 1 do
+        begin
+          Element := Trim(Liste[Ind]);
+          if CompareRechercheValeur(BonusReload, Trim(ExtractStringBefore(Element, ' '))) then
+            Base := StrToIntDef(Trim(ExtractStringAfter(Element, ' ')), -1);
+        end;
+      if Base < 0 then
+        Exit;
+      Result := Base + FabricationModificateurQualite(ListeCodeFabrication, ConstXmlModifieRechargement, ConstCibleModifieRechargement);
+      // Salvo ne perd jamais totalement la Qualite Reload (plancher 1) ; les autres armes la
+      // perdent (0 = Qualite retiree, rechargement libre) mais ne descendent jamais sous 0.
+      if Pos(BonusSalvo, PArme.ListeBonus) > 0 then
+        begin
+          if Result < 1 then
+            Result := 1;
+        end
+      else if Result < 0 then
+        Result := 0;
     finally
       Liste.Free;
     end;

@@ -923,6 +923,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     NBSort:          Integer;
     PSort:           StructureSort;
     LigneBonus:      String;
+    ReloadBase:      Integer;
+    ReloadEffectif:  Integer;
+    LibelleReload:   String;
     Ind:             Integer;
     PAttribut:       StructureAttribut;
     PFabrication:    StructureFabrication;
@@ -1876,6 +1879,21 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                         end;
                     end;
                   FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
+                  // Rune of Reloading (chargefabrication.pas, ArmeReloadEffectif) : remplace le
+                  // chiffre brut "Reload N" par le chiffre effectif une fois les runes de
+                  // rechargement appliquees, ou retire la Qualite si elle tombe a 0. 26/09/2026.
+                  ReloadEffectif := ArmeReloadEffectif(PArme, PersonnageEquipement.QualiteEquipement, ReloadBase);
+                  if (ReloadEffectif >= 0) and (ReloadEffectif <> ReloadBase) then
+                    begin
+                      LibelleReload := ChercheArmeBonus(BonusReload).Libelle;
+                      if ReloadEffectif = 0 then
+                        LigneBonus := StringReplace(LigneBonus, LibelleReload + ' ' + IntToStr(ReloadBase), '', [])
+                      else
+                        LigneBonus := StringReplace(LigneBonus, LibelleReload + ' ' + IntToStr(ReloadBase), LibelleReload + ' ' + IntToStr(ReloadEffectif), []);
+                      LigneBonus := StringReplace(LigneBonus, ',,', ',', [rfReplaceAll]);
+                      if (LigneBonus <> '') and (LigneBonus[1] = ',') then Delete(LigneBonus, 1, 1);
+                      if (LigneBonus <> '') and (LigneBonus[Length(LigneBonus)] = ',') then Delete(LigneBonus, Length(LigneBonus), 1);
+                    end;
                   // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (RangeX, cale a droite)
                   if TexteRange1 <> '' then
                     PdfEcrit(PdfPage, 132, RangeX - 1, 121.5-(NbArme*5), LigneBonus, 5)
@@ -3494,6 +3512,9 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
     LocData:               String;
     LigneBonus:            String;
     ListMalii:             String;
+    ReloadBase:            Integer;
+    ReloadEffectif:        Integer;
+    LibelleReload:         String;
   begin
     EncArme        := 0;
     ArmeBonii      := '';
@@ -3645,6 +3666,20 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
                     end;
                 end;
               FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
+              // Rune of Reloading : meme correctif que PdfPersonnageCreation ci-dessus, les DEUX
+              // blocs armes doivent toujours recevoir le meme calcul. 26/09/2026.
+              ReloadEffectif := ArmeReloadEffectif(PArme, PersonnageEquipement.QualiteEquipement, ReloadBase);
+              if (ReloadEffectif >= 0) and (ReloadEffectif <> ReloadBase) then
+                begin
+                  LibelleReload := ChercheArmeBonus(BonusReload).Libelle;
+                  if ReloadEffectif = 0 then
+                    LigneBonus := StringReplace(LigneBonus, LibelleReload + ' ' + IntToStr(ReloadBase), '', [])
+                  else
+                    LigneBonus := StringReplace(LigneBonus, LibelleReload + ' ' + IntToStr(ReloadBase), LibelleReload + ' ' + IntToStr(ReloadEffectif), []);
+                  LigneBonus := StringReplace(LigneBonus, ',,', ',', [rfReplaceAll]);
+                  if (LigneBonus <> '') and (LigneBonus[1] = ',') then Delete(LigneBonus, 1, 1);
+                  if (LigneBonus <> '') and (LigneBonus[Length(LigneBonus)] = ',') then Delete(LigneBonus, Length(LigneBonus), 1);
+                end;
               if (TexteRange1 = '') then
                 PdfEcrit(PdfPage, XGauche + 113 + 1, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice)
               else

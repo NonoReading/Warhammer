@@ -5907,7 +5907,8 @@ Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rat
 <Explanation language="ENGLISH">"The weapon reduces its Reload Rating by 2 for each Rune of Reloading. If this would reduce the Rating to 0 or below, the weapon loses the Reload Flaw. Weapons with the Salvo Quality cannot be reduced below Reload Rating 1."</Explanation>
 <Short language="ENGLISH">"Engineering rune, 12 SLs"</Short>
 <Max>"3"</Max>
-<Applies>Misc</Applies>
+<Applies>Weapon</Applies>
+<ModifyReloadRate name="RELOAD">-2</ModifyReloadRate>
 <Modifier>""</Modifier>
 </Craftsmanship>
 <Craftsmanship id="DWARF-RUNE_62">

@@ -1,3 +1,29 @@
+26/09/2026 - RUNES DE MACHINES : MOTEUR ModifyReloadRate AJOUTE, RUNE OF RELOADING CABLEE SUR LES 2 PDF
+Discussion partie d'une question sur la structure de sauvegarde des personnages (Attributs/
+Competences/Talents scindes en chapitres XML), qui a mene au bug reel du meme jour (talent de
+carriere compte comme rangs, voir entree plus bas) puis a l'audit des Runes de Dwarf Player's
+Guide (Accuracy/Penetrating/Reloading/Seeking) restees sans effet (<Modifier> vide). Decisions
+prises avec Nono : Accuracy reutilise BonusAccurate (deja code pour la qualite Accurate, pas
+touche aujourd'hui) ; Seeking reste NON MECANISE (bonus conditionne au type de cible visee,
+hors moteur, doit rester du texte) ; Reloading MECANISEE. Nouvelle cible ModifyReloadRate au
+vocabulaire du moteur generique (chargeconstantes.pas : ConstXmlModifieRechargement/
+ConstCibleModifieRechargement, BonusReload=RULES-WEAPB23, BonusSalvo=UPINA-WEAPB36), parsing
+DATA_CRAFTMANSHIP branche (xmlexportimport.pas, meme case que ModifArmure/ModifyDamage), XML de
+Rune of Reloading (DWARF-RUNE_61) porte desormais <ModifyReloadRate name="RELOAD">-2</
+ModifyReloadRate> (chiffre reel du livre, -2 par rune) et <Applies> corrige Misc->Weapon (comme
+Rune of Cleaving). Nouvelle fonction ArmeReloadEffectif (chargefabrication.pas, Base en
+parametre out) : chiffre de base lu sur PArme.ListeBonus (Qualite Reload N), moins la somme des
+ModifyReloadRate des runes portees, plancher 1 si Qualite Salvo presente sinon 0 (Qualite
+retiree, rechargement libre), -1 si l'arme n'a pas la Qualite Reload. Cablee dans les DEUX
+blocs armes de pdfpersonnage.pas (PdfPersonnageCreation et Feldo2P, meme reflexe que le bug
+ModifyWeapon du 08/09/2026) : remplace "Reload N" par le chiffre effectif dans LigneBonus juste
+apres FabricationDetail, ou retire la Qualite si elle tombe a 0. Compile (lazbuild --build-all,
+0 erreur, meme profil warnings/hints/notes). A TESTER PAR NONO : arme avec Qualite Reload +
+Rune of Reloading sur les 2 PDF, et une arme Salvo pour le plancher a 1. RESTE : l'ecran
+WinWeapon/WinPersonnage affiche toujours le chiffre brut (GetAllArmeBonusLibelle n'a pas le
+contexte personnage) - a cabler seulement si Nono en a besoin a l'ecran, pas seulement au PDF.
+Voir A FAIRE.txt "RUNES DE MACHINES".
+
 26/09/2026 - TEMPLE OF SPITE : LORE OF DARK MAGIC SAISIE, PREMIER LIVRE WFRP5 HORS RULEBOOK
 Chantier "livre suivant" apres Reikland Miscellanea, Temple of Spite choisi par Nono.
 Decouverte en cours de saisie : ce livre est en realite WFRP5 (5th Edition, copyright 2026

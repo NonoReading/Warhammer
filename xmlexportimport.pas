@@ -3502,7 +3502,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                             // d'armure. Pilote du 19/09/2026.
                             // <ModifyCarac name="RULES-ATTR_T">10</ModifyCarac> : bonus de
                             // caracteristique par niveau (Rune of Fortitude). 20/09/2026.
-                            ConstXmlModifieArmure, ConstXmlModifieAttribut, ConstXmlModifieDegat, ConstXmlModifieCompetence:
+                            // <ModifyReloadRate name="RELOAD">-2</ModifyReloadRate> : reduction du
+                            // chiffre de la Qualite Reload par niveau (Rune of Reloading, Dwarf
+                            // Player's Guide). ArmeReloadEffectif (chargefabrication.pas) applique
+                            // le plancher special Salvo. 26/09/2026.
+                            ConstXmlModifieArmure, ConstXmlModifieAttribut, ConstXmlModifieDegat, ConstXmlModifieCompetence, ConstXmlModifieRechargement:
                               begin
                                 PFabricationModificateur.TypeModif  := Node.NodeName;
                                 PFabricationModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));

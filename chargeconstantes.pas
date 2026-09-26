@@ -389,6 +389,15 @@ Const
       // colonne du profil (CREW/MSAIL/MOAR/MAN/SIZE/T/W). 24/09/2026, chantier "AMENAGEMENTS
       // DE BATEAU : CALCUL DE L'EFFET SUR LE NAVIRE".
       ConstXmlModifieBateau             = 'ModifBoat';
+      // Sixieme pendant du meme moule, cote Reload d'une arme a distance : <Modificateur
+      // Type="ModifyReloadRate" Cible="RELOAD" Facteur="-1"/> sur un DATA_CRAFTMANSHIP
+      // (Rune of Reloading, Dwarf Player's Guide). Facteur additionne au chiffre de la
+      // Qualite RULES-WEAPB23 "Reload N" de l'arme (FabricationModificateurQualite, meme
+      // mecanisme que Rune of Cleaving/ModifyDamage) - plancher a 1 pour une arme portant
+      // la Qualite Salvo (UPINA-WEAPB36, Up in Arms), qui ne se recharge jamais totalement.
+      // Affichage pas encore cable (chantier ouvert, A FAIRE.txt). 26/09/2026.
+      ConstXmlModifieRechargement       = 'ModifyReloadRate';
+      ConstCibleModifieRechargement     = 'RELOAD';
       // Quatrieme pendant du meme moule que ModifyCarac/ModifySkill/ModifyWeapon, pour les
       // paliers de CareerBonus qui n'ont AUCUN equivalent chiffre (palier 4 "Knight of the
       // Inner Circle" de la quasi-totalite des Ordres de Chevalerie - trait automatique
@@ -638,6 +647,8 @@ Const
       CodeQualiteAAjouter               = 'RULES-QUALITY_AJOUT';
       BonusProtection                   = 'WEAPB18 ';
       BonusAccurate                     = 'RULES-WEAPB16';  // qualite Accurate : +10 au test de tir
+      BonusReload                       = 'RULES-WEAPB23';  // qualite Reload N : PersonnageReloadModif
+      BonusSalvo                        = 'UPINA-WEAPB36';  // qualite Salvo : Reload plafonne a 1, jamais 0
       BonusBras                         = 'RULES-ARMOL_ARM';
       BonusCorps                        = 'RULES-ARMOL_BODY';
       BonusJambes                       = 'RULES-ARMOL_LEG';
