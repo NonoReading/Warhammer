@@ -3710,6 +3710,32 @@ begin
       TalentAttribut(PTalent.Attribut);
       end;
 
+  // Talents pris via un choix de la table de carrière (Personnage.MetierTalent) - absents
+  // jusqu'ici de ce tableau, donc invisibles sur l'ecran Augmentation pour un talent
+  // multi-niveaux (Max>1) deja pris par ce biais. Fusionnes avec la ligne existante si le
+  // talent est deja possede par CreationTalent, et comptes dans ColTalNbCrea (gratuits,
+  // pas payes en Xp) pour que le delta calcule plus bas (~L6215, "Nouveau - ColTalNbCrea")
+  // les retranche correctement. A FAIRE.txt 26/09/2026.
+  For PersonnageTalent in Personnage.MetierTalent do
+    begin
+      Lig := FindRowByText(TabTalent, PersonnageTalent.CodeTalent, ColTalCode);
+      if Lig = -1 then
+        begin
+          Inc(NbTalent);
+          TabTalent.RowCount := TabTalent.RowCount + 1;
+          Lig                := NbTalent;
+        end;
+      TabTalent.Cells[ColTalCode, Lig]    := PersonnageTalent.CodeTalent;
+      TabTalent.Cells[ColTalNb, Lig]      := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb, Lig],0) + PersonnageTalent.Valeur);
+      TabTalent.Cells[ColTalNbCrea, Lig]  := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNbCrea, Lig],0) + PersonnageTalent.Valeur);
+      PTalent                             := ChercheTalent(TabTalent.Cells[ColTalCode, Lig]);
+      TabTalent.Cells[ColTalLib, Lig]     := PTalent.Libelle;
+      if PTalent.SousTalent then
+        PTalent                          := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+      TabTalent.Cells[ColTalMax, Lig]     := Ptalent.MaxiTalent;
+      TalentAttribut(PTalent.Attribut);
+      end;
+
   // carrières
   for PersonnageMetier in Personnage.MetierAncien do
     begin

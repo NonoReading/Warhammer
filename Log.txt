@@ -7050,3 +7050,17 @@ NONO avant commit.
 Ce que la session retient : verifier avant tout si le livre en cours possede deja les
 Species necessaires ailleurs dans le corpus (ici Green Iz Best) plutot que d'en recreer -
 une table de noms rattachee au mauvais endroit ne servirait a rien au generateur.
+
+26/09/2026 - TABTALENT/ECRAN AUGMENTATION NE FUSIONNAIT PAS METIERTALENT, CORRIGE
+Bug releve le 26/09 (A FAIRE.txt) : le tableau TabTalent (winpersonnage.pas,
+XmlChargePersonnage), qui alimente la colonne "Actuel" de l'ecran Augmentation, ne
+fusionnait que Personnage.CreationTalent et Personnage.AugmentationTalent - jamais
+Personnage.MetierTalent (talents pris via un choix de la table de carriere). Un talent
+multi-niveaux (Max>1, ex. Coup Puissant) deja pris par ce biais restait donc invisible sur
+cet ecran, alors que le moteur de calcul (PersonnageTalentModificateur) le comptait bien.
+Corrige par une nouvelle boucle sur Personnage.MetierTalent juste apres celle de
+CreationTalent (~L3712) : fusion par code avec la ligne existante, ajout dans ColTalNb ET
+ColTalNbCrea. Le calcul du delta a la sauvegarde (~L6215, "Nouveau - ColTalNbCrea") en
+beneficie sans etre touche - la valeur de ColTalNbCrea etait deja le bon levier, il
+manquait juste d'y integrer MetierTalent au chargement. Compile (lazbuild --build-all, 0
+erreur, meme profil warnings/hints/notes). Teste et valide par Nono. Chantier clos.
