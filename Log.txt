@@ -1,3 +1,27 @@
+26/09/2026 - PERSONNAGE.METIERTALENT N'EST PAS UNE LISTE DE TALENTS POSSEDES (CORRECTION DE LA CORRECTION DU JOUR)
+Signale par Nono : l'ecran de talents affichait Combat Master (Maitrise du combat) comme
+acquis sur Gunther Krieg alors qu'il ne l'a jamais pris, et l'ecran Augmentation affichait
+"Current 4 / Level 4". Cause racine, plus profonde que le fix "talent de carriere compte
+NiveauMetier rangs" du meme jour (voir entree suivante) : Personnage.MetierTalent n'est PAS
+une liste de talents possedes, c'est le MENU COMPLET de la table de la carriere en cours
+(tous paliers 1 a 4 d'un coup, reconstruit depuis ListMetierTalent des l'entree en carriere,
+winpersonnage.pas ~L6419) - il sert uniquement a proposer des choix sur l'ecran Augmentation
+et a memoriser la specialite resolue d'un talent '_*'. Confirme par Nono en session apres
+plusieurs allers-retours ou j'ai d'abord suppose a tort que Valeur=niveau de carriere pouvait
+se corriger en "+1 rang par entree" (toujours faux : un talent du menu jamais achete ne doit
+JAMAIS compter). Deux boucles fautives retirees, pas corrigees : la fusion ajoutee plus tot
+dans la journee dans TabTalent (winpersonnage.pas, chargement du personnage) qui affichait
+les 16 talents du menu comme acquis, et une boucle plus ancienne (11/09/2026) dans
+PersonnageTalentModificateur (chargepersonnage.pas) qui appliquait un bonus pour n'importe
+quel talent du menu, jamais pris. Seuls Personnage.CreationTalent (creation) et
+Personnage.AugmentationTalent (achete en Xp) doivent alimenter un total affiche ou un bonus.
+Nouveau GABARIT_XML_PERSONNAGE.md (racine, meme principe que GABARIT_LIVRE_XML.md) : plan
+complet d'un XML de personnage chapitre par chapitre, avec la regle catalogue/possession et
+le piege de nommage SUBCHAPTER_TALENTCAREER vs CHAPTER_TALENT_CAREER_LINK - a lire avant tout
+code touchant Personnage.*. Reference ajoutee au §0 de CONTEXT.md. Non compile dans cette
+session (pas de fichier projet .lpi/.lpr pour l'executable principal dans cet environnement)
+- A TESTER PAR NONO.
+
 26/09/2026 - RUNES DE MACHINES : MOTEUR ModifyReloadRate AJOUTE, RUNE OF RELOADING CABLEE SUR LES 2 PDF
 Discussion partie d'une question sur la structure de sauvegarde des personnages (Attributs/
 Competences/Talents scindes en chapitres XML), qui a mene au bug reel du meme jour (talent de

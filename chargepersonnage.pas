@@ -1881,29 +1881,13 @@ Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif
            and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
                 or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
           Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
-    // MetierTalent (talent choisi dans la grille de carriere, distinct de CreationTalent/
-    // AugmentationTalent) manquait ici - trou trouve le 11/09/2026 en migrant ModifArmour,
-    // deja present sur les 4 cibles migrees avant (ModifyCarac/ModifySkill/ModifyWeapon/
-    // ModifyDamage). PersonnageTalentArmureModif, la version dediee encore a migrer, boucle
-    // deja les trois listes.
-    // PersonnageTalent.Valeur, pour CETTE liste seulement, ne porte PAS un nombre de rangs :
-    // c'est le NIVEAU DE CARRIERE ou le talent apparait dans la table (StructureMetierTalent,
-    // chargemetiertalent.pas, n'a pas de champ dedie a un nombre de rangs), reutilise ailleurs
-    // comme filtre d'affichage (winpersonnage.pas, CalculAvancement, compare a MetierNvEnCours
-    // pour proposer les talents nouvellement debloques - Valeur doit y rester le niveau brut).
-    // Le multiplier ici comme un rang comptait un talent multi-niveaux (Coup Puissant/Robuste)
-    // pris a un cran de carriere >=2 comme 2/3/4 rangs d'un coup, et en cumulait encore
-    // d'autres via l'Augmentation (boucle suivante) sans recoupement. Un pick de carriere
-    // accorde toujours exactement 1 rang : Facteur*1, jamais Facteur*Valeur, sur cette liste.
-    // Signale par Nono sur Gunther Krieg (Gaffe a +14 puis +13 au lieu de +12 attendu).
-    for PersonnageTalent in Personnage.MetierTalent do
-      for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
-        if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)
-           and CompareRechercheValeur(ListTalentModificateur[indiceModif].CodeSource, PersonnageTalent.CodeTalent)
-           and CompareRechercheValeur(ListTalentModificateur[indiceModif].Cible, Cible)
-           and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
-                or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
-          Result := Result + ListTalentModificateur[indiceModif].Facteur * 1;
+    // Personnage.MetierTalent n'est PAS une liste de talents possedes : c'est le menu de la
+    // table de carriere en cours (tous paliers), qui sert seulement a proposer des choix sur
+    // l'ecran Augmentation et a memoriser la specialite resolue pour un talent '_*'. Un
+    // talent achete depuis cette liste est deja compte via Personnage.AugmentationTalent
+    // (boucle suivante) - le boucler ici aussi comptait un bonus pour n'importe quel talent
+    // simplement LISTE dans la table de carriere, jamais realise, y compris jamais pris.
+    // Boucle ajoutee par erreur le 11/09/2026, retiree le 26/09/2026 (confirme par Nono).
     for PersonnageTalent in Personnage.AugmentationTalent do
       for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
         if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)

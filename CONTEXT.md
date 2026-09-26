@@ -3466,6 +3466,12 @@ lecture, jamais depuis la source elle-même :
   avant d'écrire N objets d'une nature donnée, indexer les libellés **de cette nature**
   dans tout `DATABASE\`, pas seulement ceux des objets qu'ils citent.
 
+- **Lire `GABARIT_XML_PERSONNAGE.md` avant de toucher au code qui lit/écrit un XML de
+  personnage ou aux champs `Personnage.*`** (26/09/2026, après une session où plusieurs
+  correctifs de suite sur `Personnage.MetierTalent` sont partis d'une lecture fausse de la
+  structure — un catalogue de menu de carrière pris pour une liste de talents possédés).
+  Même logique que `GABARIT_LIVRE_XML.md` pour les livres : relire la référence avant de
+  deviner le rôle d'un chapitre XML à partir de son seul nom.
 - **Un marqueur compté n'est pas un marqueur lu.** Avant de conclure depuis un `grep -c`,
   sortir le contexte autour des occurrences. Trois livres ont été mal classés parce que
   leurs « Career Path » étaient des fiches de PNJ et de la prose.
