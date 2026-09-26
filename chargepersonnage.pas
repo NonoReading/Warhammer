@@ -1886,6 +1886,16 @@ Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif
     // deja present sur les 4 cibles migrees avant (ModifyCarac/ModifySkill/ModifyWeapon/
     // ModifyDamage). PersonnageTalentArmureModif, la version dediee encore a migrer, boucle
     // deja les trois listes.
+    // PersonnageTalent.Valeur, pour CETTE liste seulement, ne porte PAS un nombre de rangs :
+    // c'est le NIVEAU DE CARRIERE ou le talent apparait dans la table (StructureMetierTalent,
+    // chargemetiertalent.pas, n'a pas de champ dedie a un nombre de rangs), reutilise ailleurs
+    // comme filtre d'affichage (winpersonnage.pas, CalculAvancement, compare a MetierNvEnCours
+    // pour proposer les talents nouvellement debloques - Valeur doit y rester le niveau brut).
+    // Le multiplier ici comme un rang comptait un talent multi-niveaux (Coup Puissant/Robuste)
+    // pris a un cran de carriere >=2 comme 2/3/4 rangs d'un coup, et en cumulait encore
+    // d'autres via l'Augmentation (boucle suivante) sans recoupement. Un pick de carriere
+    // accorde toujours exactement 1 rang : Facteur*1, jamais Facteur*Valeur, sur cette liste.
+    // Signale par Nono sur Gunther Krieg (Gaffe a +14 puis +13 au lieu de +12 attendu).
     for PersonnageTalent in Personnage.MetierTalent do
       for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
         if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)
@@ -1893,7 +1903,7 @@ Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif
            and CompareRechercheValeur(ListTalentModificateur[indiceModif].Cible, Cible)
            and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
                 or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
-          Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
+          Result := Result + ListTalentModificateur[indiceModif].Facteur * 1;
     for PersonnageTalent in Personnage.AugmentationTalent do
       for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
         if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)

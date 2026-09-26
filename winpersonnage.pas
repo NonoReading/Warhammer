@@ -6385,17 +6385,15 @@ Procedure TWinPersonnages.MajTables();
                                                      PMetierTalent.CodeTalent);
                     if PersonnageTalent.CodeTalent = '' then
                       continue;
-                    // PMetierTalent.NiveauMetier est le NIVEAU DE CARRIERE ou ce talent
-                    // apparait dans la table (StructureMetierTalent, chargemetiertalent.pas -
-                    // pas de champ "nombre de rangs"), pas un nombre de rangs a accorder. Le
-                    // stocker tel quel dans Valeur donnait un talent multi-niveaux (ex. Strike
-                    // Mighty Blow/Coup Puissant pris au niveau 2 d'une carriere) directement 2
-                    // rangs au lieu d'1 - avec en plus les rangs achetes ensuite via
-                    // l'Augmentation (Personnage.AugmentationTalent), PersonnageTalentModificateur
-                    // additionnait les deux sans recoupement (chargepersonnage.pas), doublant le
-                    // bonus de degats. Signale par Nono sur Gunther Krieg (Gaffe a +14 au lieu de
-                    // +12). Un pick de carriere accorde toujours exactement 1 rang.
-                    PersonnageTalent.Valeur     := 1;
+                    // PMetierTalent.NiveauMetier reste stocke tel quel : ce champ sert aussi de
+                    // FILTRE "a quel niveau de carriere ce talent apparait" ailleurs (ex.
+                    // CalculAvancement, ~L5977 : "PersonnageTalent.Valeur = StrToInt(MetierNvEnCours)"
+                    // pour proposer les talents nouvellement debloques au palier atteint) - le
+                    // remettre a 1 ici cassait cette comparaison des le niveau 2. Le vrai bug
+                    // (un pick de carriere compte pour "NiveauMetier" rangs au lieu d'1 dans le
+                    // calcul de degats) est corrige au point de consommation, dans
+                    // PersonnageTalentModificateur (chargepersonnage.pas), pas ici.
+                    PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                     Personnage.MetierTalent     += [PersonnageTalent];
                   end;
 

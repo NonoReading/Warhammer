@@ -1,21 +1,29 @@
-26/09/2026 - TALENT DE CARRIERE COMPTAIT "NIVEAU DE CARRIERE" RANGS AU LIEU DE 1
+26/09/2026 - TALENT DE CARRIERE COMPTAIT SON NIVEAU DE CARRIERE COMME NOMBRE DE RANGS
 Signale par Nono sur Gunther Krieg : la Gaffe affichait DR+14 au lieu de DR+12 attendu
-apres avoir augmente Coup Puissant de 1 a 2. Cause : Coup Puissant existait en double,
-une fois dans Personnage.MetierTalent (pris via la table de carriere, fige a "2" depuis
-le 11/09 au moins) et une fois dans Personnage.AugmentationTalent (l'ecran d'Augmentation,
-passe de 1 a 2 le 26/09) - PersonnageTalentModificateur additionne les deux sans les
-recouper (2+2=4 au lieu de 2). Racine du bug (winpersonnage.pas, entree en carriere,
-~L6379) : PersonnageTalent.Valeur := PMetierTalent.NiveauMetier stockait le niveau de
-CARRIERE ou le talent apparait dans la table (1/2/3/4) au lieu du nombre de rangs
-accordes (toujours 1) - invisible sur un talent a rang unique, mais un talent
-multi-niveaux (Coup Puissant, ou Robuste RULES-T0131) pris a un cran >=2 recevait
-directement plusieurs rangs d'un coup. Gunther a aussi Robuste fige a 4 rangs par ce
-biais, jamais augmente depuis - impact sur les Blessures a verifier. Corrige :
-PersonnageTalent.Valeur := 1. XML de Gunther deja ecrit avec la donnee corrompue,
-corrige a la main (les 16 entrees de CHAPTER_TALENT/SUBCHAPTER_TALENTCAREER remises a
-"1" dans le dernier fichier). Compile 0 erreur. A TESTER PAR NONO (Gaffe a DR+12,
-verifier le total de Blessures apres correction de Robuste). D'autres personnages avec
-un talent multi-niveaux pris a un cran de carriere >=2 peuvent porter le meme bug.
+apres avoir augmente Coup Puissant de 1 a 2. Premiere piste (stocker 1 au lieu du niveau
+de carriere dans Personnage.MetierTalent a l'entree en carriere) abandonnee : ce champ
+sert aussi de filtre dans CalculAvancement (compare a MetierNvEnCours pour proposer les
+talents debloques au palier atteint) - l'ecraser cassait la proposition de talents des
+le niveau 2. Cause reelle, confirmee par Nono ("j'ai pris coup puissant par la carriere
+actuelle puis l'ai augmente au niveau 2") : Personnage.MetierTalent[].Valeur porte
+deliberement le niveau de carriere ou le talent apparait (pas un nombre de rangs -
+StructureMetierTalent n'a pas ce champ), mais PersonnageTalentModificateur
+(chargepersonnage.pas) le multipliait quand meme par Facteur comme un rang. Invisible
+sur un talent a rang unique, mais un talent multi-niveaux (Coup Puissant) pris a un cran
+de carriere >=2 comptait 2/3/4 rangs d'un coup, plus ceux achetes ensuite via
+l'Augmentation, sans recoupement. Corrige au point de consommation : la boucle
+MetierTalent de PersonnageTalentModificateur utilise Facteur*1 au lieu de
+Facteur*Valeur - le champ Valeur reste intact partout ailleurs. XML de Gunther deja
+ecrit avec la donnee incoherente : CHAPTER_INCREASE/SUBCHAPTER_TALENT T0037 corrige a la
+main de "2" a "1" (avec la carriere qui compte 1 rang fixe, le total voulu par Nono, 2,
+c'est 1 carriere + 1 augmentation) ; CHAPTER_TALENT/SUBCHAPTER_TALENTCAREER laisse
+INCHANGE (niveaux de carriere d'origine, pas des rangs). Compile 0 erreur. A TESTER PAR
+NONO (Gaffe a DR+12). Limite connue non corrigee : l'ecran Augmentation ne fusionne pas
+Personnage.MetierTalent dans son total affiche (TabTalent ne merge que Creation+
+Augmentation) - un talent multi-niveaux pris via la carriere reste invisible sur cet
+ecran, le joueur doit ajouter mentalement les rangs de carriere pour viser le bon total
+- voir A FAIRE.txt. D'autres personnages avec un talent multi-niveaux pris via la
+carriere ET augmente peuvent porter le meme decalage.
 
 26/09/2026 - OPTION "DIVISER L'XP PAR 25" : LA COCHE NE CONVERTISSAIT PAS LE TOTAL,
 LE XML LE DIVISAIT ENSUITE DEUX FOIS - TESTE ET VALIDE PAR NONO
