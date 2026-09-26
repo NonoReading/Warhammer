@@ -820,8 +820,14 @@ REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa c
     BOOK_REIKLAND_MISCELLANEA.Xml, CODE_BOOK REIKL, 12 Lore of Hedgecraft + 12 Lore of
     Witchcraft, rattaches aux Talents Rulebook existants (RULES-T0088_MAGIE/_SORCEL) -
     aucun Talent nouveau. Deux sorts cites en liste PNJ (Nepenthe, Part the Branches) sans
-    texte de sort dans le livre, non saisis (erratum note dans le XML). Reste : Temple of
-    Spite, Tribes and Tribulations (voir GABARIT_LIVRE_XML.md pour le format).
+    texte de sort dans le livre, non saisis (erratum note dans le XML). [FAIT LE 26/09/2026, A
+    TESTER PAR NONO] Temple of Spite (Lore of Dark Magic, 24 sorts) saisi, EN REALITE UN LIVRE
+    WFRP5 (pas WFRP4, decouvert en cours de saisie via la page de copyright) : voir CONTEXT.md
+    et Log.txt 26/09/2026 pour le detail. COMPLETE=0, reste dans ce meme livre pour une session
+    future : mecanisme "Sorceress Pacts" (Lore Attribute non modelisable simplement), ethnie
+    Dark Elves (chapitre I), un trait de navire special, et les "Gifts of Khaine" (8 dons
+    rituels, bloc juste apres le chapitre de magie). Reste au global : Tribes and Tribulations
+    (voir GABARIT_LIVRE_XML.md pour le format).
   * Statut officiel ou fan : les fanbooks V4 passent par le programme Community Content,
     qui impose une mention ; les livres Cubicle 7 portent leur copyright complet. L absence
     de mention ne prouve rien - la page de copyright peut etre une image que l export TXT

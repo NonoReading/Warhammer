@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"TEMPLE"</CODE_BOOK>
+<BOOK>"BOOK TEMPLE OF SPITE"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP5"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior permission of the publishers. Warhammer Fantasy Roleplay (c) Copyright Games Workshop Limited 2026. Warhammer Fantasy Roleplay 5th Edition, the Warhammer Fantasy Roleplay 5th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="TEMPLE-BOOK TEMPLE OF SPITE">"Temple of Spite"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="TEMPLE-BOOK TEMPLE OF SPITE">"Temple of Spite"</Text>
+</Label>
+</DATA_LABEL>
+<!-- Saisie du 26/09/2026 : perimetre volontairement limite a "The Lore Of Dark Magic"
+     (chapitre VI, p.64-67 du texte source PDF_TEXTE/Temple of Spite.txt, lignes ~3612-3825).
+     PREMIER LIVRE WFRP5 AUTRE QUE LE RULEBOOK saisi dans ce projet : la page de copyright du
+     texte source (lignes 48-53) confirme "Warhammer Fantasy Roleplay 5th Edition", Copyright
+     2026 - contrairement a une premiere version de ce fichier saisie par erreur sous WFRP4
+     (conventions differentes, RULES-T0088_XXX/TypSpell "Domain Magic"), corrigee le meme jour
+     apres verification directe du texte source. Conventions WFRP5 reprises de
+     DATABASE/WFRP5/BOOK_RULESBOOK.Xml : Talents de Lore en "RULES-T0007_XXX" (famille
+     generique "RULES-T0007_*"), TypSpell="Arcane Magic" (pas "Domain Magic").
+
+     Le chapitre ne contient que 24 sorts distincts (24 occurrences de "CN:" comptees dans le
+     texte source, verifie par recherche automatisee), pas 26 comme estime au depart : Arnzipal's
+     Dimensional Door, Arnzipal's Black Horror, Bladewind, Chillwind, Dark Hand of Destruction,
+     Darkstar Cloak, Death Spasm, Disturbing Voices, Dominion, Doombolt, Grasping Darkness,
+     Memory Leech, Paralysing Nightmares, Poisoned Whispers, Power of Darkness, Shroud of
+     Despair, Skies Made Subservient, Soul Stealer, Stricken Voices, Stolen Aspect, Unravelling
+     Will, Witch Flight, Withering Presence, Word of Pain.
+
+     Talent : aucune Lore "Dark Magic" n'existe encore dans DATABASE/WFRP5/BOOK_RULESBOOK.Xml
+     (seules Beasts/Death/Fire/Heavens/Life/Light/Metal/Shadows/Hedgecraft/Witchcraft y figurent,
+     famille RULES-T0007_*) - nouveau Talent generique TEMPLE-T0001_DARK "Arcane Magic (Dark
+     Magic)" cree ici, meme convention que les Talents de Lore du Rulebook WFRP5.
+
+     Lore Attribute "Sorceress Pacts" (lignes 3614-3648 du texte source) NON modelise : mecanisme
+     narratif complexe donnant un effet bonus supplementaire selon le pacte d'ame de la
+     sorceress (Hekarti / Daemon of Slaanesh / Daemon of Tzeentch / Unaligned Daemon) quand le
+     sort inflige des degats avec 3+ SL au-dessus du CN - hors perimetre, meme decision que
+     Sense of the Green/Sacred Grove dans le Grimoire (WFRP4).
+
+     Hors perimetre de cette saisie, pour une prochaine session (localises par recherche rapide,
+     non traites) :
+     - Ethnie/race "Dark Elves" : chapitre I, decrit a partir de la ligne ~5-70 du texte source.
+     - Trait de navire special : tableaux de types de vaisseaux avec colonne "Traits and
+       Upgrades" lignes ~3415 et ~3424.
+     - Dons rituels de Khaine ("Gifts of Khaine") : bloc complet lignes ~3834-3882, juste apres
+       le chapitre de magie (Talent "Gifts of Khaine" + 8 dons : Cry of War, Dance of Doom,
+       Dagger of Khaine, Eternal Torment, Hand of Khaine, Hidden Blade, Sting in the Tail, Touch
+       of Khaine).
+
+     Aucun erratum de nom trouve entre le corps du texte du chapitre magie et l'index du livre. -->
+<DATA_TALENT>
+<Talent id="TEMPLE-T0001_DARK">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Dark Magic)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You have learned the Lore of Dark Magic, the forbidden magic of the Dark Elf sorceresses."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_SPELL>
+<Sort id="TEMPLE-DARK_01">
+<Description language="ENGLISH">"Arnzipal's Dimensional Door"</Description>
+<Explanation language="ENGLISH">"The sorceress rips a hole through the Aethyr, tearing through reality to make two locations overlap. The distance between portals is both infinitely wide and nothing at all, and all who pass through the door emerge instantly at the other location (though they may feel that the journey took some time). If the Spell is Miscast, do not roll on the table. Instead, the door closest to the caster connects to a random place in the Realm of Chaos and a Lesser Daemon creeps out, as per the Manifest Lesser Daemon Spell."</Explanation>
+<Target>"AoE (WPB yards)"</Target>
+<Duration>"WPB Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_02">
+<Description language="ENGLISH">"Arnzipal's Black Horror"</Description>
+<Explanation language="ENGLISH">"The sorceress tears the veil between reality and the Aethyr, and a black cloud of roiling energy sweeps across the land, trailing slimy tentacles that drag unfortunate victims to an unknown fate. All who fall within the Area of Effect must make a Difficult (-10) Strength Test or suffer 3 Wounds. Those who Fumble the Strength Test must spend a Fate Point or be dragged into the Aethyr, which costs them their lives. The vortex moves 1d10 + 5 yards in a random direction each subsequent Round. Use the random vortex rules from Winds of Magic (pages 20-21) if available, or determine the direction randomly as you see fit."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards (or Random Vortex)"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_03">
+<Description language="ENGLISH">"Bladewind"</Description>
+<Explanation language="ENGLISH">"Screaming a plea to the Mistress of a Thousand Cuts, the sorceress scours their enemies with sweeping swords of crystallised Dhar. All targets within the Area of Effect are hit with a magic missile for Damage equal to her Willpower Bonus + 4 and must pass a Difficult (-10) Melee Test to prevent the Damage from ignoring armour."</Explanation>
+<Target>"AoE (Fellowship Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"FelB x 2 yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_04">
+<Description language="ENGLISH">"Chillwind"</Description>
+<Explanation language="ENGLISH">"Calling upon the coldness of Nagaelythe of the Utterdark, the sorceress lashes the world with wind and bone-hollowing cold. This wind is a magic missile with Damage +8 that ignores Armour Points. All targets within the Area of Effect must pass a Challenging (+0) Endurance Test or take a Fatigued condition once per round while the wind blows. Ballistic Skill Tests within the Area of Effect incur a -3 SL penalty."</Explanation>
+<Target>"AoE (Fellowship Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_05">
+<Description language="ENGLISH">"Dark Hand of Destruction"</Description>
+<Explanation language="ENGLISH">"A dense cloud of violent and baleful black energies roils about one of the sorceress's hands. This is a magic missile with Damage +12. All non-magical armour on the struck Hit Location is ignored and destroyed."</Explanation>
+<Target>"1 (Max)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_06">
+<Description language="ENGLISH">"Darkstar Cloak"</Description>
+<Explanation language="ENGLISH">"The sorceress shrouds herself in a cape of half-solid Dhar. Channelling Dhar is twice as effective (double SL generated) for as long as the cloak lasts. Touching the cloak counts as Minor Exposure to Corruption for anyone but the caster."</Explanation>
+<Target>"You"</Target>
+<Duration>"WPB Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_07">
+<Description language="ENGLISH">"Death Spasm"</Description>
+<Explanation language="ENGLISH">"The sorceress summons a throttling force to grip her foe. They are shaken violently, striking all around them as they convulse and struggle. Death Spasm behaves as a magic missile with Damage +4 that ignores armour. Damaged targets immediately attack everyone within 1 yard of them with the weapon in their primary hand. Use the target's unmodified Weapon Skill when resolving such attacks, and they may not benefit from any Traits or Talents when making attacks."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_08">
+<Description language="ENGLISH">"Disturbing Voices"</Description>
+<Explanation language="ENGLISH">"The sorceress opens tiny rents in reality, allowing malicious entities to whisper in the target's ears, urging paranoia, a sense of betrayal, or despair. Roll three times on the Mental Corruption Table and apply the results for 1d10 hours."</Explanation>
+<Target>"1"</Target>
+<Duration>"1d10 hours"</Duration>
+<Range>"WPB yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_09">
+<Description language="ENGLISH">"Dominion"</Description>
+<Explanation language="ENGLISH">"Whispering a petition to Tyrannous Lamekh of the Third Hell, the sorceress takes control of her targets' bodies. Unless the sorceress lets them, Characters who begin their turn within the Area of Effect must pass a Very Hard (-30) Cool Test to Walk, Run, take a Melee Test, Ranged Test, or Casting Test."</Explanation>
+<Target>"AoE (WPB Yards)"</Target>
+<Duration>"FelB Rounds"</Duration>
+<Range>"Fel yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_10">
+<Description language="ENGLISH">"Doombolt"</Description>
+<Explanation language="ENGLISH">"The sorceress invokes the name of an otherworldly beast and unleashes its blasphemous energy as a bolt of pure darkness. This is a magic missile with Damage +8, increased by +4 if the caster passes an optional Challenging (+0) Lore (Magic) Test immediately after the Casting Test. Failure in this additional Test causes a roll on the Major Miscast Table."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_11">
+<Description language="ENGLISH">"Grasping Darkness"</Description>
+<Explanation language="ENGLISH">"The sorceress suffuses her target with hair-thin tendrils of malefic Dhar, making them a living marionette as dark energy braids through their muscles, bones, and nervous system. The sorceress's victim incurs a number of Entangled Conditions equal to her Intelligence Bonus minus the target's Strength Bonus. If this number is 0 or less, the Spell fails. The victim can Test to remove each Entangled Condition at the start of their Turn, Opposing the sorceress's Willpower with their Strength or Willpower. If they have at least one Entangled Condition, the sorceress can move their body as she wishes, although any physical Tests are taken at -2 SL."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Intelligence yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_12">
+<Description language="ENGLISH">"Memory Leech"</Description>
+<Explanation language="ENGLISH">"The sorceress's hand becomes insubstantial as it passes through the target's head and steals cherished memories and abilities, leaving confusion and emptiness. The target must pass a Difficult (-10) Cool Test. For every SL of failure, remove one Talent or reduce one Skill to the Characteristic baseline, chosen at random. The GM should also describe what parts of a Character's life they can no longer remember. The sorceress may add the stolen Skill or Talent to those available to her at the current level of her Career. An NPC supreme sorceress can add any stolen Talent or Skill to her profile immediately."</Explanation>
+<Target>"1"</Target>
+<Duration>"Permanent"</Duration>
+<Range>"Touch"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_13">
+<Description language="ENGLISH">"Paralysing Nightmares"</Description>
+<Explanation language="ENGLISH">"The sorceress sends invisible entities to fasten themselves to a target's soul like parasitic worms. The target cannot sleep without suffering visions of terror, eroding their sanity over time. Each morning they awake with a Fatigued Condition, as well as an additional -15 to WP and Fel. They must also test for exposure to Minor Corruption. Before sleeping, they can attempt a Difficult (-10) Cool Test to shake the effect."</Explanation>
+<Target>"1"</Target>
+<Duration>"1d10 nights"</Duration>
+<Range>"Touch"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_14">
+<Description language="ENGLISH">"Poisoned Whispers"</Description>
+<Explanation language="ENGLISH">"The sorceress breathes sweet whispers of Dhar into a victim, twisting their minds to her own ends. Choose one target: For Fellowship Bonus Rounds, every Character within Willpower Bonus yards of the target gains a Psychology Trait related to that Character whilst they remain near (such as Hatred or Fear). Or, the target gains any one Psychology Trait for Fellowship Bonus Rounds. Characters can resist Poisoned Whispers' effects with an Opposed Cool Test vs the sorceress. Poisoned Whispers lasts until the affected Character passes a Difficult (-10) Cool Test, taken once per day at sunrise."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_15">
+<Description language="ENGLISH">"Power of Darkness"</Description>
+<Explanation language="ENGLISH">"The sorceress draws the fierce energies of the Realm of Chaos to empower herself and her allies. The caster and all allies within the Area of Effect gain +10 Strength and +10 Initiative for the Spell's duration. The sorceress also benefits from +2 SL to any Channelling (Dhar) Test made for the Spell's duration. Once the Spell ends, all affected must Test for Minor Corruption."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_16">
+<Description language="ENGLISH">"Shroud of Despair"</Description>
+<Explanation language="ENGLISH">"The sorceress gestures with elaborate movements to bring a pall of gloom to engulf her enemies. Suffocating darkness suffuses all targets within the Area of Effect, sapping their will and energy. They suffer from 1 Fatigued Condition for every SL from the Casting Test and unless they pass a Challenging (+0) Cool Test, gain a Broken Condition."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_17">
+<Description language="ENGLISH">"Skies Made Subservient"</Description>
+<Explanation language="ENGLISH">"Seeding the atmosphere with Dhar to infect the open skies, the sorceress masters the heavens. They may banish clouds, summon hail, call up gale-force winds, or whatever they please. If using the weather table from Sea of Claws (page 106), she can choose any combination of weather conditions and wind."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus hours"</Duration>
+<Range>"Special"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_18">
+<Description language="ENGLISH">"Soul Stealer"</Description>
+<Explanation language="ENGLISH">"Pure, solidified darkness writhes from the caster's hands, drawing the essence from their hapless enemies to renew their own vigour. Soul Stealer acts as a magic missile with Damage +0 that ignores TB and AP. For every 2 Wounds dealt, the target loses 1 maximum Wound and the caster regains 1 Wound and 1 maximum Wound."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_19">
+<Description language="ENGLISH">"Stricken Voices"</Description>
+<Explanation language="ENGLISH">"The sorceress forces the air from her enemy's lungs, using their suffocating fear to syphon the breath from their allies too. Treat Stricken Voices as a magic missile with +0 Damage that ignores armour. The target, and up to Willpower Bonus Characters of the sorceress's choosing within Willpower Bonus yards of the target, begin Suffocating (WFRP Core Rulebook) until they pass a Difficult (-10) Endurance Test made at the start of their subsequent Turns."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_20">
+<Description language="ENGLISH">"Stolen Aspect"</Description>
+<Explanation language="ENGLISH">"The sorceress masks her soul with the essence of her target's and masks her target's soul with her own. Should the target fail a Very Hard (-30) Cool Test, the two share a sense of self. The affected parties share all Psychology Traits and must pass a Difficult (-10) Cool Test to cause each other harm. The sorceress has access to all the target's memories and knowledge for the duration of the Spell."</Explanation>
+<Target>"1 (Maximum)"</Target>
+<Duration>"WPB Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_21">
+<Description language="ENGLISH">"Unravelling Will"</Description>
+<Explanation language="ENGLISH">"The sorceress subtly erodes the target's resolve and sense of purpose. As Dhar seeps into their mind, they lose their will and become susceptible to hostile influence. The target incurs a -4 SL penalty to any Willpower Test for the spell's duration. Sorceresses often use Unravelling Will to reduce a target's resistance to other Spells."</Explanation>
+<Target>"1"</Target>
+<Duration>"1d10 minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_22">
+<Description language="ENGLISH">"Witch Flight"</Description>
+<Explanation language="ENGLISH">"Summoning a howling whirlwind, the sorceress is blown across the land, coming to rest with graceful ease as the magical tumult subsides. The billowing wind buffets any creatures or Characters of Size Average or smaller within Willpower Bonus yards of where the sorceress begins and ends her flight. Affected creatures or Characters must pass a Challenging (+0) Athletics Test or gain a Prone Condition."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_23">
+<Description language="ENGLISH">"Withering Presence"</Description>
+<Explanation language="ENGLISH">"The sorceress blights the victim with an aura that repels companionship and fellow feeling. They become a pariah, feeling unloved, unwanted, or shunned, and even their friends recoil at their presence. The target incurs a -5 SL penalty to any Fellowship Test. Each hour, they can attempt a Hard (-20) Cool Test to stop the Spell's effects."</Explanation>
+<Target>"1"</Target>
+<Duration>"1d10 hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="TEMPLE-DARK_24">
+<Description language="ENGLISH">"Word of Pain"</Description>
+<Explanation language="ENGLISH">"As the sorceress utters a forbidden name, the bodies of her enemies bend and buckle, wracked with waves of agony. Targets within the Area of Effect must pass their choice of a Difficult (-10) Endurance Test or Difficult (-10) Cool Test, subtracting any SL from the Casting Test from the result. If they fail, all Tests they make are reduced by the same SL (to a minimum of 1 SL)."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"TEMPLE-T0001_DARK"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
+</DATA_BOOK>

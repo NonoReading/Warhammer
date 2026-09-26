@@ -1,3 +1,15 @@
+26/09/2026 - TEMPLE OF SPITE : LORE OF DARK MAGIC SAISIE, PREMIER LIVRE WFRP5 HORS RULEBOOK
+Chantier "livre suivant" apres Reikland Miscellanea, Temple of Spite choisi par Nono.
+Decouverte en cours de saisie : ce livre est en realite WFRP5 (5th Edition, copyright 2026
+dans le texte source), pas WFRP4 comme suppose au depart - un premier jet WFRP4 a ete jete
+et refait sous DATABASE/WFRP5/BOOK_TEMPLE_OF_SPITE.Xml, conventions differentes reperees
+dans BOOK_RULESBOOK.Xml (Talents RULES-T0007_XXX, TypSpell "Arcane Magic"). 24 sorts de la
+Lore of Dark Magic saisis (nouveau Talent TEMPLE-T0001_DARK), reste hors perimetre : Sorceress
+Pacts (mecanisme non modelisable), ethnie Dark Elves, trait de navire special, Gifts of
+Khaine (8 dons). Compile 0 erreur, INI.TXT mis a jour (BOOKWFRP5). A tester par Nono.
+Ce que la session retient : toujours verifier la page de copyright d'un nouveau livre avant
+de supposer sa version (WFRP4 vs WFRP5) - le titre seul ne le dit pas.
+
 26/09/2026 - ARMURE A 0 PA ET TALENT DE CARRIERE : TESTES ET VALIDES PAR NONO
 Les deux chantiers signales par Nono sur Gunther Krieg sont clos. Armure a 0 PA :
 confirme comme non un bug, la case "porte" des 2 armures custom (PERSO-ARMO_01/_02)
