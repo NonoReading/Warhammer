@@ -6892,3 +6892,33 @@ liste officielle du livre : Swim etait la seule incoherence, tout le reste
 (Climb=S, Intimidate=S, Row=S, Athletics=Ag, etc.) etait deja correct. Un seul
 attribut change, XML pur, aucun code Pascal touche. Teste et valide par Nono
 le 26/09/2026.
+
+26/09/2026 - MENU PRINCIPAL : BOUTON MAJ POUR COCHER/DECOCHER PLUSIEURS LIVRES SANS RECHARGER A CHAQUE CLIC
+Signale par Nono en testant un tout autre point (ShowMessage de debug oublie dans
+TabLivreDblClick, retire) : cocher/decocher une case de TabLivre relancait a chaque clic
+un ChargerLivre(true,'') complet - vidage de TOUTES les listes en memoire puis reimport XML
+de TOUS les livres actuellement coches (warhammersource.pas). Devenu tres lent avec la
+taille prise par le corpus (60+ livres). Solution proposee par Nono : la coche ne
+declenche plus le rechargement, juste l'affichage (case + compteurs de la ligne) ; un
+bouton "MAJ"/"Update" (RULES-LAB_295, INTERFACE.Xml/INTERFACE_FRANCAIS.Xml) apparait des
+que l'etat coche a l'ecran (LivresCochesActuellement) differe de ce qui est reellement
+charge (LivresChargesSnapshot) ; le rechargement groupe (ChargerLivre/ChargerPersonnages/
+SauveIni) n'a lieu qu'au clic sur ce bouton. Permet de cocher plusieurs livres d'affilee
+pour un seul rechargement. Bug de mise au point corrige en cours de route : le snapshot
+initial etait pris depuis la variable globale LivresCharges, qui n'est mise a jour par
+ChargerLivre que si ForceMaj=true - au demarrage (ChargerLivre(false,'')) elle restait
+vide, faisant apparaitre le bouton a tort des l'ouverture ; remplace par un calcul local
+(LivresCochesActuellement) coherent des deux cotes.
+Bouton d'abord cree en code (TButton Windows nu, comme ButtonOptionRegle deja existant) :
+Nono l'a trouve visuellement "bizarre" a cote des 4 boutons Livre stylises (TBCButton,
+dégrades/bordures rouges) et a demande a pouvoir le repositionner depuis l'editeur de
+formulaire Lazarus - impossible pour un composant cree dynamiquement. Les DEUX boutons
+(ButtonMAJLivres et ButtonOptionRegle, qui avait le meme souci) sont donc repasses en
+TBCButton poses dans warhammersource.lfm (meme style que ButtonCreationLivre, clone
+propriete par propriete), avec Caption toujours pose en code (GetTexteLibelle) puisqu'il
+depend de la langue d'interface. Un bug de texte vide a cote (Caption assigne une seule
+fois au demarrage, avant que le bouton devienne visible) corrige en reposant le Caption a
+chaque appel de RafraichirBoutonMAJLivres.
+Code Pascal + .lfm + 2 livres (INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, RULES-LAB_295).
+Compile (lazbuild --build-all, 0 erreur, meme profil warnings/hints/notes). Teste et
+valide par Nono le 26/09/2026 : CHANTIER CLOS.

@@ -73,6 +73,8 @@ type
     TotLivreMetier: TEdit;
     Panel1: TPanel;
     TabPersonnage: TStringGrid;
+    ButtonOptionRegle: TBCButton;
+    ButtonMAJLivres: TBCButton;
     procedure BoutonCompetenceClick({%H-}Sender: TObject);
     procedure BoutonTalentClick({%H-}Sender: TObject);
     procedure ButtonArmureClick({%H-}Sender: TObject);
@@ -117,12 +119,17 @@ type
     procedure PeuplerTabLivre();
     procedure AjustePositionFenetre();
     procedure ButtonOptionRegleClick(Sender: TObject);
+    procedure ButtonMAJLivresClick(Sender: TObject);
+    procedure RafraichirBoutonMAJLivres();
+    function  LivresCochesActuellement(): String;
   private
     FenetreInitialisee:       Boolean;
     LargeurFenetreBase:       Integer;
     LargeurTabLivreBase:      Integer;
     LargeurTabPersonnageBase: Integer;
-    ButtonOptionRegle:        TButton;
+    // Livres réellement chargés en mémoire lors du dernier ChargerLivre (par opposition
+    // à LivresCharges, recalculée à chaque coche/décoche - voir RafraichirBoutonMAJLivres).
+    LivresChargesSnapshot:    String;
   public
   end;
 
@@ -898,6 +905,8 @@ Procedure TMenu.RafraichirLibellesMenu();
 
     ButtonCreationLivre.Caption := GetTexteLibelle('RULES-LAB_154');
     ButtonOuvrirLivre.Caption   := GetTexteLibelle('RULES-LAB_155');
+    if Assigned(ButtonMAJLivres) then
+      ButtonMAJLivres.Caption   := GetTexteLibelle('RULES-LAB_295');
 
     Label4.Caption              := GetTexteLibelle('RULES-LAB_183');
     Label5.Caption              := GetTexteLibelle('RULES-LAB_184');
@@ -1404,10 +1413,6 @@ var
 begin
   if (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
   begin
-    ShowMessage('[' + LivreRepertoireTravail('RULES','ENGLISH') + ']' + SeparateurRetourLigne
-              + '[' + LivreFichierActuel('RULES','ENGLISH') + ']');
-
-
     // Si double-click sur la PREMIÈRE colonne (sélection) → toggle + charger
     if TabLivre.Col = ColLivreSel then
       begin
@@ -1429,9 +1434,13 @@ begin
             TabLivre.Cells[ColLivreSor, TabLivre.Row] := '';
             TabLivre.Cells[ColLivreTra, TabLivre.Row] := '';
           end;
-          ChargerLivre(true, '');
-          ChargerPersonnages();
-          SauveIni();
+          // Le rechargement effectif (ChargerLivre/ChargerPersonnages/SauveIni) est
+          // différé au clic sur ButtonMAJLivres (CONTEXT.md, 26/09/2026) : avec la
+          // taille prise par le corpus de livres, cocher/décocher un seul livre
+          // relançait un reparsing complet de TOUS les livres sélectionnés à chaque
+          // clic - devenu très lent. On se contente ici de signaler l'écart via le
+          // bouton MAJ ; le traitement groupe les coches suivantes en un seul appel.
+          RafraichirBoutonMAJLivres();
         end
       end
     // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
@@ -1454,6 +1463,46 @@ begin
   end;
 end;
 
+// Recalcule, à partir des cases cochées de TabLivre, la même chaîne concaténée
+// (AjouteAccolade par code de livre) que celle que ChargerLivre calcule dans
+// LivresCharges - mais purement en lecture, sans rien recharger (26/09/2026).
+function TMenu.LivresCochesActuellement(): String;
+  var
+    I: Integer;
+  begin
+    Result := '';
+    for I := 1 to TabLivre.RowCount - 1 do
+      if TabLivre.Cells[ColLivreSel, I] = ConstSelectionne then
+        Result := Result + AjouteAccolade(TabLivre.Cells[ColLivreCod, I]);
+  end;
+
+// Affiche/masque ButtonMAJLivres selon que les cases cochées à l'écran (LivresCochesActuellement)
+// correspondent ou non aux livres réellement chargés en mémoire (LivresChargesSnapshot, mis à
+// jour uniquement par ButtonMAJLivresClick après un ChargerLivre effectif).
+procedure TMenu.RafraichirBoutonMAJLivres();
+  begin
+    if not Assigned(ButtonMAJLivres) then Exit;
+    // Caption reposée ici (pas seulement lors du GetTexteLibelle initial de PeuplerTabLivre,
+    // qui a un timing fragile vis-à-vis du chargement d'INTERFACE.Xml et de l'Assign() posé
+    // juste après la création) : garantit un texte à jour au moment précis où le bouton
+    // redevient visible (Nono a signalé le bouton vide le 26/09/2026).
+    ButtonMAJLivres.Caption := GetTexteLibelle('RULES-LAB_295');
+    ButtonMAJLivres.Visible := (LivresCochesActuellement() <> LivresChargesSnapshot);
+  end;
+
+procedure TMenu.ButtonMAJLivresClick(Sender: TObject);
+  begin
+    ChargerLivre(true, '');
+    ChargerPersonnages();
+    SauveIni();
+    // LivresCharges (variable globale, chargeconstantes.pas) n'est mise à jour par
+    // ChargerLivre QUE si ForceMaj (ce qui est le cas ici) - mais au démarrage
+    // (ChargerLivre(false,'') dans FormCreate) elle reste vide, d'où le recours à notre
+    // propre calcul (LivresCochesActuellement) pour le snapshot, cohérent dans les deux cas.
+    LivresChargesSnapshot := LivresCochesActuellement();
+    RafraichirBoutonMAJLivres();
+  end;
+
 procedure TMenu.FormCreate(Sender: TObject);
   Var
     SearchResult:        TSearchRec;
@@ -1467,18 +1516,14 @@ procedure TMenu.FormCreate(Sender: TObject);
        ChargerImage();
        Randomize;
 
-       // Bouton d'ouverture de la fenetre des regles optionnelles (toggle .INI,
-       // A FAIRE.txt "TOGGLE .INI PAR LIVRE", CONTEXT.md 2.89, 22/09/2026) - cree en
-       // code (pas dans le .lfm) sous Panel3 (Interface), zone fixe jamais reancree
-       // par AjustePositionFenetre. Le Caption (GetTexteLibelle) est pose PLUS BAS,
-       // apres le chargement d'INTERFACE.Xml (ListTexte cree ligne ~1559, rempli par
-       // XmlImport ligne ~1619) - appeler GetTexteLibelle ici plantait (ListTexte pas
-       // encore cree), crash "ACCESS VIOLATION generics.collections.pas" trouve par
-       // Nono en lancant depuis l IDE, 22/09/2026.
-       ButtonOptionRegle          := TButton.Create(Self);
-       ButtonOptionRegle.Parent   := Self;
-       ButtonOptionRegle.SetBounds(Panel3.Left, Panel3.Top + Panel3.Height + 8, Panel3.Width, 30);
-       ButtonOptionRegle.OnClick  := @ButtonOptionRegleClick;
+       // ButtonOptionRegle (regles optionnelles, A FAIRE.txt "TOGGLE .INI PAR LIVRE",
+       // CONTEXT.md 2.89, 22/09/2026) et ButtonMAJLivres (26/09/2026) sont désormais posés
+       // dans le .lfm (TBCButton, même style que les boutons Livre) plutôt que créés ici en
+       // code - Nono a demandé à pouvoir les repositionner depuis l'éditeur de formulaire
+       // Lazarus, ce qu'un composant créé dynamiquement (l'ancienne version, TButton puis
+       // TBCButton+Assign) ne permet pas. Leur Caption reste posé en code (GetTexteLibelle,
+       // PeuplerTabLivre/RafraichirBoutonMAJLivres) car il dépend de la langue d'interface,
+       // pas figé au design.
 
        // Sélection de livres cochés, une par édition (Nono, 13/09/2026, CONTEXT.md §2.70) -
        // créée AVANT ChargeIni() qui la peuple depuis le .INI.
@@ -1710,6 +1755,8 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // charger les livres
        ChargerLivre(false, '');
+       LivresChargesSnapshot := LivresCochesActuellement();
+       RafraichirBoutonMAJLivres();
 
        // Retraduire les libellés d'interface selon ValLangueInterface : ChargerLivre vient
        // d'appliquer Traduit(ValLangue,'') à TOUS les livres, y compris INTERFACE - la langue
