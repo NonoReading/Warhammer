@@ -1,9 +1,26 @@
-26/09/2026 - ARMURE A 0 PA SUR TOUS LES EMPLACEMENTS (SIGNALE EN FIN DE SESSION, A REPRENDRE)
-Nono signale sur Gunther Krieg, juste avant de partir : il porte une armure (Cotte de
-maille PERSO-ARMO_02 + Coiffe de maille PERSO-ARMO_01, catalogue custom BOOK_PERSO.Xml)
-et chaque emplacement de protection affiche 0 PA. Pas investigue ce soir - voir A FAIRE.txt
-pour le point de reprise et les premieres pistes (verifier le catalogue PERSO vs le
-moteur de calcul des PA).
+26/09/2026 - ARMURE A 0 PA SUR TOUS LES EMPLACEMENTS (CAUSE TROUVEE, PAS UN BUG DE CODE)
+Nono signale sur Gunther Krieg : Cotte de maille PERSO-ARMO_02 + Coiffe de maille
+PERSO-ARMO_01 (catalogue custom BOOK_PERSO.Xml), 0 PA sur tous les emplacements.
+Investigation : catalogue OK (ArmorPoint=2 sur les 2 pieces) et moteur de calcul OK
+(pdfpersonnage.pas, boucle ArmureBras/Corps/Jambe/Tete += PArmure.Protection). Le XML
+sauvegarde de Gunther montre ces 2 pieces sans l'attribut worn="1" (<Item
+name="PERSO-ARMO_02">""</Item>), qui est ce qui fait passer PersonnageEquipement.Porte
+a true (chargepersonnage.pas, Assigned(GetNamedItem('worn'))) - sans lui, le calcul par
+localisation n'additionne rien, exactement le symptome. Compare a une armure vraiment
+portee ailleurs dans SAVED_CARACTERS (worn="1" present). Conclusion probable : la case
+"porte" de ces 2 armures n'est simplement pas cochee sur la fiche de Gunther - Nono
+verifie a la prochaine ouverture avant qu'on touche au code. Voir A FAIRE.txt/CONTEXT.md.
+
+26/09/2026 - LIGNE ARME/ARMURE NON PORTEE GRISEE (ECRAN + PDF)
+Suite au signalement ci-dessus, Nono demande une visibilite immediate de ce qui est
+reellement porte. Ajoute : grisage (clGray) de la ligne dans TabEquipementAffichage
+(winpersonnage.pas, TabDrawCell) quand la colonne "porte" est vide, pour arme ET armure.
+Meme traitement sur le PDF (pdfpersonnage.pas), en 4 endroits car le texte de l'arme/
+armure est ecrit deux fois dans le code (fiche de creation PdfPersonnageCreation, et
+fiche etendue PdfBlocArmesDonnees/PdfBlocArmuresDonnees) : SetColor(RGB(150,150,150))
+avant la ligne, SetColor(clBlack) apres, meme mecanisme deja utilise ailleurs sur le PDF
+(talents grises hors carriere). Compile (lazbuild --build-all, 0 erreur, meme profil
+warnings/hints/notes). A tester par Nono.
 
 26/09/2026 - TALENT DE CARRIERE COMPTAIT SON NIVEAU DE CARRIERE COMME NOMBRE DE RANGS
 Signale par Nono sur Gunther Krieg : la Gaffe affichait DR+14 au lieu de DR+12 attendu

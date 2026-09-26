@@ -1785,6 +1785,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
 
               Inc(NbArme);
 
+              // Ligne grisee si l'arme n'est pas "portee" (case decochee sur la fiche) -
+              // meme visibilite demandee par Nono que sur TabEquipementAffichage
+              // (winpersonnage.pas), suite au signalement "armure a 0 PA" du 26/09/2026.
+              if not PersonnageEquipement.Porte then
+                PdfPage.SetColor(RGB(150,150,150), False);
+
               Pourcent := '';
 
               CompetenceDonnee := PdfPersonnageCompetence(Personnage, PArme.CodeCompetence, Bidon);
@@ -1908,6 +1914,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                   else
                     PdfPage.WriteText(132,121-(NbArme*5), ListMalii);
                 end;
+              if not PersonnageEquipement.Porte then
+                PdfPage.SetColor(clBlack, False);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end
 
@@ -1969,6 +1977,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                 end;
 
               Inc(NBArmure);
+              // Ligne grisee si l'armure n'est pas "portee" (meme mecanisme que le bloc
+              // arme ci-dessus - signalement Nono du 26/09/2026, "armure a 0 PA").
+              if not PersonnageEquipement.Porte then
+                PdfPage.SetColor(RGB(150,150,150), False);
               if PersonnageEquipement.TypeEquipement = TypeEquipAR then
                 begin
                   PdfEcrit(PdfPage,18,52,255-(NbArmure*5), Parmure.Libelle+Quality,MinPolice);
@@ -2015,6 +2027,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
               PdfPage.WriteText(90,255-(NbArmure*5), LigneBonus);
+              if not PersonnageEquipement.Porte then
+                PdfPage.SetColor(clBlack, False);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end
 
@@ -3530,6 +3544,12 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 
           Inc(NbArme);
 
+          // Ligne grisee si l'arme n'est pas "portee" - meme mecanisme que
+          // PdfPersonnageCreation/PdfBlocArmuresDonnees (signalement Nono du
+          // 26/09/2026, "armure a 0 PA").
+          if not PersonnageEquipement.Porte then
+            PdfPage.SetColor(RGB(150,150,150), False);
+
           Pourcent := '';
 
           CompetenceDonnee := PdfPersonnageCompetence(Personnage, PArme.CodeCompetence, Bidon);
@@ -3663,6 +3683,8 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
                 PdfEcrit(PdfPage, XGauche + 113 + 1, RangeX - 1, Y - ((NbArme + 2) * HauteurLigne) + 2, ListMalii, MinPolice);
 
             end;
+          if not PersonnageEquipement.Porte then
+            PdfPage.SetColor(clBlack, False);
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
         end;
   end;
@@ -3754,6 +3776,11 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
 
               Inc(NBArmure);
 
+              // Ligne grisee si l'armure n'est pas "portee" - meme mecanisme que
+              // PdfBlocArmes/le premier PdfBlocArmuresDonnees (signalement Nono du
+              // 26/09/2026, "armure a 0 PA").
+              if not PersonnageEquipement.Porte then
+                PdfPage.SetColor(RGB(150,150,150), False);
               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
                 begin
                   PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, Parmure.Libelle + Quality + PdfLienAnimal(PersonnageEquipement), MinPolice);
@@ -3815,6 +3842,8 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                 PdfEcrit(PdfPage, XGauche + 70 +1, XDroite, Y - ((NbArmure + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice)
               else
                 PdfEcrit(PdfPage, XGauche + 70 +1, XDroite, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, LigneBonus, MinPolice);
+              if not PersonnageEquipement.Porte then
+                PdfPage.SetColor(clBlack, False);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end;
       end;

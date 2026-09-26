@@ -4726,7 +4726,18 @@ begin
           end;
 
           // Changer la couleur du texte pour les colonnes 3 à 6
-          Grid.Canvas.Font.Color := clBlack;
+          // Ligne grisee si l'equipement (arme ou armure, colonne 3) n'est pas "porte"
+          // (colonne 8 vide) : visibilite immediate de ce qui est reellement sur soi,
+          // demande par Nono suite au signalement "armure a 0 PA" du 26/09/2026 (case
+          // "porte" non cochee, invisible jusque-la dans la grille).
+          if (Grid = TabEquipementAffichage) and
+             (Grid.Cells[8, aRow] = '') and
+             ((TrimRight(Grid.Cells[3, aRow]) = TrimRight(TypeEquipAR)) or
+              (TrimRight(Grid.Cells[3, aRow]) = TrimRight(TypeEquipARS)) or
+              (TrimRight(Grid.Cells[3, aRow]) = TrimRight(TypeEquipWe))) then
+            Grid.Canvas.Font.Color := clGray
+          else
+            Grid.Canvas.Font.Color := clBlack;
 
           // Calculer la position x du texte pour l'alignement horizontal centré
           // en utilisant la largeur de la cellule et la largeur du texte
