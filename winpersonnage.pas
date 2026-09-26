@@ -1628,8 +1628,23 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
 end;
 
 procedure TWinPersonnages.CalculXpGlobal(Mode25: boolean);
+  // A l'activation de l'option, EditTotalXp25 n'avait jamais ete alimente (reste a "0"
+  // tant que Nono ne tape pas dedans a la main) : XmlSauvegarde lit alors un Total de 0,
+  // ecrasant Xp/CurrentXp du personnage a l'enregistrement suivant. Meme conversion que
+  // EditTotalXpKeyUp (Trunc/25), declenchee ici a la coche plutot qu'a la frappe.
+  // La ligne "Total" de tabExperience (LigXpTotal) n'est sinon rafraichie qu'au chargement
+  // du personnage (l.3582) : sans la reposer ici, elle reste affichee en unites brutes
+  // (2675) alors que Spent/Remaining basculent deja en unites divisees (107) - constate
+  // par Nono a l'ecran juste apres la coche.
 begin
-
+  if Mode25 then
+    begin
+      EditTotalXp25.Text := IntToStr(Trunc(StrToIntDef(EditTotalXp.Text,0) / 25));
+      tabExperience.Cells[ColXpDonnee, LigXpTotal] := EditTotalXp25.Text;
+    end
+  else
+    tabExperience.Cells[ColXpDonnee, LigXpTotal] := EditTotalXp.Text;
+  CalculTableExperience();
 end;
 
 procedure TWinPersonnages.CheckBoxXpDiv25Change(Sender: TObject);
@@ -6673,8 +6688,14 @@ procedure TWinPersonnages.XmlSauvegarde();
     // Total/Restant lus directement sur CalculXpEtat (entiers) et non sur le texte affiche
     // de tabExperience : celui-ci porte un separateur de milliers (Format('%.0n',...)) que
     // StrToIntDef ne sait pas reparser - CurrentXp finissait a "0" des que Restant >= 1000.
+    // Le parametre Xp doit rester le total BRUT (PersonnageXmlCreation le redivise lui-meme
+    // par 25 pour ecrire Xp25) : XpEtat.Total bascule deja sur l'unite divisee des que
+    // CheckBoxXpDiv25 est coche (CalculXpEtat, pour que Restante colle a l'ecran) - le
+    // passer tel quel ici double-divisait Xp25 et ecrasait Xp (brut) par la valeur divisee
+    // (ex. Xp=2675/CurrentXp=175 devenu Xp=107/Xp25=4 au lieu de Xp=2675/Xp25=107). Xp
+    // reste donc lu sur EditTotalXp (toujours brut), seul XpRestante suit l'unite courante.
     XpEtat                := CalculXpEtat();
-    PersonnageXmlCreation(Personnage, XpEtat.Total, XpEtat.Restante, fileName, Personnage.NomPersonnage);
+    PersonnageXmlCreation(Personnage, StrToIntDef(EditTotalXp.Text,0), XpEtat.Restante, fileName, Personnage.NomPersonnage);
 
     // Contenu identique au fichier precedent : le nouveau fichier n'apporte rien, on l'efface
     // plutot que d'accumuler des doublons a chaque Enregistrer sans changement reel (remplace

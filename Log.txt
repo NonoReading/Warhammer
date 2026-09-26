@@ -1,3 +1,21 @@
+26/09/2026 - OPTION "DIVISER L'XP PAR 25" : LA COCHE NE CONVERTISSAIT PAS LE TOTAL,
+LE XML LE DIVISAIT ENSUITE DEUX FOIS - TESTE ET VALIDE PAR NONO
+Signale par Nono sur Gunther Krieg (comparaison des deux derniers XML de sauvegarde,
+avant/apres la coche). Bug 1 : CalculXpGlobal (winpersonnage.pas) etait un stub vide :
+rien ne recalculait EditTotalXp25 depuis EditTotalXp a la coche de CheckBoxXpDiv25
+(seule la frappe manuelle dans l'un des deux champs les synchronisait), et la ligne
+Total de tabExperience restait figee sur l'ancienne valeur brute a l'ecran. Corrige :
+CalculXpGlobal alimente EditTotalXp25 par Trunc(EditTotalXp/25) a la coche, rafraichit
+tabExperience et rappelle CalculTableExperience. Bug 2, trouve en relisant le XML une
+fois le bug 1 corrige : le fichier sauvegardait quand meme Xp="107"/Xp25="4" au lieu de
+Xp="2675"/Xp25="107" - XmlSauvegarde passait a PersonnageXmlCreation un total deja
+divise (CalculXpEtat().Total, qui bascule en unite divisee des que la case est cochee),
+alors que cette fonction attend le total BRUT et le redivise elle-meme pour ecrire
+Xp25 - double division. Corrige en passant EditTotalXp.Text (toujours brut) comme
+parametre Xp ; XpRestante (CurrentXp) reste sur l'unite courante, deja correct.
+Compile 0 erreur aux deux etapes. Teste et valide par Nono sur Gunther Krieg :
+Xp="2675"/Xp25="107"/CurrentXp="127" corrects dans le nouveau XML. Chantier clos.
+
 26/09/2026 - BUG DE SAUVEGARDE DES AUGMENTATIONS DE COMPETENCE
 Signale par Nono : chaque augmentation de competence sauvegardait en trop la valeur
 Actuel au lieu de la difference reellement achetee (ex. 15->20 ajoutait +15 au total au
