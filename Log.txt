@@ -6881,3 +6881,14 @@ aucun fichier .pas touche. Extraction du texte source confiee a un sous-agent de
 en page a deux colonnes tres jumbled sur ce chapitre) puis verifiee avant saisie. XML
 valide par un parseur (aucun fichier .pas modifie, compilation Pascal non requise). A
 TESTER PAR NONO EN JEU avant commit.
+
+26/09/2026 - SWIM ETAIT LIE A LA MAUVAISE CARACTERISTIQUE
+Signale par Nono suite a une partie : la competence Swim (RULES-COMPNATA,
+BOOK_RULESBOOK.Xml) etait liee a RULES-ATTR_WP (Force Mentale) au lieu de
+RULES-ATTR_S (Force). Verifie contre le texte source du Rulebook ("Swim (S)
+advanced", Master Skill List p.118) qui confirme Force. Profite de l'occasion
+pour comparer systematiquement les 45 competences de base de la XML contre la
+liste officielle du livre : Swim etait la seule incoherence, tout le reste
+(Climb=S, Intimidate=S, Row=S, Athletics=Ag, etc.) etait deja correct. Un seul
+attribut change, XML pur, aucun code Pascal touche. Teste et valide par Nono
+le 26/09/2026.

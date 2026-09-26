@@ -440,7 +440,7 @@ The Trade Skill is also used for enacting a Crafting Endeavour (see page 197)."<
 <Explanation language="ENGLISH">"Your ability to make music with an instrument, hopefully well enough to impress others. A successful Play Test lets you entertain those near enough to see and hear you; the SL indicates the quality of the piece played."</Explanation>
 </Skill>
 <Skill id="RULES-COMPNATA">
-<Attribut>"RULES-ATTR_WP"</Attribut>
+<Attribut>"RULES-ATTR_S"</Attribut>
 <Description language="ENGLISH">"Swim"</Description>
 <Explanation language="ENGLISH">"Your ability to swim in water without drowning. If you have the Swim Skill, you are automatically presumed to be able to swim freely without a Test. But if you find yourself in difficult currents, racing, or fleeing from an oversized shark sent by Stromfels, the God of Drowning, a Test will be required. This may be modified by the condition of the water, or how encumbered you are by clothes, armour, and other trappings.
 Swim is only used in combat if you happen to be fighting in the water, where it replaces Skills like Athletics to govern Movement. If exact speeds are required, you swim at half your Movement rate, using the normal rules for moving found on page 164."</Explanation>
