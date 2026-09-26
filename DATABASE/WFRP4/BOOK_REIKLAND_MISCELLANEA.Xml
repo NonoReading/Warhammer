@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"REIKL"</CODE_BOOK>
+<BOOK>"BOOK REIKLAND MISCELLANEA"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2023. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="REIKL-BOOK REIKLAND MISCELLANEA">"Reikland Miscellanea"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="REIKL-BOOK REIKLAND MISCELLANEA">"Reikland Miscellanea"</Text>
+</Label>
+</DATA_LABEL>
+<!-- Chapitre "Blood and Bramble" (p.116-131) : Lore of Hedgecraft et Lore of Witchcraft,
+     rattachees aux Talents deja existants du Rulebook (RULES-T0088_MAGIE Hedgecraft,
+     RULES-T0088_SORCEL Witchcraft) - aucun Talent nouveau. Le reste du livre (PNJ statues,
+     tables d100 narratives, sorts des 8 Lores arcanes deja saisis via BOOK_SULLASARAS_
+     SPELLS_OF_UNRIVALLED_UTILITY.Xml, reproduit a l'identique dans ce livre) est hors
+     perimetre (audit sous-agent 26/09/2026, A FAIRE.txt).
+     Erratum/omission constatee : la liste de sorts d'Old Mar of Diesdorf (p.132) cite
+     "Nepenthe" et "Part the Branches" parmi ses sorts de Lore of Hedgecraft, mais aucun des
+     deux n'a de bloc CN/Range/Target/Duration dans le texte du chapitre (verifie page par
+     page p.118-124) - non saisis. De meme la liste de sorts de la sorciere Childers (p.130)
+     cite "Curse of Ill-Fortune" et "Fatetheif" (sic) pour des sorts imprimes ailleurs sous
+     les noms "Curse of the Treacherous Tongue" et "Fatethief" - noms du corps du texte
+     retenus, meme logique que l'erratum Sullasara/Death on the Reik Companion. -->
+<DATA_SPELL>
+<Sort id="REIKL-HEDGE_01">
+<Description language="ENGLISH">"Badwill"</Description>
+<Explanation language="ENGLISH">"You create an atmosphere of mistrust, aggression, and outright hatred. All Fellowship Tests within the Area of Effect receive a penalty of -10, and any Prejudice Psychology becomes Hatred instead. You may exempt yourself from this spell's effects if you wish, but all others find themselves consumed with malicious intent. This spell often also draws malicious spirits from the surrounding area."</Explanation>
+<Target>"AoE (Fellowship Bonus Yards)"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_02">
+<Description language="ENGLISH">"Bonesetter"</Description>
+<Explanation language="ENGLISH">"By taking the broken limb in hand, and having the patient bite down on a swath of carefully prepared bark and leather, you can shift the shattered bone back into place. Reduce the healing time for a Broken Bone injury by 1d10 days, plus an additional 1d10 days for each +SL you receive on your Casting Test, to a minimum of one day. Each broken bone can only benefit from this spell once, and the treatment must be administered within a week of the injury occurring."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_03">
+<Description language="ENGLISH">"Cleanslate"</Description>
+<Explanation language="ENGLISH">"This spell requires either that the target is immersed in running water, or that you have gathered a small philter of clean spring water with which to douse them. Once successfully cast, the target is cleansed of the effects of most forms of harmful magic - resolve this as if you made a Dispel attempt and received all the required SL in a single round. This spell does not remove negative effects caused by an item the target is wearing or carrying, nor negative conditions that are the result of magic but which are not magical themselves. Curses inflicted by powerful Wizards, Witches, or baleful Daemons may instead require other ingredients or an unusual trial to remove, which casting this spell will reveal."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_04">
+<Description language="ENGLISH">"Fertilise"</Description>
+<Explanation language="ENGLISH">"By whispering words of supplication to the spirits of the earth and relieving oneself at the four corners of a field, you ensure a good harvest the following season. Regardless of inclement weather, pests, barren earth or other mitigating circumstances, the harvest is guaranteed to be at least average for the field in question."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_05">
+<Description language="ENGLISH">"Fetterfetch"</Description>
+<Explanation language="ENGLISH">"This spell is typically cast upon an instrument used for dowsing, attuned to the essence of a specific spirit which you must be able to name. If cast successfully, the instrument may be used by anyone to track down whatever binds that spirit to the mortal world (their fetter), via an extended Difficult (-10) Navigate Test requiring an hour per attempt and between 5 and 15 SL total depending on distance and concealment. For a nature spirit this leads to the tree, glade or spring where it dwells; for a ghost, typically to its mortal remains or a strongly-bonded object or person. Destroying the fetter, or resolving the spirit's lingering business, is usually enough to free it or lay it to rest."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_06">
+<Description language="ENGLISH">"Geistbane"</Description>
+<Explanation language="ENGLISH">"By casting this spell on a prepared concoction of oil and herbs, the mixture becomes abhorrent to spirits. Smeared on the entrances to a home, it bars a spirit from entering: any such being must make a Hard (-20) Willpower Test to enter a dwelling protected in this way. Smeared onto a weapon, that weapon counts as magical for the purposes of harming spirits, ghosts, and other undead who can only be harmed by such means (or gains the Damaging quality against such creatures if already magical or normally harmable). The spell ends on such a weapon if it is used to harm a living creature, as fresh blood renders the oil inert."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_07">
+<Description language="ENGLISH">"Kindle"</Description>
+<Explanation language="ENGLISH">"By gathering some kindling, you strike a fire that cannot be extinguished by normal means while the spell endures, so long as sufficient fuel is available. This fire is particularly warming, granting a bonus of +20 to any Endurance Tests made to resist cold weather. Food cooked over the fire will never burn, and even rancid or poisoned ingredients cooked over it are rendered safe, if not appetising."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_08">
+<Description language="ENGLISH">"Onerion"</Description>
+<Explanation language="ENGLISH">"You weave a subtle web of magic over a prepared powder of herbs and a sleepless owl's droppings, influencing the dreams of whoever imbibes it in a drink before the spell's duration expires (each additional SL treats one more drink). The effect becomes apparent the next time the subject sleeps: you may specify the dream's content, from pleasant dreams to a terrible nightmare, or specific messages, though interpretation remains up to the subject. The effect is purely psychological and inflicts only a single dream the first time the subject sleeps after becoming affected; a nightmare may leave the victim with a Fatigued Condition the following day."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_09">
+<Description language="ENGLISH">"Stout Spirit"</Description>
+<Explanation language="ENGLISH">"This spell must be cast over a container of strong alcohol holding up to 10 swigs. Once ensorcelled, any who drink from it find it particularly strong and invigorating, becoming subject to this spell's effects: for the duration, any subject automatically passes the first Fear Test they would be required to take. Once a subject has benefited from this spell, they may not do so again until the following dawn."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_10">
+<Description language="ENGLISH">"Trankraft"</Description>
+<Explanation language="ENGLISH">"By imbuing a bowl of hot broth suitable for one person with invigorating magic, you can stave off sleep and tiredness. The broth must be consumed in full immediately (traditionally with a loud, appreciative burp). The subject may ignore all Fatigued Conditions gained by exertion or exposure, though not those inflicted by magic, for the duration. Once the spell ends, all such Fatigued Conditions return and remain until the subject has rested properly."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_11">
+<Description language="ENGLISH">"Woecharm"</Description>
+<Explanation language="ENGLISH">"You gather up a miasma of ill will - often found at a public event such as a hanging - and imbue its malicious essence into a piece of jewellery such as a ring, amulet or bracelet. Once willingly worn, the item brings its wearer ill luck and misfortune: -10 to all Gamble Tests, -10 to Tests to resist any kind of harmful magic, and +20 on the severity rolls for all Critical Wounds. Items cursed this way are subtle and hard to detect - the Second Sight Talent reveals nothing unusual except while the effects are in use, but Detect Artefact is useful in detecting such a cursed item."</Explanation>
+<Target>"1 item of jewellery"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-HEDGE_12">
+<Description language="ENGLISH">"Godspakt"</Description>
+<Explanation language="ENGLISH">"You call upon one of the handful of spirits of the Hedge who still respect the ancient pacts (see the Pact Keepers). You must select both a spirit and the task you wish them to perform, and cast this spell in a place of suitable resonance to that spirit. If successful, the spirit performs the requested task in exchange for a boon appropriate to the spirit and the task's difficulty, from a simple offering to an esoteric sacrifice - entirely at the GM's discretion."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_01">
+<Description language="ENGLISH">"Banishment of Böl"</Description>
+<Explanation language="ENGLISH">"Using this spell, you may 'banish' a creature with the Daemonic or Undead Trait by directing its interest elsewhere. If the creature's Willpower is lower than yours, it immediately loses interest in you and turns its attention to whoever or whatever it would attack if you were not present; if its Willpower is equal or higher, you must win an Opposed Cool Test for the spell to take effect. Once the creature's new target is dead, its attention returns to you, though the spell may be cast again to redirect it. Instead of the nearest viable target, you may direct the creature's interest to a specific person by presenting a memento of them (a lock of hair, a vial of blood...)."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_02">
+<Description language="ENGLISH">"Bonesnapper"</Description>
+<Explanation language="ENGLISH">"You smear a drop of your own blood on a stone taken from a dilapidated building or ruined monument, invoking the essence of crumbling decay. If cast successfully, the stone glows with a faint red light and may be thrown as a Rock or used as an Improvised Weapon. If it strikes a target and inflicts at least one Wound, the target must make a Difficult (-10) Endurance Test or immediately suffer a Broken Bone (Minor) injury on that location (not counting as a Critical Wound). The effect ends once the stone has inflicted one Broken Bone, or when the spell's duration expires."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP) yards"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_03">
+<Description language="ENGLISH">"Congeal"</Description>
+<Explanation language="ENGLISH">"You whisper to the blood in your victim's veins, slowing its flow and causing it to become viscous and sticky. Unlike other spells of this Lore, this spell cannot be used to inflict Bleeding Conditions. Your victim immediately loses 1+SL Bleeding Conditions; for each Bleeding Condition removed this way, you may instead inflict a Fatigued Condition on the target, slowing their blood further. If you do, the target makes a Challenging (+0) Endurance Test or immediately gains an Unconscious Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_04">
+<Description language="ENGLISH">"Curse of the Treacherous Tongue"</Description>
+<Explanation language="ENGLISH">"Crushing the dried tongue of a deer or other ungulate in one hand, you direct a mote of magic to wrap around your victim's tongue, stealing their next words as your own. Your target may make a Hard (-20) Cool Test; if they fail, you may choose the next words they will speak (you cannot compel them to speak, but once they do, they say whatever you want, in their own voice and cadence). The effect lasts for a single sentence, after which they regain control and become aware of what they said, though not why. This spell does not compel belief in what was said, nor prevent the speaker from contradicting it afterwards."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP) yards"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_05">
+<Description language="ENGLISH">"Fatethief"</Description>
+<Explanation language="ENGLISH">"You capture the fleeting moment of acceptance a small creature felt in the moments before its death, and plant it in your victim's mind. The target must make a Hard (-20) Endurance Test. If they succeed, they immediately lose one Fortune point with no further effect. If they fail, a sense of impending doom takes hold: the target loses a Fortune point and may not gain any new Fortune points until the spell's duration has passed."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Days"</Duration>
+<Range>"(BATTR_WP) yards"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_06">
+<Description language="ENGLISH">"Lodestone"</Description>
+<Explanation language="ENGLISH">"By taking a smear of your victim's blood (even a drop left on a blade after inflicting a single Wound suffices, so long as it is no older than a day) and dipping a lodestone in it, you gain the ability to track that person for the duration. The spell's target is the lodestone itself, so traits such as Resistance (Magic) belonging to the blood's owner have no effect. Any magnetic mineral can be used in place of a lodestone. For the duration, the target object always points towards the original owner of the blood, so long as they are alive - it gives no indication of distance, only direction."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_07">
+<Description language="ENGLISH">"Mirrored Abyss"</Description>
+<Explanation language="ENGLISH">"A mirrored surface you touch (a mirror, a still pool, a polished piece of metal, no larger than your Willpower Bonus in yards) becomes a gateway to a nameless liminal space, a yawning void of darkness and silence. Anyone who passes through immediately becomes trapped there, and for each day they remain must make a Challenging (+0) Endurance Test or vanish forever. While trapped and still alive, victims may attempt a Challenging (+0) Cool Test to appear in nearby reflective surfaces. A second casting of this spell may free those trapped; simply dispelling it only closes an active portal without freeing anyone already inside."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"16"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_08">
+<Description language="ENGLISH">"Outcast's Curse"</Description>
+<Explanation language="ENGLISH">"By channelling Dhar into a lingering miasma and attaching it to your target's physical form, you create a sense of unease and distaste in any who meet them. The victim must make a Challenging (+0) Willpower Test or the spell takes hold: for the duration, all who meet the victim feel ill at ease and suspicious of them (even those who know them well, though they may ignore the effect if they wish and suspect witchcraft). The victim suffers a -20 penalty to Fellowship-based Tests to interact with others. Those with talents such as Second Sight will notice the lingering essence of Dhar and may draw conclusions."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Days"</Duration>
+<Range>"(BATTR_WP) yards"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_09">
+<Description language="ENGLISH">"Pactbind"</Description>
+<Explanation language="ENGLISH">"Taking a ritually prepared blade infused with Dhar, you cut a gash in your own hand and speak the terms of an agreement aloud, binding them into the bloodied blade. Another creature must willingly take up the blade, cut their own hand, and grasp yours to become bound by the terms (they may not amend the terms, only consent or refuse); if you agreed to any conditions yourself while speaking, you are likewise bound. For the duration, any subject must adhere to the letter of the terms to the best of their ability, receiving one warning (a painful physical phenomenon) before breaking them. Breaking the agreement anyway inflicts a curse of frailty: any loss of Wounds also causes a Bleeding Condition, any Fatigued Condition gained is doubled, and 40 is added to Critical Wound severity rolls, until amends are made with the other party. This curse cannot be dispelled normally, only removed by effects that specifically break curses."</Explanation>
+<Target>"You"</Target>
+<Duration>"Until Death or Fulfilment"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_10">
+<Description language="ENGLISH">"Painjar"</Description>
+<Explanation language="ENGLISH">"You recall the essence of unbearable pain from a creature at the moment of its death, typically bottled from its dying breath. If successfully cast, your target must make a Hard (-20) Cool Test or become wracked with the pain of a terrible injury they did not actually suffer: determine a hit location and roll for a Critical Wound as if one had occurred, but the target takes no additional Wounds or Bleeding Conditions from the result. For the duration, the target feels as though suffering all the effects described (snapping bones, flowing blood, lopped limbs) and must act accordingly (Stunned, Prone, believing themselves dead, etc.) though observers see no visible damage. Once the spell ends all such effects cease; the GM may decide the victim suffers an additional Stunned Condition from the trauma."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_WP) yards"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_11">
+<Description language="ENGLISH">"Wayward Path"</Description>
+<Explanation language="ENGLISH">"By walking a path yourself while chewing a mixture of herbs and offal, you render it almost impossible for anyone else to follow it without becoming lost. For the duration, the path becomes incomprehensible to any who attempt to walk it, twisting, fading and doubling back on itself until they end up back where they started. This works on lonely forest tracks as well as in towns, though in the latter case only those following your exact path are affected - those merely crossing the street are unaffected. Those who can sense the Winds of Magic may realise something is afoot and attempt to dispel the spell; until they do, they remain lost just like anyone else."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="REIKL-SORCEL_12">
+<Description language="ENGLISH">"Nameless Summons"</Description>
+<Explanation language="ENGLISH">"You weave vast quantities of Dhar into threads of vile power, creating a space (a circle up to your Willpower Bonus in yards wide) conducive to summoning entities you barely understand. You have no control over which entity is summoned nor its behaviour once manifest - most will demand something in return, others will simply attack. After casting, make a Challenging (+0) Cool Test, then roll 1d10 modified by the SL received and consult the Nameless Summons table to determine the entity, its attitude, and a suitable gift it may demand (ranging from a greater daemon dragging you into its realm on a very bad result, to a Greater Daemon willing to talk on a very good one). The spell does not expire while the entity remains within the prepared space; if it leaves, the duration becomes the entity's Willpower Bonus Rounds (minimum 1), after which it returns whence it came."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Special"</Duration>
+<Range>"(BATTR_WP) yards"</Range>
+<Talent>"RULES-T0088_SORCEL"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
+</DATA_BOOK>

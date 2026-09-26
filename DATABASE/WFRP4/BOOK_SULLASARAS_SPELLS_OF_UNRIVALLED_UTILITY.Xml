@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"SULLA"</CODE_BOOK>
+<BOOK>"BOOK SULLASARAS SPELLS OF UNRIVALLED UTILITY"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording or otherwise without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2021. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="SULLA-BOOK SULLASARAS SPELLS OF UNRIVALLED UTILITY">"Sullasara's Spells of Unrivalled Utility"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="SULLA-BOOK SULLASARAS SPELLS OF UNRIVALLED UTILITY">"Sullasara's Spells of Unrivalled Utility"</Text>
+</Label>
+</DATA_LABEL>
+<!-- 25 Useful Spells for Wizards and other Scoundrels (titre exact du livre, la couverture
+     annonce 25 et non 50, verifie par comptage page a page). Repartis sur les 8 Lores
+     arcanes deja existantes du Rulebook (RULES-T0088_*) : aucun Talent nouveau, aucune
+     carriere, aucun objet, uniquement des sorts (audit sous-agent du 26/09/2026, A FAIRE.txt).
+     Erratum conserve tel quel : la table des matieres annonce "Eye of the Beholder" pour le
+     dernier sort de la Lore of Shadows, mais le corps du livre l'imprime sous le nom
+     "Shadows of Splendour" (repete deux fois, p.11) ; nom du corps du texte retenu, meme
+     logique que "Bension of Tzeentch" dans BOOK_DEATH_ON_THE_REIK_COMPANION.Xml. -->
+<DATA_SPELL>
+<Sort id="SULLA-BETE_01">
+<Description language="ENGLISH">"Beast Made Well"</Description>
+<Explanation language="ENGLISH">"By touching a single creature and channelling Ghur into their form, you heal them of their wounds. This spell works on any creature with the Bestial Trait, and heals Willpower Bonus +SL Wounds. In addition, you gain +20 to Charm Animal Tests involving any creature you have recently healed."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-BETE_02">
+<Description language="ENGLISH">"Cruelty's Deserts"</Description>
+<Explanation language="ENGLISH">"You touch a living creature with the Bestial Trait and create a subtle brand of Ghur on their body, marking them as a favoured ally of an Amber Wizard. Other creatures with the Bestial Trait instinctively avoid them unless attacked. Anyone who passes a Hard (-20) Intuition Test when they first see the creature gains the faint sense that it is somehow protected and not to be harmed. Anyone who injures or otherwise harms a creature marked in this way suffers a -10 Fellowship penalty for the spell's duration. In addition, other members of the harmed creature's species avoid the abuser and become aggressive if approached by them."</Explanation>
+<Target>"1"</Target>
+<Duration>"(ATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-BETE_03">
+<Description language="ENGLISH">"Wyssan's Ally"</Description>
+<Explanation language="ENGLISH">"You touch a living creature with the Bestial Trait and infuse them with Ghur, urging the target to give in to their most savage instincts. Your target gains one of the following Creature Traits: Arboreal, Armour (2), Belligerent, Big, Bite (Strength Bonus +1), Clever, Fast, Fear (10), Fury, Magical, or Weapon (Strength Bonus +2). For each additional +SL, you may choose another Trait."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-BETE_04">
+<Description language="ENGLISH">"Wildercall"</Description>
+<Explanation language="ENGLISH">"You let out a howl, roar, or other appropriate call precisely tuned to a particular species of creature with the Bestial Trait. The call acts as a general summons, usually conveying a simple meaning such as 'food here'. Animals who hear it are not compelled to come to you, but any who have good reason to are likely to do so. Creatures approach your location at a speed typical of their species. If used to summon creatures to an unusual or unnatural location, few if any beasts will respond. This spell grants no special control over the creatures it summons. If you have ever previously used the Beast Master spell on a creature, you may use this spell to call to them alone."</Explanation>
+<Target>"AoE (ATTR_WP) miles"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-MORT_01">
+<Description language="ENGLISH">"Stay Death's Hand"</Description>
+<Explanation language="ENGLISH">"You touch a living creature, or a creature that has just died, and turn aside the tide of Shyish from their form. Your target is spared from death for the spell's duration, so long as they take no further damage. While the power of this spell is enough to end any risk of death from existing Bleeding Conditions, if the target is Ablaze it continues to burn each round unless extinguished. Once this spell ends, if the target has not received sufficient medical treatment or been magically healed, they immediately die."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-MORT_02">
+<Description language="ENGLISH">"Deathsight"</Description>
+<Explanation language="ENGLISH">"You touch a creature and wreathe their eyes in Shyish, granting them a limited form of the Second Sight Talent. For the duration of the spell, the target can sense Shyish, but not other Winds of Magic. Additionally, the target can see departed spirits normally invisible to those without special senses. If they have been sufficiently warned in advance, the target suffers no unfavourable effects. However, if the target is not expecting to be the recipient of this spell, they must immediately make a Challenging (+0) Cool Test or gain one Broken Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-MORT_03">
+<Description language="ENGLISH">"Preservation"</Description>
+<Explanation language="ENGLISH">"You touch any single object - such as a sack of food, cask of drink, or vehicle or building up to the size of a large riverboat - warding it against decay. Food and drink remains pure and wholesome for the spell's duration, and objects are protected from environmental damage such as rain, hailstorms, the scorching sun, and wracking winds. Objects are also protected from wear and tear they would receive in the normal course of their use. Weapons or armour retain their edge and shine without maintenance, though they do not gain the Unbreakable Quality."</Explanation>
+<Target>"1"</Target>
+<Duration>"(ATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-FEU_01">
+<Description language="ENGLISH">"Flashcook"</Description>
+<Explanation language="ENGLISH">"You force a sudden burst of heat into a haunch of meat, pot of stew, or similar-sized serving of food. It is instantly and thoroughly cooked to perfection. This does not apply seasoning or other additional ingredients. If cast on a living creature, this spell creates a sudden, intense pain and substantial burns: treat this as a magic missile dealing +3 Damage, which also inflicts one Stunned Condition on any target that can feel pain. In addition, if the location struck was an arm, the target must make a Challenging (+0) Endurance Test or drop whatever they were holding."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_FEU"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-FEU_02">
+<Description language="ENGLISH">"Comfort"</Description>
+<Explanation language="ENGLISH">"You carefully weave strands of Aqshy into a delicate web, subtly heating the surrounding area. This spell creates a zone of comfortable warmth in an otherwise frigid environment, preventing the effects of exposure to the cold. The warm air creates eddies of wind around the target area, diverting strong winds and inclement weather. By making use of this spell, the difficulty of any Outdoor Survival Tests to make camp can be no worse than Average (+20)."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_FEU"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-FEU_03">
+<Description language="ENGLISH">"Ceaseless Flame"</Description>
+<Explanation language="ENGLISH">"You carefully infuse a flammable object with a loop of Aqshy designed both to fuel a small flame and to draw more of the Red Wind of Magic to the object. A flame about the size of a small candle sprouts from the target and continues to burn without consuming fuel. The flame cannot be quenched, snuffed, or otherwise put out, even if it is fully submerged in water. The flame can set other flammable objects alight given enough time and fuel; any fires started in this way are wholly natural and can be extinguished by normal means."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_FEU"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-CIEUX_01">
+<Description language="ENGLISH">"Birdspeech"</Description>
+<Explanation language="ENGLISH">"As creatures of the sky, most birds are subject to Azyr. By casting this spell, you become able to understand and communicate with any ordinary bird. Most birds know much of the wind and weather, the scurrying of rats and other prey, and the presence of new predators in an area. Some birds will carry out simple requests, such as taking small objects to distant individuals, though most ask for something in return. You may make a Challenging (+0) Gossip Test to extract a single comprehensible rumour from a flock of birds. Whilst the spell is in effect, you may speak only in a twittering birdspeech incomprehensible to parties not similarly versed in this spell."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-CIEUX_02">
+<Description language="ENGLISH">"Weathervane"</Description>
+<Explanation language="ENGLISH">"By turning your gaze skywards and breathing in Azyr, you glean an insight into upcoming weather conditions. You learn precisely what the weather will be like at your current location for the rest of the day, and tomorrow as well. You also learn of significant weather events, such as storms or unseasonable snowfall. For each +2 SL achieved, you may extend your foresight further into the future: +2 SL for the following week, +4 SL for the following month, +6 SL for the rest of the season."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-CIEUX_03">
+<Description language="ENGLISH">"Gale"</Description>
+<Explanation language="ENGLISH">"You summon a great swell of power and twist it to your will, blasting an area of your choosing with riotous gale-force winds that last for Willpower Bonus Rounds. Torches and campfires are extinguished, and targets suffering from Ablaze Conditions lose one at the start of each round they remain within the affected area. Small and unattended objects are sent flying, and targets must make a successful Challenging (+0) Endurance Test or be sent flying 1d10 yards backwards, gaining the Prone Condition. Alternatively, you may summon up a gentler wind that lasts for Willpower Bonus Hours and blows in a direction of your choosing; no threat to targets, but it clears smoke, fog, or gas, or can fill a vessel's sail to move it at maximum speed for the duration."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"Special (BATTR_WP) Rounds/hours"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-METAL_01">
+<Description language="ENGLISH">"Tale of Metal"</Description>
+<Explanation language="ENGLISH">"You tease a mote of Chamon from the target object and have it whisper to you the tale of its being. You learn the history of the item, where and when it was forged, and any significant moments in its existence, such as if it was previously broken, reforged, or modified. You also learn what uses the item was put to during the last day."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_METAL"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-METAL_02">
+<Description language="ENGLISH">"Rigor of Steel"</Description>
+<Explanation language="ENGLISH">"You infuse an item not normally within the domain of Chamon with a pulse of power, imbuing it with the properties of metal. While its appearance does not alter, the item becomes harder, heavier, and may be put to any use that a metal version of the object touched could normally be used for, gaining all the Qualities and Flaws of a typical metal object of that sort. Infusing Chamon into materials that do not typically contain it causes stress and wear: at the end of the spell's duration, roll 1d10. On a roll of 2-3, the item is degraded and becomes tattered and torn; on a roll of 1, the item falls apart immediately. This spell cannot affect items already enchanted in any way."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_METAL"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-METAL_03">
+<Description language="ENGLISH">"Sense Metal"</Description>
+<Explanation language="ENGLISH">"You open your senses to the sharp, bitter scent of Chamon, drawing its essence to you. This brings awareness of all substantial concentrations of metal within the range: you can tell the metal any nearby objects are made of, their rough shape, and precise location. This sense functions through stone or wood walls, but not through solid metal objects such as iron doors. No Test is required to simply sense the presence of metals nearby, but for precise details make a Challenging (+0) Perception Test."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_METAL"</Talent>
+<Level>"1"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-VIE_01">
+<Description language="ENGLISH">"Ferment"</Description>
+<Explanation language="ENGLISH">"You reach your will into the Jade Wind and focus it into a suitable object, dramatically increasing the pace of natural processes affecting it. Any suitable materials that could normally be fermented or beneficially aged - typically alcohols, cheeses, dried meats, and so on - are instantly brought to the peak of suitability for consumption. To create higher-quality versions of these products, make an appropriate Trade Test when casting the spell."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-VIE_02">
+<Description language="ENGLISH">"Timbervault"</Description>
+<Explanation language="ENGLISH">"By focusing on creating a small pocket of Ghyran and whispering certain words in Elthárin in a supplicatory tone, one can deposit an item or tiny living creature of up to 1 Encumbrance into the foliage of any living tree. The target vanishes into another realm of existence associated with trees. A second casting of this spell can be used to reclaim any object sent to this realm from any tree of the same species anywhere else in the Old World. The target can weigh +1 Encumbrance for each additional SL on the casting Test. Living creatures made the subject of this spell are lost, invariably never to be found again."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-VIE_03">
+<Description language="ENGLISH">"Track's Tale Told"</Description>
+<Explanation language="ENGLISH">"By infusing your senses with Ghyran, you become able to better tell when a natural setting has been disturbed by the passing of some creature. You may immediately make a Track Test with a bonus of +2 SL. If you succeed, you spot the tracks of any creatures that have passed within Willpower Bonus yards of your location. The spell persists for as long as you are following any one set of tracks; any further Track Tests made to follow this trail enjoy a +2 SL bonus, and you can follow it past features that would normally obscure it. This spell can only be cast in a natural, rural setting. It ends when you find your quarry, or when their trail crosses an artificial road or enters an urban or other artificial setting."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-LUMIERE_01">
+<Description language="ENGLISH">"Cleansing Glow"</Description>
+<Explanation language="ENGLISH">"You focus your mind and imbue an object you can hold with a measure of pure Hysh. The object glows brightly for a moment, before being completely restored to a pristine state: dirt and rust vanish, dull blades become sharp, torn cloth is made whole, and any other minor blemishes are removed. Missing pieces are not reformed, but as long as all of the original object is present, it will be made whole, even if it was previously shattered into many pieces. Living creatures may also be targeted: they and their clothing gain all the benefits of a quick bath, but a living creature suffers one Wound for each point of Corruption they possess."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_LUMIERE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-LUMIERE_02">
+<Description language="ENGLISH">"Disgust"</Description>
+<Explanation language="ENGLISH">"You weave a web of lingering magic about a single object, imbuing it with no special properties save that it becomes abhorrent to creatures of Chaos and all their servants. Creatures with the Daemonic or Undead Traits, or anyone with 3 or more points of Corruption, will find the object quite disgusting. If they attempt to hide this reaction, they must make an opposed Cool Test resisted by the observer's Intuition or be visibly repulsed."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_LUMIERE"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-LUMIERE_03">
+<Description language="ENGLISH">"Illuminate"</Description>
+<Explanation language="ENGLISH">"You infuse a source of light with Hysh, causing it to glow much more brightly, but without giving off any additional heat or otherwise risking a fire. A candle flame gives off as much light as a campfire, while a campfire glows as brightly as the noonday sun. In a darkened environment, anyone looking at the source of light when it is first brightened must make a Challenging (+0) Initiative Test to close their eyes, or receive a Blinded Condition unless they also possess the Arcane Magic (Light) Talent. This effect occurs only during the round in which the target is first lit."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_LUMIERE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-OMBRE_01">
+<Description language="ENGLISH">"Shadows of Splendour"</Description>
+<Explanation language="ENGLISH">"You infuse an object of up to 70 Encumbrance with carefully crafted threads of Ulgu, subtly altering it to appear either immensely valuable or completely worthless. At the caster's discretion, it may appear to be worth up to five times the value given in the Consumer's Guide. Conversely, an object may be made to look worthless, worn, broken, or an obvious forgery, while its function remains unimpeded. Those with Second Sight who inspect the object may make a Hard (-20) Intuition Test to recognise that it is enchanted in some way; there is no mundane means to detect the false appearance. (La table des matieres du livre nomme ce sort 'Eye of the Beholder' ; le corps du texte, saisi ici, l'imprime deux fois sous le nom 'Shadows of Splendour'.)"</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_OMBRE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-OMBRE_02">
+<Description language="ENGLISH">"Cloak Activity"</Description>
+<Explanation language="ENGLISH">"This spell weaves a cloak of shadows about you, presenting to the world an entirely false view of your actions. While you still appear to be in your actual location, each round you may describe your actions to the GM as normal, and in addition describe what it is you appear to be doing; to all observers, it looks as though you are performing whatever action you wish. Sounds you make are not affected. Actions that involve interacting with another person grant them a Challenging (+0) Intuition Test to realise that something unnatural is happening. If you outright attack an individual they automatically pass, assuming they survive."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_OMBRE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SULLA-OMBRE_03">
+<Description language="ENGLISH">"Pall of Darkness"</Description>
+<Explanation language="ENGLISH">"You thicken the naturally occurring shadows in an area, causing them to deepen ominously and plunge the area into darkness. It becomes impossible to see through this unnatural darkness, and creatures inside the effect are afflicted with 3 Blinded Conditions until they leave the area."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0088_OMBRE"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
+</DATA_BOOK>

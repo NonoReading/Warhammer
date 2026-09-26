@@ -1,3 +1,57 @@
+26/09/2026 - REIKLAND MISCELLANEA : LORE OF HEDGECRAFT + LORE OF WITCHCRAFT SAISIES
+Chapitre "Blood and Bramble" (p.116-131) du livre. Nouveau fichier BOOK_REIKLAND_
+MISCELLANEA.Xml (CODE_BOOK REIKL), 24 sorts : 12 Lore of Hedgecraft (REIKL-HEDGE_01 a
+_12) et 12 Lore of Witchcraft (REIKL-SORCEL_01 a _12), rattaches aux Talents deja
+existants du Rulebook (RULES-T0088_MAGIE/RULES-T0088_SORCEL) - aucun Talent nouveau,
+gabarit suivi via GABARIT_LIVRE_XML.md. Le reste du livre (sorts des 8 Lores arcanes,
+identiques a BOOK_SULLASARAS_SPELLS_OF_UNRIVALLED_UTILITY.Xml deja saisi ; PNJ statues ;
+tables d100) reste hors perimetre. Deux erratums/omissions constates et documentes en
+commentaire dans le XML : "Nepenthe" et "Part the Branches" cites dans la liste de
+sorts d'un PNJ (p.132) mais sans bloc CN/Range/Target/Duration nulle part dans le texte
+du chapitre (verifie page par page) - non saisis ; "Curse of Ill-Fortune"/"Fatetheif"
+(listes PNJ) vs "Curse of the Treacherous Tongue"/"Fatethief" (corps du texte) - noms
+du corps retenus. INI.TXT mis a jour (BOOKWFRP4, BOOK REIKLAND MISCELLANEA). XML valide
+par un parseur (aucun fichier .pas modifie, compilation Pascal non requise). A TESTER
+PAR NONO EN JEU avant commit.
+Nono a fait remarquer que le bloc <DISCLAIMER> (copyright Games Workshop/Cubicle 7)
+manquait sur ce livre ET sur BOOK_SULLASARAS_SPELLS_OF_UNRIVALLED_UTILITY.Xml, alors
+qu'un accord anterieur demandait de le recuperer sur chaque livre saisi s'il existe.
+Corrige sur les deux fichiers (texte copie depuis la page de copyright de chaque PDF).
+GABARIT_LIVRE_XML.md mis a jour pour inclure <DISCLAIMER> dans l'en-tete obligatoire,
+avec avertissement explicite pour ne plus l'oublier a la prochaine saisie.
+Verification demandee par Nono sur TOUS les livres deja en base : 2 autres oublis trouves
+parmi les livres officiels (OFFICIAL=1), corriges (texte copie depuis chaque PDF) -
+BOOK_SEA_WARDENS_OF_COTHIQUE.Xml et BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml (ce dernier est
+WFRP5, texte legal different - pas de mention Cubicle 7, "5th Edition"). BOOK_PERSO.Xml
+(OFFICIAL=2, catalogue perso de Nono) et BOOK_RULESBOOK_FRANCAIS.Xml (meme CODE_BOOK RULES
+que le Rulebook anglais qui porte deja le disclaimer, fichier de traduction et non un livre
+distinct) laisses sans DISCLAIMER a dessein. Les autres livres OFFICIAL=1/2 en avaient deja
+un. Les deux fichiers corriges valides par un parseur.
+
+26/09/2026 - SULLASARA'S SPELLS OF UNRIVALLED UTILITY SAISI, GABARIT XML CREE
+Nono demande si des sorts restent a ajouter. Verification : Reikland Miscellanea, Temple
+of Spite, Sullasara's Spells et Tribes and Tribulations (releves non vides depuis le
+29/08 mais jamais saisis) n'avaient aucun fichier BOOK_*.Xml. Audit sous-agent sur le
+contenu au-dela des sorts (jamais fait avant) : Reikland Miscellanea et Temple of Spite
+ajoutent des PNJ statues et quelques regles mineures sans nouvelle carriere/talent/objet ;
+Tribes and Tribulations est le plus riche (bestiaire complet, objets magiques, tables
+d100, bandes de PNJ) et demandera plusieurs chantiers ; Sullasara's Spells ne contient
+QUE des sorts (25 reels, le titre "25 Useful Spells" contredisait l'estimation a 50 du
+tri de 29/08). Saisi et clos : BOOK_SULLASARAS_SPELLS_OF_UNRIVALLED_UTILITY.Xml
+(CODE_BOOK SULLA), 25 sorts sur les 8 Lores arcaniques deja existantes du Rulebook
+(RULES-T0088_BETE/MORT/FEU/CIEUX/METAL/VIE/LUMIERE/OMBRE) - aucun Talent nouveau. Erratum
+du livre conserve tel quel (table des matieres "Eye of the Beholder" / corps du texte
+"Shadows of Splendour"). Livre ajoute a INI.TXT. Compile (lazbuild --build-all, 0 erreur,
+meme profil warnings/hints/notes). TESTE ET VALIDE PAR NONO le 26/09/2026.
+Nono a fait remarquer que je regrattais un livre existant a chaque nouvelle saisie de
+sort/talent/carriere pour retrouver le format XML, au lieu de me construire une reference
+une bonne fois - reproche fonde (memoire feedback_proactive_tooling ajoutee). Cree
+GABARIT_LIVRE_XML.md (racine du depot) : en-tete DATA_BOOK/DATA_LABEL, blocs DATA_SPELL/
+DATA_TALENT/DATA_CAREER avec conventions de champs (ATTR_WP/BATTR_WP, TypSpell Domain/
+Minor Magic, etc.), liste des DATA_* restants a detailler au fil de l'eau, pieges connus
+(commentaires XML inline). A consulter avant toute prochaine saisie plutot que relire un
+livre existant.
+
 26/09/2026 - ARMURE A 0 PA SUR TOUS LES EMPLACEMENTS (CAUSE TROUVEE, PAS UN BUG DE CODE)
 Nono signale sur Gunther Krieg : Cotte de maille PERSO-ARMO_02 + Coiffe de maille
 PERSO-ARMO_01 (catalogue custom BOOK_PERSO.Xml), 0 PA sur tous les emplacements.

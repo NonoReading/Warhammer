@@ -798,7 +798,30 @@ REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa c
     ses 15 "Species", qui sont des PNJ. Toujours sortir le contexte avant de conclure.
   * Un livre sans carriere n est pas un livre sans donnees : le tri du 29/08 ecartait
     Temple of Spite, Reikland Miscellanea, Sullasara s Spells et Tribes and Tribulations
-    comme vides, alors qu ils portent entre 26 et 50 SORTS chacun.
+    comme vides, alors qu ils portent entre 26 et 50 SORTS chacun. [AUDIT SOUS-AGENT
+    26/09/2026, contenu au-dela des sorts, jamais verifie avant] Reikland Miscellanea :
+    sorts (Lore of Beasts/Death/Fire/Heavens/Metal/Life/Light/Shadows via Sullasara + Lore
+    of Hedgecraft/Witchcraft via Blood and Bramble) + PNJ statues + tables d100 narratives,
+    PAS de nouvelles carrieres/talents/objets. Temple of Spite : sorts (Lore of Dark Magic)
+    + PNJ statues (elfes noirs) + un trait de navire special + dons rituels de Khaine (a
+    verifier si modelisables en talents). Tribes and Tribulations : le plus riche, PAS que
+    des sorts - sorts (Waaagh! Magic) + bestiaire complet (Trolls, Ogres, Gobelins, Orcs,
+    Orcs Noirs, Hobgoblins, Snotlings) + objets magiques + tables d100 + PNJ/bandes
+    statuees ; importer necessitera plusieurs chantiers, pas un simple BOOK_*.Xml de sorts.
+    [FAIT LE 26/09/2026, TESTE ET VALIDE PAR NONO] Sullasara's Spells of
+    Unrivalled Utility saisi et clos : 25 sorts reels (titre exact "25 Useful Spells", pas
+    50), BOOK_SULLASARAS_SPELLS_OF_UNRIVALLED_UTILITY.Xml, CODE_BOOK SULLA, rattaches aux 8
+    Talents Domain Magic existants du Rulebook (RULES-T0088_BETE/MORT/FEU/CIEUX/METAL/VIE/
+    LUMIERE/OMBRE) - aucun Talent/carriere/objet nouveau. Livre ajoute a INI.TXT
+    (BOOKWFRP4). Erratum : le sort de la table des matieres "Eye of the Beholder" est
+    imprime "Shadows of Splendour" dans le corps du texte (deux fois, p.11) - nom du corps
+    retenu (SULLA-OMBRE_01), note dans l'Explanation XML. [FAIT LE 26/09/2026, A TESTER PAR
+    NONO] Reikland Miscellanea (chapitre Blood and Bramble) saisi et clos : 24 sorts,
+    BOOK_REIKLAND_MISCELLANEA.Xml, CODE_BOOK REIKL, 12 Lore of Hedgecraft + 12 Lore of
+    Witchcraft, rattaches aux Talents Rulebook existants (RULES-T0088_MAGIE/_SORCEL) -
+    aucun Talent nouveau. Deux sorts cites en liste PNJ (Nepenthe, Part the Branches) sans
+    texte de sort dans le livre, non saisis (erratum note dans le XML). Reste : Temple of
+    Spite, Tribes and Tribulations (voir GABARIT_LIVRE_XML.md pour le format).
   * Statut officiel ou fan : les fanbooks V4 passent par le programme Community Content,
     qui impose une mention ; les livres Cubicle 7 portent leur copyright complet. L absence
     de mention ne prouve rien - la page de copyright peut etre une image que l export TXT
