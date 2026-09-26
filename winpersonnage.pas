@@ -6133,8 +6133,12 @@ Procedure TWinPersonnages.MajTables();
           for IndActu := 1 to TabCompetence.RowCount-1 do
             if TabCompetence.Cells[ColCompCode, IndActu] = TabAugmentationCompetence.Cells[ColAugmCompCode, indAugm] then
               begin
-                // mettre à jour le total
+                // mettre à jour le total : on ajoute la différence réellement achetée
+                // (Nouveau - Actuel), pas la valeur Actuel elle-même - sinon chaque
+                // augmentation ajoutait en trop la valeur de départ. Signalé par Nono
+                // le 25/09/2026 (ex. 15->20 sauvegardait comme +15 au lieu de +5).
                 TabCompetence.Cells[ColCompWork, IndActu] := IntToStr(StrToIntDef(TabCompetence.Cells[ColCompWork, IndActu],0) +
+                                                                      StrToIntDef(TabAugmentationCompetence.Cells[ColAugmCompNouveau, indAugm],0) -
                                                                       StrToIntDef(TabAugmentationCompetence.Cells[ColAugmCompActuel, indAugm],0));
                 if TabAugmentationCompetence.Cells[ColAugmCompSpeSel, indAugm] <> '' then
                   begin

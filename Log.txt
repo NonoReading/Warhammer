@@ -1,3 +1,9 @@
+26/09/2026 - BUG DE SAUVEGARDE DES AUGMENTATIONS DE COMPETENCE
+Signale par Nono : chaque augmentation de competence sauvegardait en trop la valeur
+Actuel au lieu de la difference reellement achetee (ex. 15->20 ajoutait +15 au total au
+lieu de +5). MajTables (winpersonnage.pas, ~L6133) ajoutait Actuel seul ; corrige en
+ajoutant Nouveau - Actuel. Teste et valide par Nono.
+
 25/09/2026 - UNOFFICIAL GRIMOIRE : THE LORE OF ELEMENTALISM (21 SORTS), XML VALIDE, A TESTER PAR NONO.
 Suite du chantier Unofficial Grimoire, chapitre "Elementalist" (p.18-21) : carriere Elementalist
 et les Elementals (creatures invocables) laisses de cote - meme decision que pour les creatures
